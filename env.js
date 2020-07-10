@@ -1,13 +1,20 @@
+export const browsers = {
+	OPERA: "opera",
+	FIREFOX: "firefox",
+	SAFARI: "safari",
+	CHROME: "chrome",
+	IE: "ie",
+	EDGE: "edge",
+	BLINK: "blink",
+};
+
 export function detectBrowser() {
 	// src: https://stackoverflow.com/a/31479176
 	if (detectBrowser.prototype._cachedResult) {
 		return detectBrowser.prototype._cachedResult;
 	}
 	// Opera 8.0+
-	const isOpera =
-			(!!window.opr && !!window.opr.addons) ||
-			!!window.opera ||
-			navigator.userAgent.indexOf(" OPR/") >= 0,
+	const isOpera = (!!window.opr && !!window.opr.addons) || !!window.opera || navigator.userAgent.indexOf(" OPR/") >= 0,
 		// Firefox 1.0+
 		isFirefox = typeof InstallTrigger !== "undefined",
 		// Safari 3.0+ "[object HTMLElementConstructor]"
@@ -27,33 +34,33 @@ export function detectBrowser() {
 	let result;
 	switch (true) {
 		case isOpera:
-			result = "Opera";
+			result = browsers.OPERA;
 			break;
 		case isFirefox:
-			result = "Firefox";
+			result = browsers.FIREFOX;
 			break;
 		case isSafari:
-			result = "Safari";
+			result = browsers.SAFARI;
 			break;
 		case isChrome:
-			result = "Chrome";
+			result = browsers.CHROME;
 			break;
 		case isIE:
-			result = "IE";
+			result = browsers.IE;
 			break;
 		case isEdge:
-			result = "Edge";
+			result = browsers.EDGE;
 			break;
 		case isBlink:
-			result = "Blink";
+			result = browsers.BLINK;
 			break;
 	}
 	return (detectBrowser.prototype._cachedResult = result);
 }
 
 /**
- * Calculate the width of the native scrollbars
- * @returns {number} width of native browser scrollbars in px
+ * Calculate the width of the native scrollbars.
+ * @returns {number} Width of native browser scrollbars in px.
  */
 export function calculateScrollbarWidth() {
 	const outer = document.createElement("div");
@@ -72,8 +79,8 @@ export function calculateScrollbarWidth() {
 }
 
 /**
- * Try to identify development environment from location host TLD
- * @returns {Boolean} whether it was able to detect current environment as 'dev'
+ * Try to identify development environment from location host TLD.
+ * @returns {boolean} Whether it was able to detect current environment as 'dev'.
  */
 export function isDev() {
 	const devTLDs = ["localhost", "dev", "test", "local", "example", "invalid", "tk"];
@@ -82,13 +89,13 @@ export function isDev() {
 
 /**
  * @typedef {Object} Breakpoint
- * @property {Number} min - The minimum screenwidth for a breakpoint
- * @property {String} id - breakpoint identifier
+ * @property {number} min The minimum screenwidth for a breakpoint.
+ * @property {string} id Breakpoint identifier.
  */
 
 /**
  * Get an object of preset matchMedia media queries.
- * @param {Breakpoint[]} breakpoints - Array of Breakpoint objects
+ * @arg {Breakpoint[]} breakpoints Array of Breakpoint objects.
  * @returns {Object}
  */
 export function setUpMediaQueries(breakpoints) {
@@ -99,12 +106,7 @@ export function setUpMediaQueries(breakpoints) {
 		mq[breakpoint.id] = {
 			up: matchMedia("(min-width: " + min + "px)"),
 			down: max ? matchMedia("(max-width: " + max + "px)") : null,
-			only: matchMedia(
-				"(min-width: " +
-					min +
-					"px)" +
-					(max ? "and (max-width: " + max + "px)" : "")
-			),
+			only: matchMedia("(min-width: " + min + "px)" + (max ? "and (max-width: " + max + "px)" : "")),
 		};
 	});
 	mq.portrait = matchMedia("(orientation: portrait)");

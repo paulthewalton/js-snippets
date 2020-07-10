@@ -1,10 +1,10 @@
 {
-	"name": "js-snippets",
+	"name": "js-utils",
 	"version": "1.0.0",
 	"description": "Vanilla JS utility functions and snippets",
 	"author": "Paul Walton",
 	"license": "GPL v3.0+",
-	"homepage": "https://bitbucket.org/denmandigital/rpm.fm#readme",
+	"homepage": "https://github.com/pwalton/js-utils#readme",
 	"browserslist": [
 		">= 0.1% in CA",
 		">= 0.5%",

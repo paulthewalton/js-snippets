@@ -1,33 +1,49 @@
-import { isDomObject, isString } from "./type";
+import { isDomObject, isString, isObject } from "./type";
 import { toInteger } from "./math";
 import { kebabCase, upperCaseFirst } from "./strings";
 import { batchApply } from "./functions";
+import { extend } from "./objects";
 
+/**
+ * Create an HTMLElement.
+ * * returns null for invalid tagName
+ * @uses ParentNode.append
+ * @arg {string} tagName Element tag name.
+ * @arg {Object} props Element properties. Unrecognized props are kebab-cased and set as attributes.
+ * @arg {string[]|Node[]} children Element child nodes.
+ * @returns {?HTMLElement}
+ */
 export function createElem(tagName, props, ...children) {
 	const el = document.createElement(tagName);
 	if (el.toString() === "[object HTMLUnknownElement]") {
 		return;
 	}
-	if (props && props instanceof Object) {
+	if (props && isObject(props)) {
 		for (const prop in props) {
-			if (props.hasOwnProperty(prop)) {
-				if (prop in el) {
-					el[prop] = props[prop];
-				} else {
-					el.setAttribute(kebabCase(prop), props[prop]);
-				}
+			if (!props.hasOwnProperty(prop)) {
+				continue;
+			}
+			const propValue = props[prop];
+			if (!(prop in el)) {
+				el.setAttribute(kebabCase(prop), propValue);
+				continue;
+			}
+			if (isObject(propValue) && isObject(el[prop])) {
+				extend(el[prop], propValue);
+			} else {
+				el[prop] = propValue;
 			}
 		}
 	}
-	children.forEach(el.append);
+	el.append(...children);
 	return el;
 }
 
 /**
- * Determine whether a DOM object is the same or parent of another DOM object
- * @param {Node} potentialParentNode - parent DOM object to check lineage
- * @param {Node} targetNode - child DOM object
- * @returns {Boolean}
+ * Determine whether a DOM object is the same or parent of another DOM object.
+ * @arg {Node} potentialParentNode Parent DOM object to check lineage.
+ * @arg {Node} targetNode Child DOM object.
+ * @returns {boolean}
  */
 export function isSameOrChildNode(potentialParentNode, targetNode) {
 	return (
@@ -38,19 +54,18 @@ export function isSameOrChildNode(potentialParentNode, targetNode) {
 }
 
 /**
- * Determine whether a DOM object is in the current DOM
- * @function isInDom
- * @param {Node} targetNode - DOM object to check
- * @returns {Boolean}
+ * Determine whether a DOM object is in the current DOM.
+ * @arg {Node} targetNode DOM object to check.
+ * @returns {boolean}
  */
 export function isInDom(targetNode) {
 	return isSameOrChildNode(document, targetNode);
 }
 
 /**
- * Add listeners for multiple events to one DOM element
- * @param {Element} eventTarget - DOM element to add event listeners
- * @param {*[][]} listeners - array of addEventListener argument sets
+ * Add listeners for multiple events to one DOM element.
+ * @arg {Element} eventTarget DOM element to add event listeners.
+ * @arg {*[][]} listeners Array of addEventListener argument sets.
  */
 export function applyEventListeners(eventTarget, listeners) {
 	batchApply(EventTarget.prototype.addEventListener, listeners, eventTarget);
@@ -58,13 +73,13 @@ export function applyEventListeners(eventTarget, listeners) {
 
 /**
  * @typedef {Object} Point
- * @property {number} x - The X Coordinate
- * @property {number} y - The Y Coordinate
+ * @property {number} x The X Coordinate.
+ * @property {number} y The Y Coordinate.
  */
 
 /**
- * Get the full page offset for an element
- * @param {Element} el - element of which to find offset
+ * Get the full page offset for an element.
+ * @arg {Element} el Element of which to find offset.
  * @returns {Point}
  */
 export function getPageOffset(el) {
@@ -77,54 +92,94 @@ export function getPageOffset(el) {
 }
 /**
  * Get the em (font size) of an element
- * @param {Element} el - element to get em value from
+ * @arg {Element} el Element to get em value from.
+ * @returns {string}
  */
 export function getEm(el) {
 	return getComputedStyle(el).fontSize;
 }
 
 /**
- * Scroll the window to the vertical position of an element
- * @param {Element|string} el - element or selector to scroll into view
- * @param {number} [offset=0] - cast to int, vertical pixel offset from element
+ * Scroll the window to the vertical position of an element.
+ * @arg {Element|string} el Element or selector to scroll into view.
+ * @arg {number} [offset=0] Cast to int, vertical pixel offset from element.
  */
 export function scrollIntoView(el, offset) {
 	if (isString(el)) {
 		el = document.querySelector(el);
 	}
-	if (isInDom(el)) {
+	if (!isInDom(el)) {
 		return;
 	}
-	offset = toInteger(offset);
-	window.scrollTo({
-		top: el.getBoundingClientRect().top + offset,
-		behavior: "smooth",
-	});
+	offset = toInteger(offset) || 0;
+	scrollIntoView.prototype._smooth =
+		scrollIntoView.prototype._smooth !== undefined
+			? scrollIntoView.prototype._smooth
+			: "scrollBehavior" in document.documentElement.style;
+	if (scrollIntoView.prototype._smooth) {
+		try {
+			window.scrollBy({
+				top: el.getBoundingClientRect().top + offset,
+				behavior: "smooth",
+			});
+		} catch (_error) {
+			window.scrollBy(0, el.getBoundingClientRect().top + offset);
+		}
+	} else {
+		window.scrollBy(0, el.getBoundingClientRect().top + offset);
+	}
 }
 
 /**
- * Get all parent elements for an element
- * @param {Element} el - DOM element to get parents of
- * @param {*|Boolean} includeSelf - whether to include
+ * Check if any part of an element is within the viewport.
+ * @arg {HTMLElement} el
+ * @returns {boolean}
  */
-export function getParents(el, includeSelf) {
-	const parents = includeSelf ? [el] : [];
-	while (el.parentNode) {
-		parents.push(el.parentNode);
-		el = el.parentNode;
+export function isInViewport(el) {
+	const rect = el.getBoundingClientRect();
+	const viewport = { w: window.innerWidth, h: window.innerHeight };
+	return !(-rect.top >= rect.height || -rect.left >= rect.width || rect.top >= viewport.h || rect.left >= viewport.w);
+}
+
+/**
+ * Check whether an element has currently scrollable overflow.
+ * @arg {HTMLElement} el
+ * @returns {Object} scrollbarStatus
+ * @property {boolean} scrollbarStatus.any Element can scroll vertically or horizontally.
+ * @property {boolean} scrollbarStatus.both Element can scroll vertically and horizontally.
+ * @property {boolean} scrollbarStatus.x Element can scroll horizontally.
+ * @property {boolean} scrollbarStatus.y Element can scroll vertically.
+ */
+export function isScrollable(el) {
+	const x = el.scrollWidth > el.clientWidth;
+	const y = el.scrollHeight > el.clientHeight;
+	return { any: x || y, both: x && y, x, y };
+}
+
+/**
+ * Get all parent elements for an element.
+ * @arg {Node} node Node to get parents of.
+ * @arg {*|boolean} includeSelf Whether to include starting node.
+ * @returns {Node[]}
+ */
+export function getParents(node, includeSelf) {
+	const parents = includeSelf ? [node] : [];
+	while (node.parentNode) {
+		parents.push(node.parentNode);
+		node = node.parentNode;
 	}
 	return parents;
 }
 
 /**
- * Apply a style to a DOM element with vendor prefixes
- * @param {Element} elem - element to apply styles to
- * @param {String} styleName - the name of a CSS style
- * @param {String} styleValue - string-ified CSS style value
- * @param {Boolean} prefixValues - whether to prefix the values as well
+ * Apply a style to a DOM element with vendor prefixes.
+ * @arg {Element} elem Element to apply styles to.
+ * @arg {string} styleName The name of a CSS style.
+ * @arg {string} styleValue String-ified CSS style value.
+ * @arg {boolean} prefixValues Whether to prefix the values as well.
  */
 export function setPrefixedStyle(elem, styleName, styleValue, prefixValues) {
-	if (window.jQuery && elem instanceof jQuery) {
+	if (window.jQuery && elem instanceof window.jQuery) {
 		elem.each(function() {
 			setPrefixedStyle(this, styleName, styleValue, prefixValues);
 		});
@@ -143,27 +198,6 @@ export function setPrefixedStyle(elem, styleName, styleValue, prefixValues) {
 		if (!(browsers[browser].js in elem.style)) {
 			continue;
 		}
-		elem.style[browsers[browser].js] =
-			(prefixValues === true ? browsers[browser].prefix : "") + styleValue;
+		elem.style[browsers[browser].js] = (prefixValues === true ? browsers[browser].prefix : "") + styleValue;
 	}
-}
-
-/**
- * Scroll to an element with optional offset
- * @function scrollToElement
- * @param {Element|Node|string} element - element or selector for element to scroll to
- * @param {number} [offset=0] - cast to int, pixel offset from element
- */
-export function scrollToElement(element, offset) {
-	if (isString(element)) {
-		element = document.querySelector(element);
-	}
-	if (!isInDom(element)) {
-		return;
-	}
-	offset = toInteger(offset);
-	window.scrollTo({
-		top: element.getBoundingClientRect().top + offset,
-		behavior: "smooth",
-	});
 }

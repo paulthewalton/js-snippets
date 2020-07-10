@@ -1,22 +1,32 @@
+import { isCallable } from "./type";
+
 /**
- * Make sure that a value is an array
- * @param {*} value - value to check
+ * Make sure that a value is an array.
+ * @arg {*} value Value to check.
+ * @arg {number} minLength Minimum length for returned array.
+ * @arg {*} fill Value to insert when filling. If function, will be called with the current index, inserting the returned value.
  * @returns {Array}
  */
-export function assertArray(value) {
+export function assertArray(value, minLength = 0, fill) {
+	let arr;
 	if (Array.isArray(value)) {
-		return value;
+		arr = value;
+	} else if (value instanceof HTMLCollection || value instanceof NodeList) {
+		arr = Array.from(value);
+	} else {
+		arr = [value]; // else wrap in array
 	}
-	if (value instanceof HTMLCollection || value instanceof NodeList) {
-		return Array.from(value);
+	while (arr.length < minLength) {
+		arr.push(isCallable(fill) ? fill(arr.length) : fill);
 	}
-	return [value]; // else wrap in array
+	return arr;
 }
+
 /**
- * Check whether 2 arrays are equal
- * @param {Array} a - first array
- * @param {Array} b - second array
- * @returns {Boolean}
+ * Check whether 2 arrays are equal.
+ * @arg {Array} a First array.
+ * @arg {Array} b Second array.
+ * @returns {boolean}
  */
 export function arraysAreEqual(a, b) {
 	if (
@@ -37,9 +47,9 @@ export function arraysAreEqual(a, b) {
 }
 
 /**
- * strip array to unique values
- * @param {Array} arr - an array
- * @returns {Array} array of unique values
+ * Strip array to unique values.
+ * @arg {Array} arr An array.
+ * @returns {Array} Array of unique values.
  * @example
  * uniq([1, 1, 3, 'cat', 1, 'cat']); // -> [1, 3, 'cat']
  */
@@ -54,35 +64,50 @@ export function uniq(arr) {
 	return arr.filter(function(item) {
 		const type = typeof item;
 		if (primatives.hasOwnProperty(type)) {
-			return primatives[type].hasOwnProperty(item)
-				? false
-				: (primatives[type][item] = true);
+			return primatives[type].hasOwnProperty(item) ? false : (primatives[type][item] = true);
 		}
 		return objects.indexOf(item) >= 0 ? false : objects.push(item);
 	});
 }
 
 /**
- * Filter unknown values out of a given array
- * @param {Array} whitelist - array of whitelisted values/objects
- * @param {Array} subject - array to filter
- * @returns {Array} Filtered array
+ * Flatten an array up to a set number of levels.
+ * @arg {Array} arr Array to flatten.
+ * @arg {number} [depth=1] Max depth of flattening.
+ * @returns {Array}
  * @example
- * whitelist([2,4], [1,1,2,3,4,4,4,5,9]); // -> [2,4,4,4]
+ * 	flatten([1,2,[3,4],5]); // -> [1,2,3,4,5]
+ * 	flatten([1,2,[3,[4]],5], 1); // -> [1,2,3,[4],5]
+ * 	flatten([1,2,[3,[[[[4]]]]],5], Infinity); // -> [1,2,3,4,5]
  */
-export function whitelist(allowedValues, subject) {
+export function flatten(arr, depth = 1) {
+	return depth > 0
+		? arr.reduce((acc, val) => {
+				return acc.concat(Array.isArray(val) ? flatten(val, depth - 1) : val);
+		  }, [])
+		: arr.slice();
+}
+/**
+ * Filter unknown values out of a given array.
+ * @arg {Array} allowedValues Array of allowed values/objects.
+ * @arg {Array} subject Array to filter.
+ * @returns {Array} Filtered array.
+ * @example
+ * allow([2,4], [1,1,2,3,4,4,4,5,9]); // -> [2,4,4,4]
+ */
+export function allowValues(allowedValues, subject) {
 	return subject.filter(value => allowedValues.includes(value));
 }
 
 /**
- * Filter known values out of a given array
- * @param {Array} blacklist - array of blacklisted values/objects
- * @param {Array} subject - array to filter
- * @returns {Array} Filtered array
+ * Filter known values out of a given array.
+ * @arg {Array} deniedValues Array of denyed values/objects.
+ * @arg {Array} subject Array to filter.
+ * @returns {Array} Filtered array.
  * @example
  * var nums = [1,1,2,3,4,4,4,5,9];
- * nums = blacklist([2,4], nums); // -> [1,1,3,5,9]
+ * nums = denyValues([2,4], nums); // -> [1,1,3,5,9]
  */
-export function blacklist(prohibitedValues, subject) {
-	return subject.filter(value => !prohibitedValues.includes(value));
+export function denyValues(deniedValues, subject) {
+	return subject.filter(value => !deniedValues.includes(value));
 }

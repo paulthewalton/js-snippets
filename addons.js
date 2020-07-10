@@ -1,5 +1,13 @@
 import { getEventPath } from "./events";
 
+/**
+ * @member listenerOptions
+ * @type {Object}
+ * @property {Object|boolean} normal - Listener will behave as default.
+ * @property {Object|boolean} passive - Listener will be passive if supported.
+ * @property {Object|boolean} capture - Listener will dispatched as the event bubbles down.
+ * @property {Object|boolean} passiveCapture - Listener will capture and be passive if supported.
+ */
 export const listenerOptions = (function detectListenerOptions() {
 	let passiveSupported = false;
 	const LEGACY_OPTS = {
@@ -45,33 +53,21 @@ export const listenerOptions = (function detectListenerOptions() {
 	});
 })();
 
-(function setUpInterfaceDetection(window, document) {
-	"use strict";
-
+export function setUpInterfaceDetection(window, document) {
 	function onDetectTouchInput() {
 		document.documentElement.classList.add("touch");
-		window.removeEventListener(
-			"touchstart",
-			onDetectTouchInput,
-			listenerOptions.normal
-		);
+		window.removeEventListener("touchstart", onDetectTouchInput, listenerOptions.normal);
 	}
 	window.addEventListener("touchstart", onDetectTouchInput, listenerOptions.normal);
 
 	function onDetectHover() {
 		document.documentElement.classList.add("hover");
-		window.removeEventListener(
-			"mouseover",
-			onDetectHover,
-			listenerOptions.passiveCapture
-		);
+		window.removeEventListener("mouseover", onDetectHover, listenerOptions.passiveCapture);
 	}
 	window.addEventListener("mouseover", onDetectHover, listenerOptions.passiveCapture);
-})(window, document);
+}
 
-(function setUpTabFocus(window, document) {
-	"use strict";
-
+export function setUpTabFocus(window, document) {
 	const focusClass = "tab-focus",
 		focusWithinClass = "tab-focus-within";
 	window.tabDown = false;
@@ -117,4 +113,4 @@ export const listenerOptions = (function detectListenerOptions() {
 		},
 		listenerOptions.passiveCapture
 	);
-})(window, document);
+}
