@@ -1,4 +1,4 @@
-import { isInt } from "./type";
+import { isInt } from "./_type";
 
 /**
  * Cast value to number.
@@ -18,7 +18,7 @@ export function toNumber(value, fallback = 0) {
  * Cast a single value to integer.
  * returns 0 if an array with length < 1 or string with non-numeral characters
  * @arg {*} value
- * @return {Number}
+ * @return {number}
  */
 export function toInteger(value) {
 	const number = toNumber(value);
@@ -31,9 +31,9 @@ export function toInteger(value) {
 /**
  * Cast a single value to decimal of specified precision.
  * * Returns 0 if an array with length < 1 or string with non-numeral characters.
- * @arg {Number} digitsAfterDecimal Integer number of significant digits after decimal.
+ * @arg {number} digitsAfterDecimal Integer number of significant digits after decimal.
  * @arg {*} value
- * @returns {Number}
+ * @returns {number}
  */
 export function toDecimal(digitsAfterDecimal, value) {
 	const number = toNumber(value);
@@ -49,10 +49,10 @@ export function toDecimal(digitsAfterDecimal, value) {
 
 /**
  * Cap a value to between minimum and maximum values.
- * @arg {Number} min Minimum acceptable value.
- * @arg {Number} max Maximum acceptable value.
- * @arg {Number} value Value to cap.
- * @returns {Number}
+ * @arg {number} min Minimum acceptable value.
+ * @arg {number} max Maximum acceptable value.
+ * @arg {number} value Value to cap.
+ * @returns {number}
  */
 export function capMinMax(min, max, value) {
 	return Math.max(min, Math.min(max, value));

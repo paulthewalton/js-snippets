@@ -1,10 +1,10 @@
-import { flatten } from "./arrays";
+import { flatten } from "./_arrays";
 
 /**
  * @function
  * @returns {string}
  */
-export const percentage = fraction => `${fraction * 100}%`;
+export const percentage = (fraction) => `${fraction * 100}%`;
 
 /**
  * @function
@@ -101,7 +101,7 @@ export function pathJoin(...segments) {
  * @arg {string} str
  * @returns {string}
  */
-export const stripCase = str =>
+export const stripCase = (str) =>
 	str
 		.replace(/([A-Z]+)/, " $1")
 		.replace(/[_-]+/, " ")
@@ -114,67 +114,67 @@ export const stripCase = str =>
  * @arg {string} str
  * @returns {string}
  */
-export const upperCaseWords = str => str.replace(/\b\w/, match => match.toUpperCase());
+export const upperCaseWords = (str) => str.replace(/\b\w/, (match) => match.toUpperCase());
 
 /**
  * Lower case the first letter of each word in a string.
  * @arg {string} str
  * @returns {string}
  */
-export const lowerCaseWords = str => str.replace(/\b\w/, match => match.toLowerCase());
+export const lowerCaseWords = (str) => str.replace(/\b\w/, (match) => match.toLowerCase());
 
 /**
  * Upper case the first letter of a string.
  * @arg {string} str
  * @returns {string}
  */
-export const upperCaseFirst = str => str.charAt(0).toUpperCase + str.slice(1);
+export const upperCaseFirst = (str) => str.charAt(0).toUpperCase + str.slice(1);
 
 /**
  * Lower case the first letter of a string.
  * @arg {string} str
  * @returns {string}
  */
-export const lowerCaseFirst = str => str.charAt(0).toLowerCase + str.slice(1);
+export const lowerCaseFirst = (str) => str.charAt(0).toLowerCase + str.slice(1);
 
 /**
  * Sentence case a string, i.e. This text is sentenced.
  * @arg {string} str
  * @returns {string}
  */
-export const sentenceCase = str => upperCaseFirst(stripCase(str));
+export const sentenceCase = (str) => upperCaseFirst(stripCase(str));
 
 /**
  * Title case a string, i.e. This Text Is Titled.
  * @arg {string} str
  * @returns {string}
  */
-export const titleCase = str => upperCaseWords(stripCase(str));
+export const titleCase = (str) => upperCaseWords(stripCase(str));
 
 /**
  * Pascal case a string, i.e. ThisTextIsPascaled.
  * @arg {string} str
  * @returns {string}
  */
-export const pascalCase = str => titleCase(str).replace(" ", "");
+export const pascalCase = (str) => titleCase(str).replace(" ", "");
 
 /**
  * Snake case a string, i.e. this_text_is_snaked.
  * @arg {string} str
  * @returns {string}
  */
-export const snakeCase = str => stripCase(str).replace(" ", "_");
+export const snakeCase = (str) => stripCase(str).replace(" ", "_");
 
 /**
  * Kebab case a string, i.e. this-text-is-kebabed.
  * @arg {string} str
  * @returns {string}
  */
-export const kebabCase = str => stripCase(str).replace(" ", "-");
+export const kebabCase = (str) => stripCase(str).replace(" ", "-");
 
 /**
  * Camel case a string, i.e. thisTextIsCameled.
  * @arg {string} str
  * @returns {string}
  */
-export const camelCase = str => lowerCaseFirst(pascalCase(str));
+export const camelCase = (str) => lowerCaseFirst(pascalCase(str));

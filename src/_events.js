@@ -1,5 +1,5 @@
-import { isPojo, isString } from "./type";
-import { getParents } from "./elements";
+import { isPojo, isString } from "./_type";
+import { getParents } from "./_elements";
 
 /**
  * Vanilla JS replacement for jQuery document ready.
@@ -70,6 +70,9 @@ export function getEventPath(event) {
 	return getParents(event.target, true).concat(window);
 }
 
+/**
+ * Browser-friendly Emitter class.
+ */
 export class Emitter {
 	constructor() {
 		const delegate = document.createDocumentFragment();

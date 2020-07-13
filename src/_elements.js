@@ -1,8 +1,8 @@
-import { isDomObject, isString, isObject } from "./type";
-import { toInteger } from "./math";
-import { kebabCase, upperCaseFirst } from "./strings";
-import { batchApply } from "./functions";
-import { extend } from "./objects";
+import { isDomObject, isString, isObject } from "./_type";
+import { toInteger } from "./_math";
+import { kebabCase, upperCaseFirst } from "./_strings";
+import { batchApply } from "./_functions";
+import { extend } from "./_objects";
 
 /**
  * Create an HTMLElement.
@@ -180,7 +180,7 @@ export function getParents(node, includeSelf) {
  */
 export function setPrefixedStyle(elem, styleName, styleValue, prefixValues) {
 	if (window.jQuery && elem instanceof window.jQuery) {
-		elem.each(function() {
+		elem.each(function () {
 			setPrefixedStyle(this, styleName, styleValue, prefixValues);
 		});
 		return;

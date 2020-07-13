@@ -1,4 +1,4 @@
-import { isCallable } from "./type";
+import { isCallable } from "./_type";
 // import { compatRequestAnimationFrame, compatCancelAnimationFrame } from "./compat";
 
 /**
@@ -11,7 +11,7 @@ import { isCallable } from "./type";
  */
 export function sequence(...fns) {
 	fns = fns.filter(isCallable);
-	return function(result) {
+	return function (result) {
 		for (let i = 0; i < fns.length; i++) {
 			result = fns[i].call(this, result);
 		}
@@ -43,7 +43,7 @@ export function compose(...fns) {
 export function batch(...fns) {
 	fns = fns.filter(isCallable);
 	const returns = new Array(fns.length);
-	return function(...args) {
+	return function (...args) {
 		for (let i = 0; i < fns.length; i++) {
 			returns[i] = fns[i].apply(this, args);
 		}
@@ -61,7 +61,7 @@ export function batch(...fns) {
  * batchApply(Math.pow, [[2, 2], [10, 3]]) // -> [4, 1000]
  */
 export function batchApply(fn, argsArray, thisArg) {
-	return argsArray.map(value => {
+	return argsArray.map((value) => {
 		return Array.isArray(value) ? fn.apply(this, value) : fn.call(this, value);
 	}, thisArg);
 }
@@ -80,7 +80,7 @@ export function makeTest(fns, strictMode) {
 	}
 	const trials = batch(...fns);
 	strictMode = !!strictMode;
-	return function(...args) {
+	return function (...args) {
 		return trials(...args).reduce((lastResult, value) => (strictMode ? lastResult && value : lastResult || value));
 	};
 }
@@ -96,17 +96,20 @@ function processPartialPlaceholders(partials) {
 	const placeholders = [];
 	const processedPartials = partials.map((value, index) => {
 		switch (value) {
-			case "_":
+			case processPartialPlaceholders.placeholder:
 				placeholders.push(index);
 				return undefined;
-			case "\\_":
-				return "_";
+			case `\${processPartialPlaceholders.placeholder}`:
+				return processPartialPlaceholders.placeholder;
 			default:
 				return value;
 		}
 	});
 	return { placeholders, processedPartials };
 }
+Object.defineProperty(processPartialPlaceholders, "placeholder", {
+	value: "_",
+});
 
 /**
  * Partially apply arguments to a function without setting `this`.
@@ -120,13 +123,16 @@ function processPartialPlaceholders(partials) {
  */
 export function partial(fn, ...partials) {
 	const { placeholders, processedPartials } = processPartialPlaceholders(partials);
-	return function(...args) {
-		placeholders.forEach(placeholder => {
+	return function (...args) {
+		placeholders.forEach((placeholder) => {
 			processedPartials[placeholder] = args.shift();
 		});
 		return fn.apply(this, processedPartials.concat(args));
 	};
 }
+Object.defineProperty(partial, "placeholder", {
+	get: () => processPartialPlaceholders.placeholder,
+});
 
 /**
  * Partially apply arguments to a function from right-to-left without setting `this`.
@@ -141,13 +147,16 @@ export function partial(fn, ...partials) {
  */
 export function partialRight(fn, ...partials) {
 	const { placeholders, processedPartials } = processPartialPlaceholders(partials);
-	return function(...args) {
-		placeholders.forEach(placeholder => {
+	return function (...args) {
+		placeholders.forEach((placeholder) => {
 			processedPartials[placeholder] = args.pop();
 		});
 		return fn.apply(this, args.concat(processedPartials));
 	};
 }
+Object.defineProperty(partialRight, "placeholder", {
+	get: () => processPartialPlaceholders.placeholder,
+});
 
 /**
  * Throttle a high-frequecy and/or resource intensive function.
@@ -159,13 +168,13 @@ export function throttle(fn, wait) {
 	let context, args, result;
 	let timeout = null;
 	let previous = 0;
-	const later = function() {
+	const later = function () {
 		previous = Date.now();
 		timeout = null;
 		result = fn.apply(context, args);
 		if (!timeout) context = args = null;
 	};
-	return function() {
+	return function () {
 		const now = Date.now();
 		const remaining = wait - (now - previous);
 		context = this;
@@ -202,14 +211,14 @@ export function debounce(fn, wait, leading) {
 	leading = !!leading || false;
 	let timeout, lastThis, lastArgs, lastResult;
 
-	const invokeFunc = function() {
+	const invokeFunc = function () {
 		var args = lastArgs,
 			thisArg = lastThis;
 		lastArgs = lastThis = undefined;
 		lastResult = fn.apply(thisArg, args);
 		return lastResult;
 	};
-	const debounced = function(...args) {
+	const debounced = function (...args) {
 		lastArgs = args;
 		lastThis = this;
 		if (leading && !timeout) {
@@ -220,10 +229,10 @@ export function debounce(fn, wait, leading) {
 		timeout = setTimeout(invokeFunc, wait);
 		return lastResult;
 	};
-	debounced.cancel = function() {
+	debounced.cancel = function () {
 		clearTimeout(timeout);
 	};
-	debounced.flush = function() {
+	debounced.flush = function () {
 		clearTimeout(timeout);
 		return invokeFunc();
 	};

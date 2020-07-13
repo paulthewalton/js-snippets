@@ -1,7 +1,7 @@
-import { getEventPath } from "./events";
+import { getEventPath } from "./_events";
 
 /**
- * @member listenerOptions
+ * @var listenerOptions
  * @type {Object}
  * @property {Object|boolean} normal - Listener will behave as default.
  * @property {Object|boolean} passive - Listener will be passive if supported.
@@ -36,7 +36,7 @@ export const listenerOptions = (function detectListenerOptions() {
 		};
 	try {
 		const options = Object.defineProperty({}, "passive", {
-			get: function() {
+			get: function () {
 				passiveSupported = true;
 			},
 		});
@@ -47,12 +47,17 @@ export const listenerOptions = (function detectListenerOptions() {
 	}
 	const opts = passiveSupported ? DEFAULT_OPTS : LEGACY_OPTS;
 	return Object.defineProperty(opts, "default", {
-		get: function() {
+		get: function () {
 			return this.normal;
 		},
 	});
 })();
 
+/**
+ * Adds `hover` and `touch` classes to the documentElement when mouse/stylus & touch events detected.
+ * @listens window.touchstart
+ * @listens window.mouseover
+ */
 export function setUpInterfaceDetection(window, document) {
 	function onDetectTouchInput() {
 		document.documentElement.classList.add("touch");
@@ -67,6 +72,12 @@ export function setUpInterfaceDetection(window, document) {
 	window.addEventListener("mouseover", onDetectHover, listenerOptions.passiveCapture);
 }
 
+/**
+ * Adds event listeners to window, setting `tab-focus` and `tab-focus-within` classes to focused elements.
+ * @listens window.focusout
+ * @listens window.focusin
+ * @listens window.keydown
+ */
 export function setUpTabFocus(window, document) {
 	const focusClass = "tab-focus",
 		focusWithinClass = "tab-focus-within";

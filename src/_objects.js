@@ -1,5 +1,5 @@
-import { isObject, isPojo, areSameType } from "./type";
-import { sequence } from "./functions";
+import { isObject, isPojo, areSameType } from "./_type";
+import { sequence } from "./_functions";
 
 /**
  * Verify that an object has all of the supplied properties.
@@ -8,7 +8,7 @@ import { sequence } from "./functions";
  * @returns {boolean}
  */
 export function hasAllProps(proplist, subject) {
-	return proplist.every(prop => subject.hasOwnProperty(prop));
+	return proplist.every((prop) => subject.hasOwnProperty(prop));
 }
 
 /**
@@ -18,7 +18,7 @@ export function hasAllProps(proplist, subject) {
  * @returns {boolean}
  */
 export function hasAnyProps(proplist, subject) {
-	return proplist.some(prop => subject.hasOwnProperty(prop));
+	return proplist.some((prop) => subject.hasOwnProperty(prop));
 }
 
 /**

@@ -9,7 +9,7 @@
  */
 export function request(method, type, url, headers, body) {
 	method = /get|post|put|patch|delete|head|options/i.test(method) ? method.toUpperCase() : "GET";
-	return new Promise(function(resolve, reject) {
+	return new Promise(function (resolve, reject) {
 		const xhr = new XMLHttpRequest(),
 			json = !type || type.toLowerCase() === "json";
 		xhr.responseType = json ? "text" : type;
@@ -22,7 +22,7 @@ export function request(method, type, url, headers, body) {
 				}
 			}
 		}
-		xhr.onload = function() {
+		xhr.onload = function () {
 			let { response, status } = xhr;
 			if (json) {
 				try {
@@ -34,7 +34,7 @@ export function request(method, type, url, headers, body) {
 			}
 			resolve({ response, status, xhr });
 		};
-		xhr.onerror = function(err) {
+		xhr.onerror = function (err) {
 			reject(err);
 		};
 		xhr.send(body || null);
@@ -81,12 +81,12 @@ export function makeVerbosePromise(promise) {
 
 	// Observe the promise, saving the fulfillment in a closure scope.
 	let result = promise.then(
-		value => {
+		(value) => {
 			isFulfilled = true;
 			isPending = false;
 			return value;
 		},
-		_error => {
+		(_error) => {
 			isRejected = true;
 			isPending = false;
 		}

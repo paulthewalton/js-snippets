@@ -1,5 +1,5 @@
-import { createElem } from "./elements";
-import { toNumber } from "./math";
+import { createElem } from "./_elements";
+import { toNumber } from "./_math";
 
 /**
  * @typedef {Object} ParsedCSSColor

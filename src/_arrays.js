@@ -1,4 +1,4 @@
-import { isCallable } from "./type";
+import { isCallable } from "./_type";
 
 /**
  * Make sure that a value is an array.
@@ -61,7 +61,7 @@ export function uniq(arr) {
 		},
 		objects = [];
 
-	return arr.filter(function(item) {
+	return arr.filter(function (item) {
 		const type = typeof item;
 		if (primatives.hasOwnProperty(type)) {
 			return primatives[type].hasOwnProperty(item) ? false : (primatives[type][item] = true);
@@ -96,7 +96,7 @@ export function flatten(arr, depth = 1) {
  * allow([2,4], [1,1,2,3,4,4,4,5,9]); // -> [2,4,4,4]
  */
 export function allowValues(allowedValues, subject) {
-	return subject.filter(value => allowedValues.includes(value));
+	return subject.filter((value) => allowedValues.includes(value));
 }
 
 /**
@@ -109,5 +109,5 @@ export function allowValues(allowedValues, subject) {
  * nums = denyValues([2,4], nums); // -> [1,1,3,5,9]
  */
 export function denyValues(deniedValues, subject) {
-	return subject.filter(value => !deniedValues.includes(value));
+	return subject.filter((value) => !deniedValues.includes(value));
 }

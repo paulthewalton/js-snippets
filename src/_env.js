@@ -8,6 +8,7 @@ export const browsers = {
 	BLINK: "blink",
 };
 
+/* eslint-disable compat/compat */
 export function detectBrowser() {
 	// src: https://stackoverflow.com/a/31479176
 	if (detectBrowser.prototype._cachedResult) {
@@ -20,7 +21,7 @@ export function detectBrowser() {
 		// Safari 3.0+ "[object HTMLElementConstructor]"
 		isSafari =
 			/constructor/i.test(window.HTMLElement) ||
-			(function(p) {
+			(function (p) {
 				return p.toString() === "[object SafariRemoteNotification]";
 			})(!window.safari || window.safari.pushNotification),
 		// Internet Explorer 6-11
@@ -57,6 +58,7 @@ export function detectBrowser() {
 	}
 	return (detectBrowser.prototype._cachedResult = result);
 }
+/* eslint-enable compat/compat */
 
 /**
  * Calculate the width of the native scrollbars.
@@ -83,8 +85,9 @@ export function calculateScrollbarWidth() {
  * @returns {boolean} Whether it was able to detect current environment as 'dev'.
  */
 export function isDev() {
-	const devTLDs = ["localhost", "dev", "test", "local", "example", "invalid", "tk"];
-	return devTLDs.includes(location.hostname.split(".").reverse()[0]);
+	const devTLDs = ["localhost", "dev", "test", "local", "example", "invalid"];
+	const tld = location.host.split(".").reverse()[0].split(":")[0];
+	return devTLDs.includes(tld);
 }
 
 /**
@@ -100,7 +103,7 @@ export function isDev() {
  */
 export function setUpMediaQueries(breakpoints) {
 	const mq = {};
-	breakpoints.forEach(function(breakpoint, index, arr) {
+	breakpoints.forEach(function (breakpoint, index, arr) {
 		const min = breakpoint.min,
 			max = arr[index + 1] ? arr[index + 1].min - 0.02 : null;
 		mq[breakpoint.id] = {

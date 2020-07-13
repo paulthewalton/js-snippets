@@ -1,4 +1,4 @@
-import { isCallable } from "./type";
+import { isCallable } from "./_type";
 
 export class CompatResolver {
 	constructor(candidates, scope) {
@@ -52,7 +52,7 @@ export const compatRequestAnimationFrame = new CompatResolver([
 	{ scope: window, fn: "oRequestAnimationFrame" },
 	{ scope: window, fn: "msRequestAnimationFrame" },
 	{
-		fn: function(callback) {
+		fn: function (callback) {
 			return window.setTimeout(callback, 1000 / 60);
 		},
 	},
