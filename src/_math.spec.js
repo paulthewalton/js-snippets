@@ -1,4 +1,4 @@
-import { toNumber, toInteger, toDecimal, capMinMax } from "../src/_math";
+import { toNumber, toInteger, toDecimal, capMinMax } from "./_math";
 
 test("testing toNumber() for successful conversions", () => {
 	expect(toNumber(1)).toBe(1);
@@ -52,12 +52,23 @@ test("testing toInteger()", () => {
 });
 
 test("testing toDecimal()", () => {
-	expect(toDecimal("3", 0.12345)).toThrow();
-	expect(toDecimal(3.5, 0.12345)).toThrow();
+	expect(() => toDecimal(3.5, 0.12345)).toThrow();
 	expect(toDecimal(2)).toBe(0);
 	expect(toDecimal(2, 2)).toBe(2);
 	expect(toDecimal(2, 2.12345)).toBe(2.12);
 	expect(toDecimal(3, -2.12345)).toBe(-2.123);
 	expect(toDecimal(0, -2.12345)).toBe(-2);
 	expect(toDecimal(-1, 123)).toBe(120);
+	// Unexpected, Math.pow apparently accepts numeric strings?
+	expect(toDecimal("3", 0.12345)).toBe(0.123);
+});
+
+test("testing capMinMax()", () => {
+	expect(capMinMax(1, 10, 5)).toBe(5);
+	expect(capMinMax(1, 10, 10)).toBe(10);
+	expect(capMinMax(1, 10, 0.2)).toBe(1);
+	expect(capMinMax(1, 10, 20000)).toBe(10);
+	expect(capMinMax(1, 10, Infinity)).toBe(10);
+	expect(capMinMax(0, 1, -1)).toBe(0);
+	expect(capMinMax(0, 1, 0.1234)).toBe(0.1234);
 });

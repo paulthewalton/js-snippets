@@ -2,11 +2,13 @@
 extends:
 - plugin:compat/recommended
 - plugin:prettier/recommended
+- plugin:jest/recommended
 - prettier
 plugins:
 - jest
 env:
   browser: true
+  jest/globals: true
 parser: babel-eslint
 parserOptions:
   ecmaVersion: 6

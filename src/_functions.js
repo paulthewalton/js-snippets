@@ -137,11 +137,12 @@ Object.defineProperty(partial, "placeholder", {
 /**
  * Partially apply arguments to a function from right-to-left without setting `this`.
  * * Use `_` as a placeholder value, final arguments will replace those positions from right-to-left, prepending any remaining arguments.
+ * ! BEWARE using this with variable argument functions, as any partially filled arguments will be appended to the end of the final supplied arguments (after accounting for placeholders)
  * @arg {Function} fn Function to partially apply.
  * @arg {...*} partials Arguments to partially apply to `fn`.
  * @returns {Function}
  * @example
- * let divide = (a, b) => { a / b };
+ * let divide = (a, b) => a / b;
  * let divideBy2 = partialRight(divide, 2);
  * divideBy2(myNum) // ~= divide(myNum, 2)
  */
