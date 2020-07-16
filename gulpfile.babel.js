@@ -5,7 +5,6 @@
  * @requires fancy-log
  * @requires chalk
  * @author Paul Walton
- * @since 1.0.0
  */
 
 /* eslint-env node, es6 */
@@ -24,16 +23,15 @@ const link = (msg, file) => chalk.underline(`${file}(${msg.line},${msg.column})`
 
 const jsdoc2mdOpts = {
 	plugin: "dmd-readable",
-	partial: "docs/partials/global-index-dl.hbs",
 	"no-cache": true,
 };
 
 /**
  * Generate documentation for Gulp tasks.
- * @example gulp taskDocs
+ * @global
  * @requires jsdoc-to-markdown
  * @requires dmd-readable
- * @global
+ * @example gulp taskDocs
  */
 export function taskDocs(done) {
 	const jsdoc2md = require("jsdoc-to-markdown");
@@ -44,16 +42,16 @@ export function taskDocs(done) {
 
 /**
  * Generate documentation for project API.
- * @example gulp apiDocs
+ * @global
  * @requires jsdoc-to-markdown
  * @requires dmd-readable
- * @global
+ * @example gulp apiDocs
  */
 export function apiDocs() {
 	const glob = require("glob");
 	const jsdoc2md = require("jsdoc-to-markdown");
 	return new Promise((resolve, reject) => {
-		glob("src/**/*!(spec|test|index).[tj]s?(x)", async (err, matches) => {
+		glob("src/**/!(index|*spec|*test).[tj]s?(x)", async (err, matches) => {
 			if (err) {
 				reject(err);
 			}
@@ -73,10 +71,10 @@ export function apiDocs() {
 /**
  * Generate all documentation for this project.
  * @function
- * @example gulp docs
+ * @global
  * @see {@link taskDocs}
  * @see {@link apiDocs}
- * @global
+ * @example gulp docs
  */
 export const docs = gulp.parallel(taskDocs, apiDocs);
 
@@ -99,10 +97,10 @@ function handleESLintOutput(result) {
 /**
  * Lint scripts with ESLint & format with Prettier. Will fix simple style errors unless being run from the `dev` task.
  * @summary Lint scripts with ESLint.
- * @example gulp lint
+ * @global
  * @requires gulp-if
  * @requires gulp-eslint
- * @global
+ * @example gulp lint
  */
 export function lint() {
 	const ifThen = require("gulp-if");
@@ -117,10 +115,10 @@ export function lint() {
 /**
  * Lint test scripts with ESLint & format with Prettier. Will fix simple style errors unless being run from the `dev` task.
  * @summary Lint tests with ESLint.
- * @example gulp lintTests
+ * @global
  * @requires gulp-if
  * @requires gulp-eslint
- * @global
+ * @example gulp lintTests
  */
 export function lintTests() {
 	const ifThen = require("gulp-if");
@@ -134,10 +132,10 @@ export function lintTests() {
 
 /**
  * Starts a file watcher, linting scripts on save.
- * @example gulp dev
+ * @global
  * @see {@link lint}
  * @see {@link lintTests}
- * @global
+ * @example gulp dev
  */
 export function dev() {
 	watchFlag = true;
