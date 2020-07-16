@@ -1,17 +1,19 @@
-import { createElem } from "./_elements";
-import { toNumber } from "./_math";
+import { createElem } from "./elements";
+import { toNumber } from "./math";
+import { TIME } from "./constants";
 
 /**
  * @typedef {Object} ParsedCSSColor
- * @property {number} red
- * @property {number} green
- * @property {number} blue
- * @property {number} alpha
- * @property {string} value
+ * @property {number} red Red value of parsed color.
+ * @property {number} green Green value of parsed color.
+ * @property {number} blue Blue value of parsed color.
+ * @property {number} alpha Alpha value of parsed color.
+ * @property {string} value The CSS color string for the parsed color.
  */
 
 /**
- * @arg {string} color CSS color value.
+ * Parse a CSS color string into red, green, blue, and alpha components.
+ * @arg {string} color - CSS color value.
  * @returns {ParsedCSSColor}
  */
 export function parseCSSColor(color) {
@@ -27,21 +29,21 @@ export function parseCSSColor(color) {
 
 /**
  * Parse a CSS time string into ms.
- * @arg {string} cssTimeStr
+ * @arg {string} cssTimeStr - Valid CSS time in seconds or milliseconds
  * @returns {number}
  */
 export function parseCSSTime(cssTimeStr) {
 	const time = parseFloat(cssTimeStr);
 	if (time && cssTimeStr.endsWith("s")) {
-		return time * (cssTimeStr.endsWith("ms") ? 1 : 1000);
+		return time * (cssTimeStr.endsWith("ms") ? 1 : TIME.SECOND);
 	}
 	return 0;
 }
 
 /**
- * @arg {string} value CSS value as string.
- * @arg {string[]} [units] Units to check for at the end of the value string.
- * @arg {string} fallback Unit to add if no matching unit detected.
+ * @arg {string} value - CSS value as string.
+ * @arg {string[]} units - Units to check for at the end of the value string.
+ * @arg {string} fallback - Unit to add if no matching unit detected.
  * @returns {string}
  */
 export function ensureCSSUnits(value, units = ["px", "%"], fallback = "px") {

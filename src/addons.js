@@ -1,7 +1,12 @@
-import { getEventPath } from "./_events";
+/**
+ * @file Non-functional addon helpers
+ * @author Paul Walton
+ * @since 1.0.0
+ */
+
+import { getEventPath } from "./events";
 
 /**
- * @var listenerOptions
  * @type {Object}
  * @property {Object|boolean} normal - Listener will behave as default.
  * @property {Object|boolean} passive - Listener will be passive if supported.
@@ -55,36 +60,57 @@ export const listenerOptions = (function detectListenerOptions() {
 
 /**
  * Adds `hover` and `touch` classes to the documentElement when mouse/stylus & touch events detected.
- * @listens window.touchstart
- * @listens window.mouseover
+ * @arg {Window} win - Window to listen for events.
+ * @arg {Document} doc - Document to recieve classes.
  */
-export function setUpInterfaceDetection(window, document) {
+export function setUpInterfaceDetection(win = window, doc = document) {
+	const lOpts = listenerOptions.passiveCapture;
+	/**
+	 * Add the `touch` class to the document element when the next touch event is detected.
+	 * @listens Window#touchstart
+	 * @listens Window#touchmove
+	 * @listens Window#touchend
+	 */
 	function onDetectTouchInput() {
-		document.documentElement.classList.add("touch");
-		window.removeEventListener("touchstart", onDetectTouchInput, listenerOptions.normal);
+		doc.documentElement.classList.add("touch");
+		win.removeEventListener("touchstart", onDetectTouchInput, lOpts);
+		win.removeEventListener("touchmove", onDetectTouchInput, lOpts);
+		win.removeEventListener("touchend", onDetectTouchInput, lOpts);
 	}
-	window.addEventListener("touchstart", onDetectTouchInput, listenerOptions.normal);
+	win.addEventListener("touchstart", onDetectTouchInput, lOpts);
+	win.addEventListener("touchmove", onDetectTouchInput, lOpts);
+	win.addEventListener("touchend", onDetectTouchInput, lOpts);
 
+	/**
+	 * Add the `hover` class to the document element on the next mouseover event
+	 * @listens Window#mouseover
+	 */
 	function onDetectHover() {
-		document.documentElement.classList.add("hover");
-		window.removeEventListener("mouseover", onDetectHover, listenerOptions.passiveCapture);
+		doc.documentElement.classList.add("hover");
+		win.removeEventListener("mouseover", onDetectHover, lOpts);
 	}
-	window.addEventListener("mouseover", onDetectHover, listenerOptions.passiveCapture);
+	win.addEventListener("mouseover", onDetectHover, lOpts);
 }
 
 /**
- * Adds event listeners to window, setting `tab-focus` and `tab-focus-within` classes to focused elements.
- * @listens window.focusout
- * @listens window.focusin
- * @listens window.keydown
+ * Adds event listeners to window, setting `tab-focus` and `tab-focus-within` classes on focused elements.
+ * @listens Window#focusout
+ * @listens Window#focusin
+ * @listens Window#keydown
  */
-export function setUpTabFocus(window, document) {
+export function setUpTabFocus(win = window, doc = document) {
 	const focusClass = "tab-focus",
 		focusWithinClass = "tab-focus-within";
-	window.tabDown = false;
-	window.tabFocused = document.getElementsByClassName(focusClass);
-	window.tabFocusedWithin = document.getElementsByClassName(focusWithinClass);
+	let tabDown = false;
+	const tabFocused = doc.getElementsByClassName(focusClass);
+	const tabFocusedWithin = doc.getElementsByClassName(focusWithinClass);
 
+	/**
+	 * Remove classes on focusout.
+	 * @listens Window#focusout
+	 * @see getEventPath
+	 * @arg {FocusEvent} focusEvent
+	 */
 	function removeTabFocusClasses(focusEvent) {
 		focusEvent.target.classList.remove(focusClass);
 		const path = getEventPath(focusEvent);
@@ -94,34 +120,52 @@ export function setUpTabFocus(window, document) {
 			}
 		}
 	}
-	window.addEventListener("focusout", removeTabFocusClasses);
-	window.addEventListener(
-		"focusin",
-		function addTabFocusClasses(focusEvent) {
-			while (window.tabFocused.length) {
-				window.tabFocused[0].classList.remove(focusClass);
-			}
-			while (window.tabFocusedWithin.length) {
-				window.tabFocusedWithin[0].classList.remove(focusWithinClass);
-			}
-			if (window.tabDown) {
-				focusEvent.target.classList.add(focusClass);
-				const path = getEventPath(focusEvent);
-				for (let i = 0; i < path.length; i++) {
-					if (path[i].classList) {
-						path[i].classList.add(focusWithinClass);
-					}
+
+	/**
+	 * Add classes on focusin.
+	 * Removes classes from elements not in event path.
+	 * @listens Window#focusin
+	 * @see getEventPath
+	 * @arg {FocusEvent} focusEvent
+	 */
+	function addTabFocusClasses(focusEvent) {
+		while (tabFocused.length) {
+			tabFocused[0].classList.remove(focusClass);
+		}
+		while (tabFocusedWithin.length) {
+			tabFocusedWithin[0].classList.remove(focusWithinClass);
+		}
+		if (tabDown) {
+			focusEvent.target.classList.add(focusClass);
+			const path = getEventPath(focusEvent);
+			for (let i = 0; i < path.length; i++) {
+				if (path[i].classList) {
+					path[i].classList.add(focusWithinClass);
 				}
-				window.tabDown = false;
 			}
-		},
-		listenerOptions.passive
-	);
-	window.addEventListener(
-		"keydown",
-		function primeTabFocus(keyEvent) {
-			window.tabDown = keyEvent.key === "Tab";
-		},
-		listenerOptions.passiveCapture
-	);
+			tabDown = false;
+		}
+	}
+
+	/**
+	 * Primes tab focus listeners by capturing keydown events for the Tab key.
+	 * @listens Window#keydown
+	 * @arg {KeyboardEvent} keyEvent
+	 */
+	function primeTabFocus(keyEvent) {
+		tabDown = keyEvent.key === "Tab";
+	}
+
+	win.addEventListener("focusout", removeTabFocusClasses, listenerOptions.passive);
+	win.addEventListener("focusin", addTabFocusClasses, listenerOptions.passive);
+	win.addEventListener("keydown", primeTabFocus, listenerOptions.passiveCapture);
+
+	/**
+	 * Remove listeners
+	 */
+	return function teardownTabFocus() {
+		win.removeEventListener("focusout", removeTabFocusClasses, listenerOptions.passive);
+		win.removeEventListener("focusin", addTabFocusClasses, listenerOptions.passive);
+		win.removeEventListener("keydown", primeTabFocus, listenerOptions.passiveCapture);
+	};
 }

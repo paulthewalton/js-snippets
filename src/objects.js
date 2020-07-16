@@ -1,5 +1,5 @@
-import { isObject, isPojo, areSameType } from "./_type";
-import { sequence } from "./_functions";
+import { isObject, isPojo, areSameType } from "./type";
+import { sequence } from "./functions";
 
 /**
  * Verify that an object has all of the supplied properties.
@@ -74,6 +74,7 @@ export function extend(target, extensions, depth = -1) {
 
 /**
  * Snapshot the properties of an object.
+ * @function
  * @arg {Object} obj
  * @returns {Object}
  */

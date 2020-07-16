@@ -1,12 +1,16 @@
-import { flatten } from "./_arrays";
+import { flatten } from "./arrays";
 
 /**
+ * Turn a fractional number into a percentage string.
  * @function
+ * @arg {number} fraction
  * @returns {string}
+ * @example percentage(0.725); // "72.5%"
  */
 export const percentage = (fraction) => `${fraction * 100}%`;
 
 /**
+ * Get a unique id string.
  * @function
  * @returns {string}
  */
@@ -14,7 +18,7 @@ export const getUniqueId = () => `${Date.now()}-${Math.random()}`;
 
 /**
  * Copy a string to the users clipboard.
- * @arg {string} str String to copy to clipboard.
+ * @arg {string} str - String to copy to clipboard.
  */
 export function copyToClipboard(str) {
 	const el = document.createElement("textarea"); // Create a <textarea> element
@@ -39,8 +43,8 @@ export function copyToClipboard(str) {
 
 /**
  * Strip substrings from the start of a string.
- * @arg {string|RegExp} match Substring or regex to match.
- * @arg {string} str String to operate on.
+ * @arg {string|RegExp} match - Substring or regex to match.
+ * @arg {string} str
  * @returns {string}
  */
 export function stripStart(match, str) {
@@ -59,8 +63,8 @@ export function stripStart(match, str) {
 
 /**
  * Strip substrings from the end of a string.
- * @arg {string|RegExp} match Substring or regex to match.
- * @arg {string} str String to operate on.
+ * @arg {string|RegExp} match - Substring or regex to match.
+ * @arg {string} str
  * @returns {string}
  */
 export function stripEnd(match, str) {
@@ -79,7 +83,7 @@ export function stripEnd(match, str) {
 
 /**
  * Join path segments.
- * @arg {...string|string[]} segments Path segments. Arrays and nested arrays will be flattened.
+ * @arg {...string|string[]} segments - Path segments. Arrays and nested arrays will be flattened.
  * @returns {string}
  */
 export function pathJoin(...segments) {
@@ -98,6 +102,8 @@ export function pathJoin(...segments) {
 
 /**
  * Strip the case of a string: no capitals, words separated by a single space.
+ * @summary Strip the case of a string.
+ * @function
  * @arg {string} str
  * @returns {string}
  */
@@ -111,6 +117,7 @@ export const stripCase = (str) =>
 
 /**
  * Upper case the first letter of each word in a string.
+ * @function
  * @arg {string} str
  * @returns {string}
  */
@@ -118,6 +125,7 @@ export const upperCaseWords = (str) => str.replace(/\b\w/, (match) => match.toUp
 
 /**
  * Lower case the first letter of each word in a string.
+ * @function
  * @arg {string} str
  * @returns {string}
  */
@@ -125,6 +133,7 @@ export const lowerCaseWords = (str) => str.replace(/\b\w/, (match) => match.toLo
 
 /**
  * Upper case the first letter of a string.
+ * @function
  * @arg {string} str
  * @returns {string}
  */
@@ -132,49 +141,68 @@ export const upperCaseFirst = (str) => str.charAt(0).toUpperCase + str.slice(1);
 
 /**
  * Lower case the first letter of a string.
+ * @function
  * @arg {string} str
  * @returns {string}
  */
 export const lowerCaseFirst = (str) => str.charAt(0).toLowerCase + str.slice(1);
 
 /**
- * Sentence case a string, i.e. This text is sentenced.
+ * Sentence case a string.
+ * @function
  * @arg {string} str
  * @returns {string}
+ * @example
+ * 	myFunc("this is my sample"); // => "This is my sample"
  */
 export const sentenceCase = (str) => upperCaseFirst(stripCase(str));
 
 /**
- * Title case a string, i.e. This Text Is Titled.
+ * Title case a string.
+ * @function
  * @arg {string} str
  * @returns {string}
+ * @example
+ * 	myFunc("this is my sample"); // => "This Is My Sample"
  */
 export const titleCase = (str) => upperCaseWords(stripCase(str));
 
 /**
- * Pascal case a string, i.e. ThisTextIsPascaled.
+ * Pascal case a string.
+ * @function
  * @arg {string} str
  * @returns {string}
+ * @example
+ * 	myFunc("this is my sample"); // => "ThisIsMySample"
  */
 export const pascalCase = (str) => titleCase(str).replace(" ", "");
 
 /**
- * Snake case a string, i.e. this_text_is_snaked.
+ * Snake case a string.
+ * @function
  * @arg {string} str
  * @returns {string}
+ * @example
+ * 	myFunc("This is my sample"); // => "this_is_my_sample"
  */
 export const snakeCase = (str) => stripCase(str).replace(" ", "_");
 
 /**
- * Kebab case a string, i.e. this-text-is-kebabed.
+ * Kebab case a string.
+ * @function
  * @arg {string} str
  * @returns {string}
+ * @example
+ * 	myFunc("This is my sample"); // => "this-is-my-sample"
  */
 export const kebabCase = (str) => stripCase(str).replace(" ", "-");
 
 /**
- * Camel case a string, i.e. thisTextIsCameled.
+ * Camel case a string.
+ * @function
  * @arg {string} str
  * @returns {string}
+ * @example
+ * 	myFunc("This is my sample"); // => "thisIsMySample"
  */
 export const camelCase = (str) => lowerCaseFirst(pascalCase(str));

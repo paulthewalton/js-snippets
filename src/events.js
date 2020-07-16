@@ -1,5 +1,5 @@
-import { isPojo, isString } from "./_type";
-import { getParents } from "./_elements";
+import { isPojo, isString } from "./type";
+import { getParents } from "./elements";
 
 /**
  * Vanilla JS replacement for jQuery document ready.

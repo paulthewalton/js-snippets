@@ -1,4 +1,4 @@
-import { isInt } from "./_type";
+import { isInt } from "./type";
 
 /**
  * Cast value to number.

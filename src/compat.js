@@ -1,9 +1,9 @@
-import { isCallable } from "./_type";
+import { isCallable } from "./type";
 
 export class CompatResolver {
 	constructor(candidates, scope) {
 		this.candidates = candidates || [];
-		// eslint-disable-next-line
+		// eslint-disable-next-line no-undef
 		this.scope = scope || window || global;
 	}
 

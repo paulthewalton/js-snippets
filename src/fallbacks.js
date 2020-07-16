@@ -1,4 +1,4 @@
-import { isCallable } from "./_type";
+import { isCallable } from "./type";
 
 /**
  * Return the first argument that satisfies a validation callback, or the last

@@ -10,7 +10,7 @@ import {
 	isString,
 	parseBool,
 	areSameType,
-} from "./_type";
+} from "../src/type";
 
 const testArray = ["foo", "bar", "baz"];
 const testFauxArray = { 0: "foo", 1: "bar", 2: "baz", length: 3 };

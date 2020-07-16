@@ -1,15 +1,14 @@
 /**
- * React specific utility functions.
- * TODO: Component type documentation
+ * @file React specific utility functions.
  */
 
 /**
- * Merge React refs.
- * * If only one potential ref is passed in, returns that ref.
- * @arg {Array.<Function|Object>} refs
- * @returns {Function|Object}
+ * Merge React refs. If only one potential ref is passed in, returns that ref.
+ * @summary Merge React refs.
+ * @arg {...React.Ref} refs
+ * @returns {React.Ref}
  */
-export const mergeRefs = (...refs) => {
+export function mergeRefs(...refs) {
 	const filteredRefs = refs.filter(Boolean);
 	if (!filteredRefs.length) return null;
 	if (filteredRefs.length === 1) return filteredRefs[0];
@@ -22,19 +21,22 @@ export const mergeRefs = (...refs) => {
 			}
 		}
 	};
-};
+}
 
 /**
  * Display name helper for HOCs.
+ * @arg {React.Component} WrappedComponent - A React component.
  * @returns {string}
  */
-export const getDisplayName = (WrappedComponent) =>
-	WrappedComponent.displayName || WrappedComponent.name || "Component";
+export function getDisplayName(WrappedComponent) {
+	return WrappedComponent.displayName || WrappedComponent.name || "Component";
+}
 
 /**
  * Test if component is functional.
  * eg. for when checking if you should forward refs when creating HOCs.
- * @arg {Object} Component
+ * @summary Test if component is functional.
+ * @arg {React.Component} Component - A React component.
  * @returns {boolean}
  */
 export function isFunctionalComponent(Component) {
@@ -44,7 +46,8 @@ export function isFunctionalComponent(Component) {
 /**
  * Test if component is a class component.
  * eg. for when checking if you should forward refs when creating HOCs.
- * @arg {Object} Component
+ * @summary Test if component is a class component.
+ * @arg {React.Component} Component - A React component.
  * @returns {boolean}
  */
 export function isClassComponent(Component) {

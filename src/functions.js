@@ -1,4 +1,4 @@
-import { isCallable } from "./_type";
+import { isCallable } from "./type";
 // import { compatRequestAnimationFrame, compatCancelAnimationFrame } from "./compat";
 
 /**
@@ -54,9 +54,9 @@ export function batch(...fns) {
 /**
  * Call one function multiple times with an array of values/value arrays to pass to each call.
  * @arg {Function} fn Function to call.
- * @arg {*[][]} argsArray Array of arguments for function.
- * @arg {*} [thisArg] Value to set as `this` for the function.
- * @returns {*[]} Array of returns from each call of fn.
+ * @arg {Array[]} argsArray Array of arguments for function.
+ * @arg {*} thisArg Value to set as `this` for the function.
+ * @returns {Array} Array of returns from each call of fn.
  * @example
  * batchApply(Math.pow, [[2, 2], [10, 3]]) // -> [4, 1000]
  */
@@ -89,7 +89,7 @@ export function makeTest(fns, strictMode) {
  * Process placeholder values for partial application of functions.
  * * Values of `_` will be replaced with `undefined` unless preceded by backslash
  * @private
- * @arg {*[]} partials Array of values to partially apply to a function.
+ * @arg {Array} partials Array of values to partially apply to a function.
  * @returns {Object} Placeholders and processed partial arguments.
  */
 function processPartialPlaceholders(partials) {
@@ -137,7 +137,6 @@ Object.defineProperty(partial, "placeholder", {
 /**
  * Partially apply arguments to a function from right-to-left without setting `this`.
  * * Use `_` as a placeholder value, final arguments will replace those positions from right-to-left, prepending any remaining arguments.
- * ! BEWARE using this with variable argument functions, as any partially filled arguments will be appended to the end of the final supplied arguments (after accounting for placeholders)
  * @arg {Function} fn Function to partially apply.
  * @arg {...*} partials Arguments to partially apply to `fn`.
  * @returns {Function}

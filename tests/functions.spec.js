@@ -8,7 +8,7 @@ import {
 	partialRight,
 	throttle,
 	debounce,
-} from "./_functions";
+} from "../src/functions";
 
 const times10 = (x) => x * 10;
 const plus2 = (x) => x + 2;
@@ -31,11 +31,15 @@ test("testing compose()", () => {
 });
 
 test("testing batch()", () => {
+	// Check outcome equivalence
 	expect(batch(plus2, times10, minus5)(15)).toStrictEqual([plus2(15), times10(15), minus5(15)]);
+	// Check argument order preserved
 	expect(batch(plus2, times10, minus5)(15)).toStrictEqual([17, 150, 10]);
 	expect(batch(times10, minus5, plus2)(15)).toStrictEqual([150, 10, 17]);
+	// Check discarding invalid arguments
 	expect(batch(times10, minus5, "String", plus2)(15)).toStrictEqual([150, 10, 17]);
 	const { toUpperCase, toLowerCase, split } = String.prototype;
+	// Check application of thisArg
 	expect(batch(toUpperCase, toLowerCase, split).call("HELLO world", " ")).toStrictEqual([
 		"HELLO WORLD",
 		"hello world",

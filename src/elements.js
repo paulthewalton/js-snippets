@@ -1,8 +1,8 @@
-import { isDomObject, isString, isObject } from "./_type";
-import { toInteger } from "./_math";
-import { kebabCase, upperCaseFirst } from "./_strings";
-import { batchApply } from "./_functions";
-import { extend } from "./_objects";
+import { isDomObject, isString, isObject } from "./type";
+import { toInteger } from "./math";
+import { kebabCase, upperCaseFirst } from "./strings";
+import { batchApply } from "./functions";
+import { extend } from "./objects";
 
 /**
  * Create an HTMLElement.
@@ -65,7 +65,7 @@ export function isInDom(targetNode) {
 /**
  * Add listeners for multiple events to one DOM element.
  * @arg {Element} eventTarget DOM element to add event listeners.
- * @arg {*[][]} listeners Array of addEventListener argument sets.
+ * @arg {Array[]} listeners Array of addEventListener argument sets.
  */
 export function applyEventListeners(eventTarget, listeners) {
 	batchApply(EventTarget.prototype.addEventListener, listeners, eventTarget);
