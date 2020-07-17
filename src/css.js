@@ -21,8 +21,11 @@ export function parseCSSColor(color) {
 		return parseCSSColor.prototype[color];
 	}
 	let temp = document.body.appendChild(createElem("div", { style: { color, display: "none" } }));
-	let rgba = window.getComputedStyle(temp).color.match(/rgba?\((\d+)\,\s(\d+)\,\s(\d+)(?:\,\s([0-9.]+))?\)/);
-	temp.remove();
+	if (!temp || !temp.style.color) {
+		return { red: 0, green: 0, blue: 0, alpha: 0, value: "" };
+	}
+	const rgba = window.getComputedStyle(temp).color.match(/rgba?\((\d+)\,\s(\d+)\,\s(\d+)(?:\,\s([0-9.]+))?\)/);
+	temp = temp.remove();
 	const [red, green, blue] = rgba.slice(1, 4).map(toNumber);
 	return (parseCSSColor.prototype[color] = { red, green, blue, alpha: toNumber(rgba[4], 1), value: rgba[0] });
 }
