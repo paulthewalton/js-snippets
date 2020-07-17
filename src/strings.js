@@ -1,3 +1,10 @@
+/**
+ * @file
+ * @kind overview
+ * @summary Utilities for working with strings.
+ * @author Paul Walton
+ */
+
 import { flatten } from "./arrays";
 
 /**
@@ -83,7 +90,7 @@ export function stripEnd(match, str) {
 
 /**
  * Join path segments.
- * @arg {...string|string[]} segments - Path segments. Arrays and nested arrays will be flattened.
+ * @arg {...(string|string[])} segments - Path segments. Arrays and nested arrays will be flattened.
  * @returns {string}
  */
 export function pathJoin(...segments) {

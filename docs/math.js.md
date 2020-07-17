@@ -1,22 +1,31 @@
+
+
+<br><a name="math.js"></a>
+
+# math.js
+> Math & number functions.
+
+**Author**: Paul Walton  
+
 <br>
 
 ## Functions
 
 <dl>
-<dt><a href="#toNumber">toNumber(value, [fallback])</a> ⇒ <code>number</code></dt>
+<dt><a href="docs/toNumber.md">toNumber(value, [fallback])</a> ⇒ <code>number</code></dt>
 <dd><p>Cast value to number.</p>
 </dd>
-<dt><a href="#toInteger">toInteger(value)</a> ⇒ <code>number</code></dt>
+<dt><a href="docs/toInteger.md">toInteger(value)</a> ⇒ <code>number</code></dt>
 <dd><p>Cast a single value to integer.
 returns 0 if an array with length &lt; 1 or string with non-numeral characters</p>
 </dd>
-<dt><a href="#toDecimal">toDecimal(digitsAfterDecimal, value)</a> ⇒ <code>number</code></dt>
+<dt><a href="docs/toDecimal.md">toDecimal(digitsAfterDecimal, value)</a> ⇒ <code>number</code></dt>
 <dd><p>Cast a single value to decimal of specified precision.</p>
 <ul>
 <li>Returns 0 if an array with length &lt; 1 or string with non-numeral characters.</li>
 </ul>
 </dd>
-<dt><a href="#capMinMax">capMinMax(min, max, value)</a> ⇒ <code>number</code></dt>
+<dt><a href="docs/capMinMax.md">capMinMax(min, max, value)</a> ⇒ <code>number</code></dt>
 <dd><p>Cap a value to between minimum and maximum values.</p>
 </dd>
 </dl>

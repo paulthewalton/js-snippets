@@ -1,44 +1,49 @@
+
+
+<br><a name="type.js"></a>
+
+# type.js
+> Utility functions for checking types.
+
+**Author**: Paul Walton  
+
 <br>
 
 ## Functions
 
 <dl>
-<dt><a href="#isCallable">isCallable(fn)</a> ⇒ <code>boolean</code></dt>
+<dt><a href="docs/isCallable.md">isCallable(fn)</a> ⇒ <code>boolean</code></dt>
 <dd><p>Determine whether a value is a callable function</p>
 </dd>
-<dt><a href="#isInt">isInt(value)</a> ⇒ <code>boolean</code></dt>
+<dt><a href="docs/isInt.md">isInt(value)</a> ⇒ <code>boolean</code></dt>
 <dd><p>Reliable method of determining if int</p>
 </dd>
-<dt><a href="#isNumber">isNumber(value)</a> ⇒ <code>boolean</code></dt>
+<dt><a href="docs/isNumber.md">isNumber(value)</a> ⇒ <code>boolean</code></dt>
 <dd><p>Check if value is a number</p>
 </dd>
-<dt><a href="#isArray">isArray(value)</a> ⇒ <code>boolean</code></dt>
+<dt><a href="docs/isArray.md">isArray(value)</a> ⇒ <code>boolean</code></dt>
 <dd><p>Check if value is an Array</p>
 </dd>
-<dt><a href="#isNumeric">isNumeric(value)</a> ⇒ <code>boolean</code></dt>
+<dt><a href="docs/isNumeric.md">isNumeric(value)</a> ⇒ <code>boolean</code></dt>
 <dd><p>Check if value is numeric</p>
 </dd>
-<dt><a href="#isString">isString(value)</a> ⇒ <code>boolean</code></dt>
+<dt><a href="docs/isString.md">isString(value)</a> ⇒ <code>boolean</code></dt>
 <dd><p>Check if a value is a string</p>
 </dd>
-<dt><a href="#isObject">isObject(value)</a> ⇒ <code>boolean</code></dt>
+<dt><a href="docs/isObject.md">isObject(value)</a> ⇒ <code>boolean</code></dt>
 <dd><p>Determine whether a value is an Object</p>
 </dd>
-<dt><a href="#isPojo">isPojo(value)</a> ⇒ <code>boolean</code></dt>
+<dt><a href="docs/isPojo.md">isPojo(value)</a> ⇒ <code>boolean</code></dt>
 <dd><p>Determine whether a value is a Plain Old Javascript Object (POJO)</p>
 </dd>
-<dt><a href="#isDomObject">isDomObject(value)</a> ⇒ <code>boolean</code></dt>
+<dt><a href="docs/isDomObject.md">isDomObject(value)</a> ⇒ <code>boolean</code></dt>
 <dd><p>Check if a value is a DOM object, a.k.a. Node</p>
 </dd>
-<dt><a href="#parseBool">parseBool(value)</a> ⇒ <code>boolean</code></dt>
-<dd><p>Parse for boolean.
-Checks for numeric strings, and &quot;true&quot;, else casting to boolean.</p>
+<dt><a href="docs/parseBool.md">parseBool(value)</a> ⇒ <code>boolean</code></dt>
+<dd><p>Parse for boolean.</p>
 </dd>
-<dt><a href="#areSameType">areSameType(value, ...values)</a> ⇒ <code>boolean</code></dt>
-<dd><p>Check whether any number of values are of the same type</p>
-<ul>
-<li>checks typeof and object/function constructors</li>
-</ul>
+<dt><a href="docs/areSameType.md">areSameType(value, ...values)</a> ⇒ <code>boolean</code></dt>
+<dd><p>Check whether any number of values are of the same type.</p>
 </dd>
 </dl>
 
@@ -145,6 +150,8 @@ Check if a value is a DOM object, a.k.a. Node
 <br><a name="parseBool"></a>
 
 ## parseBool(value) ⇒ <code>boolean</code>
+> Parse for boolean.
+
 Parse for boolean.
 Checks for numeric strings, and "true", else casting to boolean.
 
@@ -157,8 +164,10 @@ Checks for numeric strings, and "true", else casting to boolean.
 <br><a name="areSameType"></a>
 
 ## areSameType(value, ...values) ⇒ <code>boolean</code>
-Check whether any number of values are of the same type
-* checks typeof and object/function constructors
+> Check whether any number of values are of the same type.
+
+Check whether any number of values are of the same type.
+* checks typeof and object/function constructors.
 
 
 | Param | Type | Description |

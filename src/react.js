@@ -1,5 +1,8 @@
 /**
- * @file React specific utility functions.
+ * @file
+ * @kind overview
+ * @summary React specific utility functions.
+ * @author Paul Walton
  */
 
 /**

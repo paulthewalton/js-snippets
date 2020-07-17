@@ -1,9 +1,16 @@
+/**
+ * @file
+ * @kind overview
+ * @summary Event utilities.
+ * @author Paul Walton
+ */
+
 import { isPojo, isString } from "./type";
 import { getParents } from "./elements";
 
 /**
  * Vanilla JS replacement for jQuery document ready.
- * @arg {Function} fn Callback for on document ready.
+ * @arg {Function} fn - Callback for on document ready.
  */
 export function onDocReady(fn) {
 	if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
@@ -15,14 +22,16 @@ export function onDocReady(fn) {
 
 /**
  * Dispatch a custom event of type `eventType` on `target`, defaults to document.
+ * * Returns true on success, false on failure.
+ * @summary Dispatch a custom event.
  * @arg {string} eventType The event type.
- * @arg {EventTarget} target Optional. The element to dispatch the event. Default `document`.
- * @arg {Object} options Optional. Event options.
- * @arg {boolean} [options.bubbles=false] Optional. Whether the event will bubble. Default `false`.
- * @arg {boolean} [options.cancelable=false] Optional. Whether the event is cancelable. Default `false`.
- * @arg {boolean} [options.composed=false] Optional. Whether the event is composed. Default `false`.
- * @arg {*} [options.detail=undefined] Optional. Any data to pass to the event handler. Default `undefined`.
- * @returns {boolean} true on success, false on fail.
+ * @arg {EventTarget} [target=document] - The element to dispatch the event.
+ * @arg {Object} [options] - Event options.
+ * @arg {boolean} [options.bubbles=false] - Whether the event will bubble.
+ * @arg {boolean} [options.cancelable=false] - Whether the event is cancelable.
+ * @arg {boolean} [options.composed=false] - Whether the event is composed.
+ * @arg {*} [options.detail] - Any data to pass to the event handler.
+ * @returns {boolean}
  */
 export function dispatchCustomEvent(eventType, target, options) {
 	let event;

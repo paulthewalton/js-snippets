@@ -1,4 +1,13 @@
 
+
+<br><a name="constants.js"></a>
+
+# constants.js
+> Common constants & enums.
+
+**Author**: Paul Walton  
+
+
 <br><a name="RECT"></a>
 
 ## RECT : <code>enum</code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;_`🔒 Read only`_
@@ -37,7 +46,10 @@ Common frequency periods (time from peak to peak).
 
 | Name | Description |
 | --- | --- |
-| HZ_15 | Period for frequency of 15Hz. Visual updates throttled to 15Hz will feel slow. Not recommended for anything visual. Aliased by FREQ.FPS_15. |
-| HZ_30 | Period for frequency of 30Hz. Visual updates throttled to 30Hz may be noticed by users, but should be acceptable. Aliased by FREQ.FPS_30. |
-| HZ_60 | Period for frequency of 60Hz. Users shouldn't be able to detect visual updates throttled to 60Hz. Aliased by FREQ.FPS_60. |
+| HZ_15 | Period for frequency of 15Hz. Visual updates throttled to 15Hz will feel slow. |
+| HZ_30 | Period for frequency of 30Hz. Visual updates throttled to 30Hz may be noticed by users, but should be acceptable. |
+| HZ_60 | Period for frequency of 60Hz. Users shouldn't be able to detect visual updates throttled to 60Hz. |
+| FPS_15 | Alias of FREQ.HZ_15. |
+| FPS_30 | Alias of FREQ.HZ_30. |
+| FPS_60 | Alias of FREQ.HZ_60. |
 

@@ -1,24 +1,24 @@
+
+
+<br><a name="css.js"></a>
+
+# css.js
+> Helper functions for working with CSS.
+
+**Author**: Paul Walton  
+
 <br>
 
 ## Functions
 
 <dl>
-<dt><a href="#parseCSSColor">parseCSSColor(color)</a> ⇒ <code><a href="#ParsedCSSColor">ParsedCSSColor</a></code></dt>
+<dt><a href="docs/parseCSSColor.md">parseCSSColor(color)</a> ⇒ <code><a href="#ParsedCSSColor">ParsedCSSColor</a></code></dt>
 <dd><p>Parse a CSS color string into red, green, blue, and alpha components.</p>
 </dd>
-<dt><a href="#parseCSSTime">parseCSSTime(cssTimeStr)</a> ⇒ <code>number</code></dt>
+<dt><a href="docs/parseCSSTime.md">parseCSSTime(cssTimeStr)</a> ⇒ <code>number</code></dt>
 <dd><p>Parse a CSS time string into ms.</p>
 </dd>
-<dt><a href="#ensureCSSUnits">ensureCSSUnits(value, units, fallback)</a> ⇒ <code>string</code></dt>
-<dd></dd>
-</dl>
-
-<br>
-
-## Typedefs
-
-<dl>
-<dt><a href="#ParsedCSSColor">ParsedCSSColor</a> : <code>Object</code></dt>
+<dt><a href="docs/ensureCSSUnits.md">ensureCSSUnits(value, units, fallback)</a> ⇒ <code>string</code></dt>
 <dd></dd>
 </dl>
 
@@ -26,12 +26,15 @@
 <br><a name="parseCSSColor"></a>
 
 ## parseCSSColor(color) ⇒ [<code>ParsedCSSColor</code>](#ParsedCSSColor)
+> Parse a CSS color string into red, green, blue, and alpha components.
+
 Parse a CSS color string into red, green, blue, and alpha components.
+* Passing an invalid color will return the components for transparent black, with an empty string as the `value` property.
 
 
 | Param | Type | Description |
 | --- | --- | --- |
-| color | <code>string</code> | CSS color value. |
+| color | <code>string</code> | CSS color value, case-insensitive. |
 
 
 <br><a name="parseCSSTime"></a>

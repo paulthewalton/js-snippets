@@ -1,69 +1,68 @@
+
+
+<br><a name="elements.js"></a>
+
+# elements.js
+> Helper functions for working with the DOM.
+
+**Author**: Paul Walton  
+
 <br>
 
 ## Functions
 
 <dl>
-<dt><a href="#createElem">createElem(tagName, props, children)</a> ⇒ <code>HTMLElement</code></dt>
+<dt><a href="docs/createElem.md">createElem(tagName, props, ...children)</a> ⇒ <code>HTMLElement</code></dt>
 <dd><p>Create an HTMLElement.</p>
-<ul>
-<li>returns null for invalid tagName</li>
-</ul>
 </dd>
-<dt><a href="#isSameOrChildNode">isSameOrChildNode(potentialParentNode, targetNode)</a> ⇒ <code>boolean</code></dt>
+<dt><a href="docs/isSameOrChildNode.md">isSameOrChildNode(potentialParentNode, targetNode)</a> ⇒ <code>boolean</code></dt>
 <dd><p>Determine whether a DOM object is the same or parent of another DOM object.</p>
 </dd>
-<dt><a href="#isInDom">isInDom(targetNode)</a> ⇒ <code>boolean</code></dt>
+<dt><a href="docs/isInDom.md">isInDom(targetNode)</a> ⇒ <code>boolean</code></dt>
 <dd><p>Determine whether a DOM object is in the current DOM.</p>
 </dd>
-<dt><a href="#applyEventListeners">applyEventListeners(eventTarget, listeners)</a></dt>
+<dt><a href="docs/applyEventListeners.md">applyEventListeners(eventTarget, listeners)</a></dt>
 <dd><p>Add listeners for multiple events to one DOM element.</p>
 </dd>
-<dt><a href="#getPageOffset">getPageOffset(el)</a> ⇒ <code><a href="#Point">Point</a></code></dt>
+<dt><a href="docs/getPageOffset.md">getPageOffset(el)</a> ⇒ <code><a href="#Point">Point</a></code></dt>
 <dd><p>Get the full page offset for an element.</p>
 </dd>
-<dt><a href="#getEm">getEm(el)</a> ⇒ <code>string</code></dt>
-<dd><p>Get the em (font size) of an element</p>
+<dt><a href="docs/getEm.md">getEm(el)</a> ⇒ <code>string</code></dt>
+<dd><p>Get the em (font size) of an element.</p>
 </dd>
-<dt><a href="#scrollIntoView">scrollIntoView(el, [offset])</a></dt>
+<dt><a href="docs/scrollIntoView.md">scrollIntoView(el, [offset])</a></dt>
 <dd><p>Scroll the window to the vertical position of an element.</p>
 </dd>
-<dt><a href="#isInViewport">isInViewport(el)</a> ⇒ <code>boolean</code></dt>
+<dt><a href="docs/isInViewport.md">isInViewport(el)</a> ⇒ <code>boolean</code></dt>
 <dd><p>Check if any part of an element is within the viewport.</p>
 </dd>
-<dt><a href="#isScrollable">isScrollable(el)</a> ⇒ <code>Object</code></dt>
+<dt><a href="docs/isScrollable.md">isScrollable(el)</a> ⇒ <code><a href="#ScrollbarStatus">ScrollbarStatus</a></code></dt>
 <dd><p>Check whether an element has currently scrollable overflow.</p>
 </dd>
-<dt><a href="#getParents">getParents(node, includeSelf)</a> ⇒ <code>Array.&lt;Node&gt;</code></dt>
+<dt><a href="docs/getParents.md">getParents(node, includeSelf)</a> ⇒ <code>Array.&lt;Node&gt;</code></dt>
 <dd><p>Get all parent elements for an element.</p>
 </dd>
-<dt><a href="#setPrefixedStyle">setPrefixedStyle(elem, styleName, styleValue, prefixValues)</a></dt>
+<dt><a href="docs/setPrefixedStyle.md">setPrefixedStyle(elem, styleName, styleValue, prefixValues)</a></dt>
 <dd><p>Apply a style to a DOM element with vendor prefixes.</p>
 </dd>
-</dl>
-
-<br>
-
-## Typedefs
-
-<dl>
-<dt><a href="#Point">Point</a> : <code>Object</code></dt>
-<dd></dd>
 </dl>
 
 
 <br><a name="createElem"></a>
 
-## createElem(tagName, props, children) ⇒ <code>HTMLElement</code>
+## createElem(tagName, props, ...children) ⇒ <code>HTMLElement</code>
+> Create an HTMLElement.
+
 Create an HTMLElement.
 * returns null for invalid tagName
 
-**Uses**: ParentNode.append  
+**See**: [ParentNode.append](https://developer.mozilla.org/en-US/docs/Web/API/ParentNode/append)  
 
 | Param | Type | Description |
 | --- | --- | --- |
 | tagName | <code>string</code> | Element tag name. |
 | props | <code>Object</code> | Element properties. Unrecognized props are kebab-cased and set as attributes. |
-| children | <code>Array.&lt;string&gt;</code>, <code>Array.&lt;Node&gt;</code> | Element child nodes. |
+| ...children | <code>Node</code>, <code>string</code> | Element child nodes. |
 
 
 <br><a name="isSameOrChildNode"></a>
@@ -97,8 +96,8 @@ Add listeners for multiple events to one DOM element.
 
 | Param | Type | Description |
 | --- | --- | --- |
-| eventTarget | <code>Element</code> | DOM element to add event listeners. |
-| listeners | <code>Array.&lt;Array&gt;</code> | Array of addEventListener argument sets. |
+| eventTarget | <code>Element</code> | eventTarget DOM element to add event listeners. |
+| listeners | <code>Array.&lt;Array&gt;</code> | listeners Array of addEventListener argument sets. |
 
 
 <br><a name="getPageOffset"></a>
@@ -115,7 +114,7 @@ Get the full page offset for an element.
 <br><a name="getEm"></a>
 
 ## getEm(el) ⇒ <code>string</code>
-Get the em (font size) of an element
+Get the em (font size) of an element.
 
 
 | Param | Type | Description |
@@ -148,23 +147,13 @@ Check if any part of an element is within the viewport.
 
 <br><a name="isScrollable"></a>
 
-## isScrollable(el) ⇒ <code>Object</code>
+## isScrollable(el) ⇒ [<code>ScrollbarStatus</code>](#ScrollbarStatus)
 Check whether an element has currently scrollable overflow.
 
-**Returns**: <code>Object</code> - scrollbarStatus  
 
 | Param | Type |
 | --- | --- |
 | el | <code>HTMLElement</code> | 
-
-**Properties**
-
-| Name | Type | Description |
-| --- | --- | --- |
-| scrollbarStatus.any | <code>boolean</code> | Element can scroll vertically or horizontally. |
-| scrollbarStatus.both | <code>boolean</code> | Element can scroll vertically and horizontally. |
-| scrollbarStatus.x | <code>boolean</code> | Element can scroll horizontally. |
-| scrollbarStatus.y | <code>boolean</code> | Element can scroll vertically. |
 
 
 <br><a name="getParents"></a>
@@ -187,7 +176,7 @@ Apply a style to a DOM element with vendor prefixes.
 
 | Param | Type | Description |
 | --- | --- | --- |
-| elem | <code>Element</code> | Element to apply styles to. |
+| elem | <code>Element</code>, <code>jQuery</code> | Element to apply styles to. |
 | styleName | <code>string</code> | The name of a CSS style. |
 | styleValue | <code>string</code> | String-ified CSS style value. |
 | prefixValues | <code>boolean</code> | Whether to prefix the values as well. |
@@ -202,4 +191,17 @@ Apply a style to a DOM element with vendor prefixes.
 | --- | --- | --- |
 | x | <code>number</code> | The X Coordinate. |
 | y | <code>number</code> | The Y Coordinate. |
+
+
+<br><a name="ScrollbarStatus"></a>
+
+## ScrollbarStatus : <code>Object</code>
+**Properties**
+
+| Name | Type | Description |
+| --- | --- | --- |
+| scrollbarStatus.any | <code>boolean</code> | Element can scroll vertically or horizontally. |
+| scrollbarStatus.both | <code>boolean</code> | Element can scroll vertically and horizontally. |
+| scrollbarStatus.x | <code>boolean</code> | Element can scroll horizontally. |
+| scrollbarStatus.y | <code>boolean</code> | Element can scroll vertically. |
 

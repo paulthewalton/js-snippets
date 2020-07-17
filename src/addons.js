@@ -1,7 +1,8 @@
 /**
- * @file Non-functional addon helpers
+ * @file
+ * @kind overview
+ * @summary Non-functional addon helpers
  * @author Paul Walton
- * @since 1.0.0
  */
 
 import { getEventPath } from "./events";
@@ -59,7 +60,7 @@ export const listenerOptions = (function detectListenerOptions() {
 })();
 
 /**
- * Adds `hover` and `touch` classes to the documentElement when mouse/stylus & touch events detected.
+ * Adds `hover` and `touch` classes once to the documentElement when mouse/stylus & touch events detected.
  * @arg {Window} win - Window to listen for events.
  * @arg {Document} doc - Document to recieve classes.
  */
@@ -67,6 +68,7 @@ export function setUpInterfaceDetection(win = window, doc = document) {
 	const lOpts = listenerOptions.passiveCapture;
 	/**
 	 * Add the `touch` class to the document element when the next touch event is detected.
+	 * @private
 	 * @listens Window#touchstart
 	 * @listens Window#touchmove
 	 * @listens Window#touchend
@@ -83,6 +85,7 @@ export function setUpInterfaceDetection(win = window, doc = document) {
 
 	/**
 	 * Add the `hover` class to the document element on the next mouseover event
+	 * @private
 	 * @listens Window#mouseover
 	 */
 	function onDetectHover() {
@@ -97,6 +100,7 @@ export function setUpInterfaceDetection(win = window, doc = document) {
  * @listens Window#focusout
  * @listens Window#focusin
  * @listens Window#keydown
+ * @returns {Function} Teardown function to remove listeners.
  */
 export function setUpTabFocus(win = window, doc = document) {
 	const focusClass = "tab-focus",
@@ -107,6 +111,7 @@ export function setUpTabFocus(win = window, doc = document) {
 
 	/**
 	 * Remove classes on focusout.
+	 * @private
 	 * @listens Window#focusout
 	 * @see getEventPath
 	 * @arg {FocusEvent} focusEvent
@@ -124,6 +129,7 @@ export function setUpTabFocus(win = window, doc = document) {
 	/**
 	 * Add classes on focusin.
 	 * Removes classes from elements not in event path.
+	 * @private
 	 * @listens Window#focusin
 	 * @see getEventPath
 	 * @arg {FocusEvent} focusEvent
@@ -149,6 +155,7 @@ export function setUpTabFocus(win = window, doc = document) {
 
 	/**
 	 * Primes tab focus listeners by capturing keydown events for the Tab key.
+	 * @private
 	 * @listens Window#keydown
 	 * @arg {KeyboardEvent} keyEvent
 	 */
@@ -160,9 +167,6 @@ export function setUpTabFocus(win = window, doc = document) {
 	win.addEventListener("focusin", addTabFocusClasses, listenerOptions.passive);
 	win.addEventListener("keydown", primeTabFocus, listenerOptions.passiveCapture);
 
-	/**
-	 * Remove listeners
-	 */
 	return function teardownTabFocus() {
 		win.removeEventListener("focusout", removeTabFocusClasses, listenerOptions.passive);
 		win.removeEventListener("focusin", addTabFocusClasses, listenerOptions.passive);

@@ -1,26 +1,18 @@
+
 <br>
 
 ## Functions
 
 <dl>
-<dt><a href="#calculateScrollbarWidth">calculateScrollbarWidth()</a> ⇒ <code>number</code></dt>
+<dt><a href="docs/calculateScrollbarWidth.md">calculateScrollbarWidth()</a> ⇒ <code>number</code></dt>
 <dd><p>Calculate the width of the native scrollbars.</p>
 </dd>
-<dt><a href="#isDev">isDev()</a> ⇒ <code>boolean</code></dt>
+<dt><a href="docs/isDev.md">isDev()</a> ⇒ <code>boolean</code></dt>
 <dd><p>Try to identify development environment from location host TLD.</p>
 </dd>
-<dt><a href="#setUpMediaQueries">setUpMediaQueries(breakpoints)</a> ⇒ <code>Object</code></dt>
+<dt><a href="docs/setUpMediaQueries.md">setUpMediaQueries(breakpoints)</a> ⇒ <code>Object</code></dt>
 <dd><p>Get an object of preset matchMedia media queries.</p>
 </dd>
-</dl>
-
-<br>
-
-## Typedefs
-
-<dl>
-<dt><a href="#Breakpoint">Breakpoint</a> : <code>Object</code></dt>
-<dd></dd>
 </dl>
 
 

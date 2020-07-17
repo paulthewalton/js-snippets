@@ -1,4 +1,11 @@
 /**
+ * @file
+ * @kind overview
+ * @summary Common constants & enums.
+ * @author Paul Walton
+ */
+
+/**
  * Rect properties
  * @readonly
  * @enum {string}
@@ -44,9 +51,12 @@ export const TIME = Object.freeze({
  * Common frequency periods (time from peak to peak).
  * @readonly
  * @enum {number}
- * @property HZ_15 Period for frequency of 15Hz. Visual updates throttled to 15Hz will feel slow. Not recommended for anything visual. Aliased by FREQ.FPS_15.
- * @property HZ_30 Period for frequency of 30Hz. Visual updates throttled to 30Hz may be noticed by users, but should be acceptable. Aliased by FREQ.FPS_30.
- * @property HZ_60 Period for frequency of 60Hz. Users shouldn't be able to detect visual updates throttled to 60Hz. Aliased by FREQ.FPS_60.
+ * @property HZ_15 Period for frequency of 15Hz. Visual updates throttled to 15Hz will feel slow.
+ * @property HZ_30 Period for frequency of 30Hz. Visual updates throttled to 30Hz may be noticed by users, but should be acceptable.
+ * @property HZ_60 Period for frequency of 60Hz. Users shouldn't be able to detect visual updates throttled to 60Hz.
+ * @property FPS_15 Alias of FREQ.HZ_15.
+ * @property FPS_30 Alias of FREQ.HZ_30.
+ * @property FPS_60 Alias of FREQ.HZ_60.
  */
 export const FREQ = Object.freeze({
 	HZ_15: TIME.SECOND / 15,

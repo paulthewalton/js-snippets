@@ -1,3 +1,10 @@
+/**
+ * @file
+ * @kind overview
+ * @summary Utilities for combining, modifying functions.
+ * @author Paul Walton
+ */
+
 import { isCallable } from "./type";
 // import { compatRequestAnimationFrame, compatCancelAnimationFrame } from "./compat";
 
@@ -34,6 +41,7 @@ export function compose(...fns) {
 /**
  * Create one function that runs multiple functions on the same arguments.
  * * Returned function returns array of results in order of original args.
+ * @summary Create one function that runs multiple functions on the same arguments.
  * @arg {...Function} fns Callable functions.
  * @returns {Function}
  * @example
@@ -114,9 +122,11 @@ Object.defineProperty(processPartialPlaceholders, "placeholder", {
 /**
  * Partially apply arguments to a function without setting `this`.
  * * Use `_` as a placeholder value, final arguments will fill those positions from left-to-right, appending any remaining arguments.
+ * @summary Partially apply arguments to a function without setting `this`.
  * @arg {Function} fn Function to partially apply.
  * @arg {...*} partials Arguments to partially apply to `fn`.
  * @returns {Function}
+ * @property {string} placeholder "_", can be used as placeholder instead of the string literal.
  * @example
  * let forceGreaterThanZero = partial(Math.max, 0);
  * forceGreaterThanZero(myNum) // ~= Math.max(0, myNum)
@@ -137,13 +147,19 @@ Object.defineProperty(partial, "placeholder", {
 /**
  * Partially apply arguments to a function from right-to-left without setting `this`.
  * * Use `_` as a placeholder value, final arguments will replace those positions from right-to-left, prepending any remaining arguments.
+ * @summary Partially apply arguments to a function from right-to-left without setting `this`.
  * @arg {Function} fn Function to partially apply.
  * @arg {...*} partials Arguments to partially apply to `fn`.
  * @returns {Function}
+ * @property {string} placeholder "_", can be used as placeholder instead of the string literal.
  * @example
  * let divide = (a, b) => a / b;
  * let divideBy2 = partialRight(divide, 2);
  * divideBy2(myNum) // ~= divide(myNum, 2)
+ * @example
+ * let addThenMultiply = (a, b, c) => (a + b) * c;
+ * let add2ThenMultiply = partialRight(divide, 2, partialRight.placeholder);
+ * add2ThenMultiply(1, 3) // === addThenMultiply(1, 2, 3) === 9
  */
 export function partialRight(fn, ...partials) {
 	const { placeholders, processedPartials } = processPartialPlaceholders(partials);
@@ -202,6 +218,7 @@ export function throttle(fn, wait) {
  * * Debounced function has 2 methods:
  *   - flush(), which cancels the timer and immediately returns the result of the invoked function, and
  *   - cancel(), which just cancels the timer.
+ * @summary Debounce a function by setting a minimum elapsed time between invocations.
  * @arg {Function} fn Function to debounce.
  * @arg {number} wait Minimum elapsed time between invoking `fn`.
  * @arg {boolean} [leading=false] Optional. Whether to invoke the function the first time is is called before waiting. Default false.

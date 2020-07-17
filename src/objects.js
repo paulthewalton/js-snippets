@@ -1,3 +1,10 @@
+/**
+ * @file
+ * @kind overview
+ * @summary Utilities for working with objects and their properties.
+ * @author Paul Walton
+ */
+
 import { isObject, isPojo, areSameType } from "./type";
 import { sequence } from "./functions";
 

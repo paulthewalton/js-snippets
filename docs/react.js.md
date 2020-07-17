@@ -1,18 +1,27 @@
+
+
+<br><a name="react.js"></a>
+
+# react.js
+> React specific utility functions.
+
+**Author**: Paul Walton  
+
 <br>
 
 ## Functions
 
 <dl>
-<dt><a href="#mergeRefs">mergeRefs(...refs)</a> ⇒ <code>React.Ref</code></dt>
+<dt><a href="docs/mergeRefs.md">mergeRefs(...refs)</a> ⇒ <code>React.Ref</code></dt>
 <dd><p>Merge React refs.</p>
 </dd>
-<dt><a href="#getDisplayName">getDisplayName(WrappedComponent)</a> ⇒ <code>string</code></dt>
+<dt><a href="docs/getDisplayName.md">getDisplayName(WrappedComponent)</a> ⇒ <code>string</code></dt>
 <dd><p>Display name helper for HOCs.</p>
 </dd>
-<dt><a href="#isFunctionalComponent">isFunctionalComponent(Component)</a> ⇒ <code>boolean</code></dt>
+<dt><a href="docs/isFunctionalComponent.md">isFunctionalComponent(Component)</a> ⇒ <code>boolean</code></dt>
 <dd><p>Test if component is functional.</p>
 </dd>
-<dt><a href="#isClassComponent">isClassComponent(Component)</a> ⇒ <code>boolean</code></dt>
+<dt><a href="docs/isClassComponent.md">isClassComponent(Component)</a> ⇒ <code>boolean</code></dt>
 <dd><p>Test if component is a class component.</p>
 </dd>
 </dl>

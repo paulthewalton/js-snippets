@@ -1,7 +1,8 @@
 /**
- * @file Array helper functions
+ * @file
+ * @kind overview
+ * @summary Array utility functions.
  * @author Paul Walton
- * @since 1.0.0
  */
 
 import { isCallable } from "./type";
@@ -9,8 +10,8 @@ import { isCallable } from "./type";
 /**
  * Make sure that a value is an array.
  * @arg {*} value - Value to check.
- * @arg {number} minLength - Minimum length for returned array.
- * @arg {*} fill - Value to insert when filling. If function, will be called with the current index, inserting the returned value.
+ * @arg {number} [minLength=0] - Minimum length for returned array.
+ * @arg {*} [fill] - Value to insert when filling. If function, will be called with the current index, inserting the returned value.
  * @returns {Array}
  */
 export function assertArray(value, minLength = 0, fill = undefined) {
@@ -81,12 +82,12 @@ export function uniq(arr) {
 /**
  * Flatten an array up to a set number of levels.
  * @arg {Array} arr - Array to flatten.
- * @arg {number} depth - Max depth of flattening.
+ * @arg {number} [depth=1] - Max depth of flattening.
  * @returns {Array}
  * @example
- * 	flatten([1,2,[3,4],5]); // -> [1,2,3,4,5]
- * 	flatten([1,2,[3,[4]],5], 1); // -> [1,2,3,[4],5]
- * 	flatten([1,2,[3,[[[[4]]]]],5], Infinity); // -> [1,2,3,4,5]
+ * flatten([1,2,[3,4],5]); // -> [1,2,3,4,5]
+ * flatten([1,2,[3,[4]],5], 1); // -> [1,2,3,[4],5]
+ * flatten([1,2,[3,[[[[4]]]]],5], Infinity); // -> [1,2,3,4,5]
  */
 export function flatten(arr, depth = 1) {
 	return depth > 0

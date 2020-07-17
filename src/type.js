@@ -1,7 +1,8 @@
 /**
- * @file Utility functions for checking types
+ * @file
+ * @kind overview
+ * @summary Utility functions for checking types.
  * @author Paul Walton
- * @since 1.0.0
  */
 
 function isES6ClassFunction(value) {
@@ -130,6 +131,7 @@ export function isDomObject(value) {
 /**
  * Parse for boolean.
  * Checks for numeric strings, and "true", else casting to boolean.
+ * @summary Parse for boolean.
  * @arg {string} value
  * @returns {boolean}
  */
@@ -143,9 +145,10 @@ export function parseBool(value) {
 }
 
 /**
- * Check whether any number of values are of the same type
- * * checks typeof and object/function constructors
- * @arg {*} value All other values are tested agains this value.
+ * Check whether any number of values are of the same type.
+ * * checks typeof and object/function constructors.
+ * @summary Check whether any number of values are of the same type.
+ * @arg {*} value - All other values are tested agains this value.
  * @arg {...*} values
  * @returns {boolean}
  */

@@ -1,3 +1,10 @@
+/**
+ * @file
+ * @kind overview
+ * @summary Helper functions for working with CSS.
+ * @author Paul Walton
+ */
+
 import { createElem } from "./elements";
 import { toNumber } from "./math";
 import { TIME } from "./constants";
@@ -13,7 +20,9 @@ import { TIME } from "./constants";
 
 /**
  * Parse a CSS color string into red, green, blue, and alpha components.
- * @arg {string} color - CSS color value.
+ * * Passing an invalid color will return the components for transparent black, with an empty string as the `value` property.
+ * @summary Parse a CSS color string into red, green, blue, and alpha components.
+ * @arg {string} color - CSS color value, case-insensitive.
  * @returns {ParsedCSSColor}
  */
 export function parseCSSColor(color) {

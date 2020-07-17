@@ -1,3 +1,18 @@
+/**
+ * @file
+ * @kind overview
+ * @summary Comparison functions. Mostly for Array.prototype.sort().
+ * @author Paul Walton
+ */
+
+/**
+ * Compare 2 values numerically.
+ * * Non-numeric values are considered "greater".
+ * @summary Compare 2 values numerically.
+ * @param {*} a
+ * @param {*} b
+ * @returns {number}
+ */
 export function byNumericValue(a, b) {
 	a = Number(a);
 	b = Number(b);

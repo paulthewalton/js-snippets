@@ -1,30 +1,36 @@
+
+
+<br><a name="objects.js"></a>
+
+# objects.js
+> Utilities for working with objects and their properties.
+
+**Author**: Paul Walton  
+
 <br>
 
 ## Functions
 
 <dl>
-<dt><a href="#hasAllProps">hasAllProps(proplist, subject)</a> ⇒ <code>boolean</code></dt>
+<dt><a href="docs/hasAllProps.md">hasAllProps(proplist, subject)</a> ⇒ <code>boolean</code></dt>
 <dd><p>Verify that an object has all of the supplied properties.</p>
 </dd>
-<dt><a href="#hasAnyProps">hasAnyProps(proplist, subject)</a> ⇒ <code>boolean</code></dt>
+<dt><a href="docs/hasAnyProps.md">hasAnyProps(proplist, subject)</a> ⇒ <code>boolean</code></dt>
 <dd><p>Verify that an object has at least one of the supplied properties.</p>
 </dd>
-<dt><a href="#matchProps">matchProps(prop, subjectA, subjectB)</a> ⇒ <code>boolean</code></dt>
+<dt><a href="docs/matchProps.md">matchProps(prop, subjectA, subjectB)</a> ⇒ <code>boolean</code></dt>
 <dd><p>Check a property of 2 objects to see if the values match.</p>
 </dd>
-<dt><a href="#compareProps">compareProps(prop, subjectA, subjectB)</a> ⇒ <code>number</code></dt>
-<dd><p>Compare a property of 2 objects.</p>
-</dd>
-<dt><a href="#extend">extend(target, extensions, [limit])</a> ⇒ <code>Object</code></dt>
+<dt><a href="docs/extend.md">extend(target, extensions, [limit])</a> ⇒ <code>Object</code></dt>
 <dd><p>Copy properties from one object to another recursively.</p>
 </dd>
-<dt><a href="#snapshot">snapshot(obj)</a> ⇒ <code>Object</code></dt>
+<dt><a href="docs/snapshot.md">snapshot(obj)</a> ⇒ <code>Object</code></dt>
 <dd><p>Snapshot the properties of an object.</p>
 </dd>
-<dt><a href="#allowProps">allowProps(allowedProps, subject)</a> ⇒ <code>Object</code></dt>
+<dt><a href="docs/allowProps.md">allowProps(allowedProps, subject)</a> ⇒ <code>Object</code></dt>
 <dd><p>Remove unknown properties from a given object (DESTRUCTIVE).</p>
 </dd>
-<dt><a href="#denyProps">denyProps(deniedProps, subject)</a> ⇒ <code>Object</code></dt>
+<dt><a href="docs/denyProps.md">denyProps(deniedProps, subject)</a> ⇒ <code>Object</code></dt>
 <dd><p>Remove known properties from a given object (DESTRUCTIVE).</p>
 </dd>
 </dl>
@@ -64,20 +70,6 @@ Check a property of 2 objects to see if the values match.
 | --- | --- | --- |
 | prop | <code>string</code> | The property by which to evaluate. |
 | subjectA | <code>Object</code> | An object to evaluate. |
-| subjectB | <code>Object</code> | Another object to evaluate. |
-
-
-<br><a name="compareProps"></a>
-
-## compareProps(prop, subjectA, subjectB) ⇒ <code>number</code>
-Compare a property of 2 objects.
-
-**Returns**: <code>number</code> - 0 if equal, 1 if more, -1 if less.  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| prop | <code>string</code> | The property by which to evaluate. |
-| subjectA | <code>Object</code> | The object to evaluate. |
 | subjectB | <code>Object</code> | Another object to evaluate. |
 
 

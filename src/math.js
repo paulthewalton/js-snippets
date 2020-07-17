@@ -1,3 +1,10 @@
+/**
+ * @file
+ * @kind overview
+ * @summary Math & number functions.
+ * @author Paul Walton
+ */
+
 import { isInt } from "./type";
 
 /**

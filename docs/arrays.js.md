@@ -1,24 +1,33 @@
+
+
+<br><a name="arrays.js"></a>
+
+# arrays.js
+> Array utility functions.
+
+**Author**: Paul Walton  
+
 <br>
 
 ## Functions
 
 <dl>
-<dt><a href="#assertArray">assertArray(value, minLength, fill)</a> ⇒ <code>Array</code></dt>
+<dt><a href="docs/assertArray.md">assertArray(value, [minLength], [fill])</a> ⇒ <code>Array</code></dt>
 <dd><p>Make sure that a value is an array.</p>
 </dd>
-<dt><a href="#arraysAreEqual">arraysAreEqual(a, b)</a> ⇒ <code>boolean</code></dt>
+<dt><a href="docs/arraysAreEqual.md">arraysAreEqual(a, b)</a> ⇒ <code>boolean</code></dt>
 <dd><p>Check whether 2 arrays are equal.</p>
 </dd>
-<dt><a href="#uniq">uniq(arr)</a> ⇒ <code>Array</code></dt>
+<dt><a href="docs/uniq.md">uniq(arr)</a> ⇒ <code>Array</code></dt>
 <dd><p>Strip array to unique values.</p>
 </dd>
-<dt><a href="#flatten">flatten(arr, depth)</a> ⇒ <code>Array</code></dt>
+<dt><a href="docs/flatten.md">flatten(arr, [depth])</a> ⇒ <code>Array</code></dt>
 <dd><p>Flatten an array up to a set number of levels.</p>
 </dd>
-<dt><a href="#allowValues">allowValues(allowedValues, subject)</a> ⇒ <code>Array</code></dt>
+<dt><a href="docs/allowValues.md">allowValues(allowedValues, subject)</a> ⇒ <code>Array</code></dt>
 <dd><p>Filter unknown values out of a given array.</p>
 </dd>
-<dt><a href="#denyValues">denyValues(deniedValues, subject)</a> ⇒ <code>Array</code></dt>
+<dt><a href="docs/denyValues.md">denyValues(deniedValues, subject)</a> ⇒ <code>Array</code></dt>
 <dd><p>Filter known values out of a given array.</p>
 </dd>
 </dl>
@@ -26,15 +35,15 @@
 
 <br><a name="assertArray"></a>
 
-## assertArray(value, minLength, fill) ⇒ <code>Array</code>
+## assertArray(value, [minLength], [fill]) ⇒ <code>Array</code>
 Make sure that a value is an array.
 
 
-| Param | Type | Description |
-| --- | --- | --- |
-| value | <code>\*</code> | Value to check. |
-| minLength | <code>number</code> | Minimum length for returned array. |
-| fill | <code>\*</code> | Value to insert when filling. If function, will be called with the current index, inserting the returned value. |
+| Param | Type | Default | Description |
+| --- | --- | --- | --- |
+| value | <code>\*</code> |  | Value to check. |
+| [minLength] | <code>number</code> | <code>0</code> | Minimum length for returned array. |
+| [fill] | <code>\*</code> |  | Value to insert when filling. If function, will be called with the current index, inserting the returned value. |
 
 
 <br><a name="arraysAreEqual"></a>
@@ -67,20 +76,20 @@ uniq([1, 1, 3, 'cat', 1, 'cat']); // -> [1, 3, 'cat']
 
 <br><a name="flatten"></a>
 
-## flatten(arr, depth) ⇒ <code>Array</code>
+## flatten(arr, [depth]) ⇒ <code>Array</code>
 Flatten an array up to a set number of levels.
 
 
-| Param | Type | Description |
-| --- | --- | --- |
-| arr | <code>Array</code> | Array to flatten. |
-| depth | <code>number</code> | Max depth of flattening. |
+| Param | Type | Default | Description |
+| --- | --- | --- | --- |
+| arr | <code>Array</code> |  | Array to flatten. |
+| [depth] | <code>number</code> | <code>1</code> | Max depth of flattening. |
 
 **Example**  
 ```js
 flatten([1,2,[3,4],5]); // -> [1,2,3,4,5]
-	flatten([1,2,[3,[4]],5], 1); // -> [1,2,3,[4],5]
-	flatten([1,2,[3,[[[[4]]]]],5], Infinity); // -> [1,2,3,4,5]
+flatten([1,2,[3,[4]],5], 1); // -> [1,2,3,[4],5]
+flatten([1,2,[3,[[[[4]]]]],5], Infinity); // -> [1,2,3,4,5]
 ```
 
 <br><a name="allowValues"></a>

@@ -1,16 +1,24 @@
+/**
+ * @file
+ * @kind overview
+ * @summary Helper functions for working with the DOM.
+ * @author Paul Walton
+ */
+
 import { isDomObject, isString, isObject } from "./type";
 import { toInteger } from "./math";
 import { kebabCase, upperCaseFirst } from "./strings";
-import { batchApply } from "./functions";
+import { batchApply, partial } from "./functions";
 import { extend } from "./objects";
 
 /**
  * Create an HTMLElement.
  * * returns null for invalid tagName
- * @uses ParentNode.append
- * @arg {string} tagName Element tag name.
- * @arg {Object} props Element properties. Unrecognized props are kebab-cased and set as attributes.
- * @arg {string[]|Node[]} children Element child nodes.
+ * @summary Create an HTMLElement.
+ * @see {@link https://developer.mozilla.org/en-US/docs/Web/API/ParentNode/append|ParentNode.append}
+ * @arg {string} tagName - Element tag name.
+ * @arg {Object} props - Element properties. Unrecognized props are kebab-cased and set as attributes.
+ * @arg {...(Node|string)} children - Element child nodes.
  * @returns {?HTMLElement}
  */
 export function createElem(tagName, props, ...children) {
@@ -41,8 +49,8 @@ export function createElem(tagName, props, ...children) {
 
 /**
  * Determine whether a DOM object is the same or parent of another DOM object.
- * @arg {Node} potentialParentNode Parent DOM object to check lineage.
- * @arg {Node} targetNode Child DOM object.
+ * @arg {Node} potentialParentNode - Parent DOM object to check lineage.
+ * @arg {Node} targetNode - Child DOM object.
  * @returns {boolean}
  */
 export function isSameOrChildNode(potentialParentNode, targetNode) {
@@ -55,17 +63,16 @@ export function isSameOrChildNode(potentialParentNode, targetNode) {
 
 /**
  * Determine whether a DOM object is in the current DOM.
- * @arg {Node} targetNode DOM object to check.
+ * @function
+ * @arg {Node} targetNode - DOM object to check.
  * @returns {boolean}
  */
-export function isInDom(targetNode) {
-	return isSameOrChildNode(document, targetNode);
-}
+export const isInDom = partial(isSameOrChildNode, document);
 
 /**
  * Add listeners for multiple events to one DOM element.
- * @arg {Element} eventTarget DOM element to add event listeners.
- * @arg {Array[]} listeners Array of addEventListener argument sets.
+ * @arg {Element} - eventTarget DOM element to add event listeners.
+ * @arg {Array[]} - listeners Array of addEventListener argument sets.
  */
 export function applyEventListeners(eventTarget, listeners) {
 	batchApply(EventTarget.prototype.addEventListener, listeners, eventTarget);
@@ -73,13 +80,13 @@ export function applyEventListeners(eventTarget, listeners) {
 
 /**
  * @typedef {Object} Point
- * @property {number} x The X Coordinate.
- * @property {number} y The Y Coordinate.
+ * @property {number} x - The X Coordinate.
+ * @property {number} y - The Y Coordinate.
  */
 
 /**
  * Get the full page offset for an element.
- * @arg {Element} el Element of which to find offset.
+ * @arg {Element} el - Element of which to find offset.
  * @returns {Point}
  */
 export function getPageOffset(el) {
@@ -91,8 +98,8 @@ export function getPageOffset(el) {
 	return coordinates;
 }
 /**
- * Get the em (font size) of an element
- * @arg {Element} el Element to get em value from.
+ * Get the em (font size) of an element.
+ * @arg {Element} el - Element to get em value from.
  * @returns {string}
  */
 export function getEm(el) {
@@ -101,8 +108,8 @@ export function getEm(el) {
 
 /**
  * Scroll the window to the vertical position of an element.
- * @arg {Element|string} el Element or selector to scroll into view.
- * @arg {number} [offset=0] Cast to int, vertical pixel offset from element.
+ * @arg {Element|string} el - Element or selector to scroll into view.
+ * @arg {number} [offset=0] - Cast to int, vertical pixel offset from element.
  */
 export function scrollIntoView(el, offset) {
 	if (isString(el)) {
@@ -142,13 +149,17 @@ export function isInViewport(el) {
 }
 
 /**
+ * @typedef {Object} ScrollbarStatus
+ * @property {boolean} scrollbarStatus.any - Element can scroll vertically or horizontally.
+ * @property {boolean} scrollbarStatus.both - Element can scroll vertically and horizontally.
+ * @property {boolean} scrollbarStatus.x - Element can scroll horizontally.
+ * @property {boolean} scrollbarStatus.y - Element can scroll vertically.
+ */
+
+/**
  * Check whether an element has currently scrollable overflow.
  * @arg {HTMLElement} el
- * @returns {Object} scrollbarStatus
- * @property {boolean} scrollbarStatus.any Element can scroll vertically or horizontally.
- * @property {boolean} scrollbarStatus.both Element can scroll vertically and horizontally.
- * @property {boolean} scrollbarStatus.x Element can scroll horizontally.
- * @property {boolean} scrollbarStatus.y Element can scroll vertically.
+ * @returns {ScrollbarStatus}
  */
 export function isScrollable(el) {
 	const x = el.scrollWidth > el.clientWidth;
@@ -158,8 +169,8 @@ export function isScrollable(el) {
 
 /**
  * Get all parent elements for an element.
- * @arg {Node} node Node to get parents of.
- * @arg {*|boolean} includeSelf Whether to include starting node.
+ * @arg {Node} node - Node to get parents of.
+ * @arg {*|boolean} includeSelf - Whether to include starting node.
  * @returns {Node[]}
  */
 export function getParents(node, includeSelf) {
@@ -173,10 +184,10 @@ export function getParents(node, includeSelf) {
 
 /**
  * Apply a style to a DOM element with vendor prefixes.
- * @arg {Element} elem Element to apply styles to.
- * @arg {string} styleName The name of a CSS style.
- * @arg {string} styleValue String-ified CSS style value.
- * @arg {boolean} prefixValues Whether to prefix the values as well.
+ * @arg {Element|jQuery} elem - Element to apply styles to.
+ * @arg {string} styleName - The name of a CSS style.
+ * @arg {string} styleValue - String-ified CSS style value.
+ * @arg {boolean} prefixValues - Whether to prefix the values as well.
  */
 export function setPrefixedStyle(elem, styleName, styleValue, prefixValues) {
 	if (window.jQuery && elem instanceof window.jQuery) {

@@ -1,74 +1,109 @@
+
+
+<br><a name="async.js"></a>
+
+# async.js
+> Async utility functions.
+
+**Author**: Paul Walton  
+
 <br>
 
 ## Functions
 
 <dl>
-<dt><a href="#request">request(method, type, url, headers, body)</a> ⇒ <code>Promise</code></dt>
+<dt><a href="docs/request.md">request(method, type, url, headers, body)</a> ⇒ <code><a href="#RequestUtilResponse">Promise.&lt;RequestUtilResponse&gt;</a></code></dt>
 <dd><p>Make simple AJAX requests</p>
 </dd>
-<dt><a href="#getHTML">getHTML(url, headers)</a> ⇒ <code>Promise</code></dt>
+<dt><a href="docs/getHTML.md">getHTML(url, headers)</a> ⇒ <code><a href="#RequestUtilResponse">Promise.&lt;RequestUtilResponse&gt;</a></code></dt>
 <dd><p>Get HTML via AJAX.</p>
 </dd>
-<dt><a href="#getJSON">getJSON(url, headers)</a> ⇒ <code>Promise</code></dt>
+<dt><a href="docs/getJSON.md">getJSON(url, headers)</a> ⇒ <code><a href="#RequestUtilResponse">Promise.&lt;RequestUtilResponse&gt;</a></code></dt>
 <dd><p>Get JSON via AJAX.</p>
 </dd>
-<dt><a href="#makeVerbosePromise">makeVerbosePromise(promise, throws)</a> ⇒ <code>Promise</code></dt>
-<dd><p>This function allow you to modify a JS Promise by adding some status properties.
-Based on: <a href="http://stackoverflow.com/questions/21485545/is-there-a-way-to-tell-if-an-es6-promise-is-fulfilled-rejected-resolved">http://stackoverflow.com/questions/21485545/is-there-a-way-to-tell-if-an-es6-promise-is-fulfilled-rejected-resolved</a>
-But modified according to the specs of promises : <a href="https://promisesaplus.com/">https://promisesaplus.com/</a></p>
+<dt><a href="docs/makeVerbosePromise.md">makeVerbosePromise(promise)</a> ⇒ <code><a href="#VerbosePromise">VerbosePromise</a></code></dt>
+<dd><p>Add status props to a Promise.</p>
 </dd>
 </dl>
 
 
 <br><a name="request"></a>
 
-## request(method, type, url, headers, body) ⇒ <code>Promise</code>
+## request(method, type, url, headers, body) ⇒ [<code>Promise.&lt;RequestUtilResponse&gt;</code>](#RequestUtilResponse)
 Make simple AJAX requests
 
+**See**: [XMLHttpRequest.responseType](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/responseType)  
 
 | Param | Type | Description |
 | --- | --- | --- |
 | method | <code>string</code> | Request method, case insensitive. |
-| type | <code>string</code> | See https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/responseType. |
+| type | <code>XMLHttpRequestResponseType</code> | Response type. |
 | url | <code>string</code> | The URL to request. |
-| headers | <code>Object</code> | Object of key:value headers. |
-| body | <code>string</code>, <code>Document</code>, <code>Blob</code>, <code>BufferSource</code>, <code>FormData</code>, <code>URLSearchParams</code>, <code>ReadableStream</code> | request body |
+| headers | <code>Object.&lt;string, \*&gt;</code> | Object of key:value headers. |
+| body | <code>string</code>, <code>Document</code>, <code>Blob</code>, <code>BufferSource</code>, <code>FormData</code>, <code>URLSearchParams</code>, <code>ReadableStream</code> | Request body. |
 
 
 <br><a name="getHTML"></a>
 
-## getHTML(url, headers) ⇒ <code>Promise</code>
+## getHTML(url, headers) ⇒ [<code>Promise.&lt;RequestUtilResponse&gt;</code>](#RequestUtilResponse)
 Get HTML via AJAX.
 
 
 | Param | Type | Description |
 | --- | --- | --- |
-| url | <code>string</code> |  |
-| headers | <code>Object</code> | key:value headers |
+| url | <code>string</code> | The URL to request. |
+| headers | <code>Object.&lt;string, \*&gt;</code> | Object of key:value headers. |
 
 
 <br><a name="getJSON"></a>
 
-## getJSON(url, headers) ⇒ <code>Promise</code>
+## getJSON(url, headers) ⇒ [<code>Promise.&lt;RequestUtilResponse&gt;</code>](#RequestUtilResponse)
 Get JSON via AJAX.
 
 
 | Param | Type | Description |
 | --- | --- | --- |
-| url | <code>string</code> |  |
-| headers | <code>Object</code> | key:value headers |
+| url | <code>string</code> | The URL to request. |
+| headers | <code>Object.&lt;string, \*&gt;</code> | Object of key:value headers. |
 
 
 <br><a name="makeVerbosePromise"></a>
 
-## makeVerbosePromise(promise, throws) ⇒ <code>Promise</code>
+## makeVerbosePromise(promise) ⇒ [<code>VerbosePromise</code>](#VerbosePromise)
+> Add status props to a Promise.
+
 This function allow you to modify a JS Promise by adding some status properties.
+
 Based on: http://stackoverflow.com/questions/21485545/is-there-a-way-to-tell-if-an-es6-promise-is-fulfilled-rejected-resolved
+
 But modified according to the specs of promises : https://promisesaplus.com/
 
 
 | Param | Type |
 | --- | --- |
 | promise | <code>Promise</code> | 
-| throws | <code>boolean</code> | 
+
+
+<br><a name="RequestUtilResponse"></a>
+
+## RequestUtilResponse : <code>Object</code>
+**Properties**
+
+| Name | Type | Description |
+| --- | --- | --- |
+| response | <code>string</code> \| <code>ArrayBuffer</code> \| <code>Blob</code> \| <code>Document</code> \| <code>Object</code> | XHR response. |
+| status | <code>number</code> | HTTP response code. |
+| xhr | <code>XMLHttpRequest</code> | Original XHR object. |
+
+
+<br><a name="VerbosePromise"></a>
+
+## VerbosePromise : <code>Promise</code>
+**Properties**
+
+| Name | Type | Description |
+| --- | --- | --- |
+| isFulfilled | <code>boolean</code> | Promise has been resolved. |
+| isRejected | <code>boolean</code> | Promise has been rejected. |
+| isPending | <code>boolean</code> | Promise is not yet settled. |
 
