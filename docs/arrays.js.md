@@ -30,6 +30,12 @@
 <dt><a href="docs/denyValues.md">denyValues(deniedValues, subject)</a> ⇒ <code>Array</code></dt>
 <dd><p>Filter known values out of a given array.</p>
 </dd>
+<dt><a href="docs/indexArray.md">indexArray(arr, uniqueKey)</a> ⇒ <code>Array.&lt;Object, function()&gt;</code></dt>
+<dd><p>Index an array of objects to quickly access it&#39;s entries by a unique key.</p>
+</dd>
+<dt><a href="docs/getIndexedValue.md">getIndexedValue(arr, idx, key)</a> ⇒ <code>Object</code> | <code>undefined</code></dt>
+<dd><p>Get indexed entry of an array by the indexed property.</p>
+</dd>
 </dl>
 
 
@@ -125,4 +131,54 @@ Filter known values out of a given array.
 ```js
 var nums = [1,1,2,3,4,4,4,5,9];
 nums = denyValues([2,4], nums); // -> [1,1,3,5,9]
+```
+
+<br><a name="indexArray"></a>
+
+## indexArray(arr, uniqueKey) ⇒ <code>Array.&lt;Object, function()&gt;</code>
+Index an array of objects to quickly access it's entries by a unique key.
+
+**Returns**: <code>Array.&lt;Object, function()&gt;</code> - Index object and prefilled accessor function  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| arr | <code>Array.&lt;Object&gt;</code> |  |
+| uniqueKey | <code>string</code>, <code>number</code> | Key for a property that will be unique for each member of the array. |
+
+**Example**  
+```js
+const fruitsInKitchen = [
+	{ name: "banana" },
+	{ name: "kiwi" },
+	{ name: "mango" },
+];
+const [fruitsByName, getFruitsByName] = indexArray(fruitsInKitchen, "name");
+fruitsByName["kiwi"]; // => { name: "kiwi" }
+getFruitsByName("mango"); // => { name: "mango" }
+getFruitsByName("banana") === fruitsInKitchen[0]; // => true
+```
+
+<br><a name="getIndexedValue"></a>
+
+## getIndexedValue(arr, idx, key) ⇒ <code>Object</code> \| <code>undefined</code>
+> Get indexed entry of an array by the indexed property.
+
+Get indexed entry of an array by the indexed property.
+* Assumes `idx` is up to date with `arr`.
+
+
+| Param | Type |
+| --- | --- |
+| arr | <code>Array.&lt;Object&gt;</code> | 
+| idx | <code>Object.&lt;(string\|number), number&gt;</code> | 
+| key | <code>string</code>, <code>number</code> | 
+
+**Example**  
+```js
+const fruitsInKitchen = [
+	{ name: "banana" },
+	{ name: "kiwi" },
+];
+const [fruitsByName] = indexArray(fruitsInKitchen, "name");
+getIndexedValue(fruitsInKitchen, fruitsByName, "kiwi"); // => { name: "kiwi" }
 ```

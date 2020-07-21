@@ -27,7 +27,7 @@
 <dt><a href="docs/stripEnd.md">stripEnd(match, str)</a> ⇒ <code>string</code></dt>
 <dd><p>Strip substrings from the end of a string.</p>
 </dd>
-<dt><a href="docs/pathJoin.md">pathJoin(segments)</a> ⇒ <code>string</code></dt>
+<dt><a href="docs/pathJoin.md">pathJoin(...segments)</a> ⇒ <code>string</code></dt>
 <dd><p>Join path segments.</p>
 </dd>
 <dt><a href="docs/stripCase.md">stripCase(str)</a> ⇒ <code>string</code></dt>
@@ -124,13 +124,13 @@ Strip substrings from the end of a string.
 
 <br><a name="pathJoin"></a>
 
-## pathJoin(segments) ⇒ <code>string</code>
+## pathJoin(...segments) ⇒ <code>string</code>
 Join path segments.
 
 
 | Param | Type | Description |
 | --- | --- | --- |
-| segments | <code>string</code>, <code>Array.&lt;string&gt;</code> | Path segments. Arrays and nested arrays will be flattened. |
+| ...segments | <code>string</code>, <code>Array.&lt;string&gt;</code> | Path segments. Arrays and nested arrays will be flattened. |
 
 
 <br><a name="stripCase"></a>

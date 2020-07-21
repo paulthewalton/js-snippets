@@ -6,6 +6,7 @@
  */
 
 import { isCallable } from "./type";
+import { partial } from "./functions";
 
 /**
  * Make sure that a value is an array.
@@ -110,7 +111,7 @@ export function allowValues(allowedValues, subject) {
 
 /**
  * Filter known values out of a given array.
- * @arg {Array} deniedValues - Array of denyed values/objects.
+ * @arg {Array} deniedValues - Array of denied values/objects.
  * @arg {Array} subject - Array to filter.
  * @returns {Array} Filtered array.
  * @example
@@ -120,3 +121,47 @@ export function allowValues(allowedValues, subject) {
 export function denyValues(deniedValues, subject) {
 	return subject.filter((value) => !deniedValues.includes(value));
 }
+
+/**
+ * Index an array of objects to quickly access it's entries by a unique key.
+ * @arg {Object[]} arr
+ * @arg {string|number} uniqueKey - Key for a property that will be unique for each member of the array.
+ * @returns {Array.<Object, Function>} Index object and prefilled accessor function
+ * @example
+ * const fruitsInKitchen = [
+ * 	{ name: "banana" },
+ * 	{ name: "kiwi" },
+ * 	{ name: "mango" },
+ * ];
+ * const [fruitsByName, getFruitsByName] = indexArray(fruitsInKitchen, "name");
+ * fruitsByName["kiwi"]; // => { name: "kiwi" }
+ * getFruitsByName("mango"); // => { name: "mango" }
+ * getFruitsByName("banana") === fruitsInKitchen[0]; // => true
+ */
+export function indexArray(arr, uniqueKey) {
+	const idx = {};
+	for (let i = 0; i < arr.length; i++) {
+		const value = arr[i];
+		idx[value[uniqueKey]] = i;
+	}
+	return [idx, partial(getIndexedValue, arr, idx)];
+}
+
+/**
+ * Get indexed entry of an array by the indexed property.
+ * * Assumes `idx` is up to date with `arr`.
+ * @summary Get indexed entry of an array by the indexed property.
+ * @function
+ * @arg {Object[]} arr
+ * @arg {Object.<(string|number), number>} idx
+ * @arg {string|number} key
+ * @returns {Object|undefined}
+ * @example
+ * const fruitsInKitchen = [
+ * 	{ name: "banana" },
+ * 	{ name: "kiwi" },
+ * ];
+ * const [fruitsByName] = indexArray(fruitsInKitchen, "name");
+ * getIndexedValue(fruitsInKitchen, fruitsByName, "kiwi"); // => { name: "kiwi" }
+ */
+export const getIndexedValue = (arr, idx, key) => arr[idx[key]];
