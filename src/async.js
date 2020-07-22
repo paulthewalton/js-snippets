@@ -26,10 +26,15 @@
 export function request(method, type, url, headers, body) {
 	method = /get|post|put|patch|delete|head|options/i.test(method) ? method.toUpperCase() : "GET";
 	return new Promise(function (resolve, reject) {
-		const xhr = new XMLHttpRequest(),
-			json = !type || type.toLowerCase() === "json";
-		xhr.responseType = json ? "text" : type;
+		const xhr = new XMLHttpRequest();
+		// json = !type || type.toLowerCase() === "json";
+		xhr.responseType = type.toLowerCase?.call(type) || "json";
 		xhr.open(method, url, true);
+		switch (xhr.responseType) {
+			case "json":
+				xhr.setRequestHeader("Content-Type", "application/json");
+				break;
+		}
 		if (headers) {
 			for (const key in headers) {
 				if (headers.hasOwnProperty(key)) {
@@ -40,14 +45,14 @@ export function request(method, type, url, headers, body) {
 		}
 		xhr.onload = function () {
 			let { response, status } = xhr;
-			if (json) {
-				try {
-					const parsed = JSON.parse(xhr.responseText);
-					response = parsed;
-				} catch (err) {
-					console.warn(err);
-				}
-			}
+			// if (json) {
+			// 	try {
+			// 		const parsed = JSON.parse(xhr.responseText);
+			// 		response = parsed;
+			// 	} catch (err) {
+			// 		console.warn(err);
+			// 	}
+			// }
 			resolve({ response, status, xhr });
 		};
 		xhr.onerror = function (err) {

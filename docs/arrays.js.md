@@ -124,7 +124,7 @@ Filter known values out of a given array.
 
 | Param | Type | Description |
 | --- | --- | --- |
-| deniedValues | <code>Array</code> | Array of denyed values/objects. |
+| deniedValues | <code>Array</code> | Array of denied values/objects. |
 | subject | <code>Array</code> | Array to filter. |
 
 **Example**  
