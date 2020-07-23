@@ -7,7 +7,6 @@
 
 /**
  * @typedef {Object} RequestUtilResponse
- * @global
  * @property {string|ArrayBuffer|Blob|Document|Object} response - XHR response.
  * @property {number} status - HTTP response code.
  * @property {XMLHttpRequest} xhr - Original XHR object.
@@ -28,7 +27,7 @@ export function request(method, type, url, headers, body) {
 	return new Promise(function (resolve, reject) {
 		const xhr = new XMLHttpRequest();
 		// json = !type || type.toLowerCase() === "json";
-		xhr.responseType = type.toLowerCase?.call(type) || "json";
+		xhr.responseType = type && type.toLowerCase ? type.toLowerCase() : "json";
 		xhr.open(method, url, true);
 		switch (xhr.responseType) {
 			case "json":
