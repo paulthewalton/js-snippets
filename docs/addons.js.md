@@ -12,7 +12,7 @@
 ## Constants
 
 <dl>
-<dt><a href="docs/listenerOptions.md">listenerOptions</a> : <code>Object</code></dt>
+<dt><a href="docs/listenerOptions.md">listenerOptions</a> : <code><a href="#EventListenerOptionsCompat">EventListenerOptionsCompat</a></code></dt>
 <dd></dd>
 </dl>
 
@@ -32,15 +32,7 @@
 
 <br><a name="listenerOptions"></a>
 
-## listenerOptions : <code>Object</code>
-**Properties**
-
-| Name | Type | Description |
-| --- | --- | --- |
-| normal | <code>Object</code> \| <code>boolean</code> | Listener will behave as default. |
-| passive | <code>Object</code> \| <code>boolean</code> | Listener will be passive if supported. |
-| capture | <code>Object</code> \| <code>boolean</code> | Listener will dispatched as the event bubbles down. |
-| passiveCapture | <code>Object</code> \| <code>boolean</code> | Listener will capture and be passive if supported. |
+## listenerOptions : [<code>EventListenerOptionsCompat</code>](#EventListenerOptionsCompat)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;_`🔒 Read only`_
 
 
 <br><a name="setUpInterfaceDetection"></a>
@@ -61,3 +53,16 @@ Adds `hover` and `touch` classes once to the documentElement when mouse/stylus &
 Adds event listeners to window, setting `tab-focus` and `tab-focus-within` classes on focused elements.
 
 **Returns**: <code>function</code> - Teardown function to remove listeners.  
+
+<br><a name="EventListenerOptionsCompat"></a>
+
+## EventListenerOptionsCompat : <code>Object</code>
+**Properties**
+
+| Name | Type | Description |
+| --- | --- | --- |
+| normal | <code>boolean</code> \| <code>EventListenerOptions</code> | Listener will behave as default. |
+| passive | <code>boolean</code> \| <code>EventListenerOptions</code> | Listener will be passive if supported. |
+| capture | <code>boolean</code> \| <code>EventListenerOptions</code> | Listener will dispatched as the event bubbles down. |
+| passiveCapture | <code>boolean</code> \| <code>EventListenerOptions</code> | Listener will capture and be passive if supported. |
+
