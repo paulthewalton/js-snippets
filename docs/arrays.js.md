@@ -36,6 +36,9 @@
 <dt><a href="docs/getIndexedValue.md">getIndexedValue(arr, idx, key)</a> ⇒ <code>Object</code> | <code>undefined</code></dt>
 <dd><p>Get indexed entry of an array by the indexed property.</p>
 </dd>
+<dt><a href="docs/shuffleArray.md">shuffleArray(arr)</a> ⇒ <code>Array</code></dt>
+<dd><p>Shuffle the elements of an array.</p>
+</dd>
 </dl>
 
 
@@ -181,4 +184,23 @@ const fruitsInKitchen = [
 ];
 const [fruitsByName] = indexArray(fruitsInKitchen, "name");
 getIndexedValue(fruitsInKitchen, fruitsByName, "kiwi"); // => { name: "kiwi" }
+```
+
+<br><a name="shuffleArray"></a>
+
+## shuffleArray(arr) ⇒ <code>Array</code>
+> Shuffle the elements of an array.
+
+Shuffle the elements of an array. Uses the Durstenfeld shuffle.
+* Shuffles in place, use `arr.slice(0)` to get a copy of the array to shuffle.
+
+
+| Param | Type |
+| --- | --- |
+| arr | <code>Array</code> | 
+
+**Example**  
+```js
+const numbers = [1,2,3,4,5];
+shuffleArray(numbers); // -> [1,4,2,5,3]
 ```
