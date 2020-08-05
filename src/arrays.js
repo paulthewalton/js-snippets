@@ -123,7 +123,7 @@ export function denyValues(deniedValues, subject) {
 }
 
 /**
- * Index an array of objects to quickly access it's entries by a unique key.
+ * Index an array of objects to quickly access its entries by a unique key.
  * @arg {Object[]} arr
  * @arg {string|number} uniqueKey - Key for a property that will be unique for each member of the array.
  * @returns {Array.<Object, Function>} Index object and prefilled accessor function
@@ -183,4 +183,23 @@ export function shuffleArray(arr) {
 		arr[i] = arr[j];
 		arr[j] = temp;
 	}
+}
+
+/**
+ * Get a rotated copy of an array.
+ * @arg {Array} arr
+ * @arg {number} [rotation=1] Index to rotate to / Number of places to rotate by.
+ * @return {Array}
+ * @example
+ * let arr = [1,2,3,4];
+ * rotateArray(arr); // -> [2,3,4,1]
+ * rotateArray(arr, 3); // -> [4,1,2,3]
+ * rotateArray(arr, -2); // -> [3,4,1,2]
+ */
+export function rotateArray(arr, rotation = 1) {
+	rotation = rotation % arr.length;
+	if (!rotation) {
+		return arr;
+	}
+	return arr.slice(rotation).concat(arr.slice(0, rotation));
 }

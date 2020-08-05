@@ -31,13 +31,16 @@
 <dd><p>Filter known values out of a given array.</p>
 </dd>
 <dt><a href="docs/indexArray.md">indexArray(arr, uniqueKey)</a> ⇒ <code>Array.&lt;Object, function()&gt;</code></dt>
-<dd><p>Index an array of objects to quickly access it&#39;s entries by a unique key.</p>
+<dd><p>Index an array of objects to quickly access its entries by a unique key.</p>
 </dd>
 <dt><a href="docs/getIndexedValue.md">getIndexedValue(arr, idx, key)</a> ⇒ <code>Object</code> | <code>undefined</code></dt>
 <dd><p>Get indexed entry of an array by the indexed property.</p>
 </dd>
 <dt><a href="docs/shuffleArray.md">shuffleArray(arr)</a> ⇒ <code>Array</code></dt>
 <dd><p>Shuffle the elements of an array.</p>
+</dd>
+<dt><a href="docs/rotateArray.md">rotateArray(arr, [rotation])</a> ⇒ <code>Array</code></dt>
+<dd><p>Get a rotated copy of an array.</p>
 </dd>
 </dl>
 
@@ -139,7 +142,7 @@ nums = denyValues([2,4], nums); // -> [1,1,3,5,9]
 <br><a name="indexArray"></a>
 
 ## indexArray(arr, uniqueKey) ⇒ <code>Array.&lt;Object, function()&gt;</code>
-Index an array of objects to quickly access it's entries by a unique key.
+Index an array of objects to quickly access its entries by a unique key.
 
 **Returns**: <code>Array.&lt;Object, function()&gt;</code> - Index object and prefilled accessor function  
 
@@ -203,4 +206,23 @@ Shuffle the elements of an array. Uses the Durstenfeld shuffle.
 ```js
 const numbers = [1,2,3,4,5];
 shuffleArray(numbers); // -> [1,4,2,5,3]
+```
+
+<br><a name="rotateArray"></a>
+
+## rotateArray(arr, [rotation]) ⇒ <code>Array</code>
+Get a rotated copy of an array.
+
+
+| Param | Type | Default | Description |
+| --- | --- | --- | --- |
+| arr | <code>Array</code> |  |  |
+| [rotation] | <code>number</code> | <code>1</code> | Index to rotate to / Number of places to rotate by. |
+
+**Example**  
+```js
+let arr = [1,2,3,4];
+rotateArray(arr); // -> [2,3,4,1]
+rotateArray(arr, 3); // -> [4,1,2,3]
+rotateArray(arr, -2); // -> [3,4,1,2]
 ```
