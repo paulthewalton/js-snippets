@@ -36,17 +36,15 @@ export function assertArray(value, minLength = 0, fill = undefined) {
  * Check whether 2 arrays are equal.
  * @arg {Array} a - First array.
  * @arg {Array} b - Second array.
+ * @arg {boolean} strict - Whether to evaluate each item, or just compare JSON strings.
  * @returns {boolean}
  */
-export function arraysAreEqual(a, b) {
-	if (
-		a == undefined || // eslint-disable-line eqeqeq
-		b == undefined || // eslint-disable-line eqeqeq
-		!Array.isArray(a) ||
-		!Array.isArray(b) ||
-		a.length !== b.length
-	) {
+export function arraysAreEqual(a, b, strict = false) {
+	if (a == null || b == null || !Array.isArray(a) || !Array.isArray(b) || a.length !== b.length) {
 		return false;
+	}
+	if (!strict) {
+		return JSON.stringify(a) === JSON.stringify(b);
 	}
 	for (let i = a.length - 1; i >= 0; i--) {
 		if (a[i] !== b[i]) {
@@ -203,3 +201,16 @@ export function rotateArray(arr, rotation = 1) {
 	}
 	return arr.slice(rotation).concat(arr.slice(0, rotation));
 }
+
+/**
+ * Get a copy of an array. Just aliases Array.prototype.slice to better communicate intent.
+ * @summary Get a copy of an array.
+ * @arg {Array} arr
+ * @returns {Array}
+ * @example
+ * let a = [1,2,3];
+ * let b = copyArray(a);
+ * a == b; // -> false
+ * arraysAreEqual(a,b); // -> true
+ */
+export const copyArray = (arr) => arr.slice(0);

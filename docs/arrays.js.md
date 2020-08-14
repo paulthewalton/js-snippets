@@ -9,13 +9,23 @@
 
 <br>
 
+## Constants
+
+<dl>
+<dt><a href="docs/copyArray.md">copyArray</a> ⇒ <code>Array</code></dt>
+<dd><p>Get a copy of an array.</p>
+</dd>
+</dl>
+
+<br>
+
 ## Functions
 
 <dl>
 <dt><a href="docs/assertArray.md">assertArray(value, [minLength], [fill])</a> ⇒ <code>Array</code></dt>
 <dd><p>Make sure that a value is an array.</p>
 </dd>
-<dt><a href="docs/arraysAreEqual.md">arraysAreEqual(a, b)</a> ⇒ <code>boolean</code></dt>
+<dt><a href="docs/arraysAreEqual.md">arraysAreEqual(a, b, strict)</a> ⇒ <code>boolean</code></dt>
 <dd><p>Check whether 2 arrays are equal.</p>
 </dd>
 <dt><a href="docs/uniq.md">uniq(arr)</a> ⇒ <code>Array</code></dt>
@@ -45,6 +55,26 @@
 </dl>
 
 
+<br><a name="copyArray"></a>
+
+## copyArray ⇒ <code>Array</code>
+> Get a copy of an array.
+
+Get a copy of an array. Just aliases Array.prototype.slice to better communicate intent.
+
+
+| Param | Type |
+| --- | --- |
+| arr | <code>Array</code> | 
+
+**Example**  
+```js
+let a = [1,2,3];
+let b = copyArray(a);
+a == b; // -> false
+arraysAreEqual(a,b); // -> true
+```
+
 <br><a name="assertArray"></a>
 
 ## assertArray(value, [minLength], [fill]) ⇒ <code>Array</code>
@@ -60,7 +90,7 @@ Make sure that a value is an array.
 
 <br><a name="arraysAreEqual"></a>
 
-## arraysAreEqual(a, b) ⇒ <code>boolean</code>
+## arraysAreEqual(a, b, strict) ⇒ <code>boolean</code>
 Check whether 2 arrays are equal.
 
 
@@ -68,6 +98,7 @@ Check whether 2 arrays are equal.
 | --- | --- | --- |
 | a | <code>Array</code> | First array. |
 | b | <code>Array</code> | Second array. |
+| strict | <code>boolean</code> | Whether to evaluate each item, or just compare JSON strings. |
 
 
 <br><a name="uniq"></a>
