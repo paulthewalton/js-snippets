@@ -11,6 +11,5 @@ export * from "./fallbacks";
 export * from "./functions";
 export * from "./math";
 export * from "./objects";
-export * from "./react";
 export * from "./strings";
 export * from "./type";
