@@ -13,20 +13,23 @@
  */
 
 /**
+ * @typedef {string|Document|Blob|BufferSource|FormData|URLSearchParams|ReadableStream} XMLHttpRequestBody
+ */
+
+/**
  * Make simple AJAX requests
  * @see [XMLHttpRequest.responseType](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/responseType)
  * @arg {string} method - Request method, case insensitive.
  * @arg {XMLHttpRequestResponseType} type - Response type.
  * @arg {string} url - The URL to request.
  * @arg {Object<string, *>} headers - Object of key:value headers.
- * @arg {string|Document|Blob|BufferSource|FormData|URLSearchParams|ReadableStream} body - Request body.
+ * @arg {XMLHttpRequestBody} body - Request body.
  * @returns {Promise.<RequestUtilResponse>}
  */
 export function request(method, type, url, headers, body) {
 	method = /get|post|put|patch|delete|head|options/i.test(method) ? method.toUpperCase() : "GET";
 	return new Promise(function (resolve, reject) {
 		const xhr = new XMLHttpRequest();
-		// json = !type || type.toLowerCase() === "json";
 		xhr.responseType = type && type.toLowerCase ? type.toLowerCase() : "json";
 		xhr.open(method, url, true);
 		switch (xhr.responseType) {
@@ -44,14 +47,6 @@ export function request(method, type, url, headers, body) {
 		}
 		xhr.onload = function () {
 			let { response, status } = xhr;
-			// if (json) {
-			// 	try {
-			// 		const parsed = JSON.parse(xhr.responseText);
-			// 		response = parsed;
-			// 	} catch (err) {
-			// 		console.warn(err);
-			// 	}
-			// }
 			resolve({ response, status, xhr });
 		};
 		xhr.onerror = function (err) {
@@ -65,20 +60,22 @@ export function request(method, type, url, headers, body) {
  * Get HTML via AJAX.
  * @arg {string} url - The URL to request.
  * @arg {Object<string, *>} headers - Object of key:value headers.
+ * @arg {XMLHttpRequestBody} body - Request body.
  * @returns {Promise.<RequestUtilResponse>}
  */
-export function getHTML(url, headers) {
-	return request("GET", "document", url, headers);
+export function getHTML(url, headers, body) {
+	return request("GET", "document", url, headers, body);
 }
 
 /**
  * Get JSON via AJAX.
  * @arg {string} url - The URL to request.
  * @arg {Object<string, *>} headers - Object of key:value headers.
+ * @arg {XMLHttpRequestBody} body - Request body.
  * @returns {Promise.<RequestUtilResponse>}
  */
-export function getJSON(url, headers) {
-	return request("GET", "json", url, headers);
+export function getJSON(url, headers, body) {
+	return request("GET", "json", url, headers, body);
 }
 
 /**

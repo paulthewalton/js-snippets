@@ -15,10 +15,10 @@
 <dt><a href="docs/request.md">request(method, type, url, headers, body)</a> ⇒ <code><a href="#RequestUtilResponse">Promise.&lt;RequestUtilResponse&gt;</a></code></dt>
 <dd><p>Make simple AJAX requests</p>
 </dd>
-<dt><a href="docs/getHTML.md">getHTML(url, headers)</a> ⇒ <code><a href="#RequestUtilResponse">Promise.&lt;RequestUtilResponse&gt;</a></code></dt>
+<dt><a href="docs/getHTML.md">getHTML(url, headers, body)</a> ⇒ <code><a href="#RequestUtilResponse">Promise.&lt;RequestUtilResponse&gt;</a></code></dt>
 <dd><p>Get HTML via AJAX.</p>
 </dd>
-<dt><a href="docs/getJSON.md">getJSON(url, headers)</a> ⇒ <code><a href="#RequestUtilResponse">Promise.&lt;RequestUtilResponse&gt;</a></code></dt>
+<dt><a href="docs/getJSON.md">getJSON(url, headers, body)</a> ⇒ <code><a href="#RequestUtilResponse">Promise.&lt;RequestUtilResponse&gt;</a></code></dt>
 <dd><p>Get JSON via AJAX.</p>
 </dd>
 <dt><a href="docs/makeVerbosePromise.md">makeVerbosePromise(promise)</a> ⇒ <code><a href="#VerbosePromise">VerbosePromise</a></code></dt>
@@ -40,12 +40,12 @@ Make simple AJAX requests
 | type | <code>XMLHttpRequestResponseType</code> | Response type. |
 | url | <code>string</code> | The URL to request. |
 | headers | <code>Object.&lt;string, \*&gt;</code> | Object of key:value headers. |
-| body | <code>string</code>, <code>Document</code>, <code>Blob</code>, <code>BufferSource</code>, <code>FormData</code>, <code>URLSearchParams</code>, <code>ReadableStream</code> | Request body. |
+| body | [<code>XMLHttpRequestBody</code>](#XMLHttpRequestBody) | Request body. |
 
 
 <br><a name="getHTML"></a>
 
-## getHTML(url, headers) ⇒ [<code>Promise.&lt;RequestUtilResponse&gt;</code>](#RequestUtilResponse)
+## getHTML(url, headers, body) ⇒ [<code>Promise.&lt;RequestUtilResponse&gt;</code>](#RequestUtilResponse)
 Get HTML via AJAX.
 
 
@@ -53,11 +53,12 @@ Get HTML via AJAX.
 | --- | --- | --- |
 | url | <code>string</code> | The URL to request. |
 | headers | <code>Object.&lt;string, \*&gt;</code> | Object of key:value headers. |
+| body | [<code>XMLHttpRequestBody</code>](#XMLHttpRequestBody) | Request body. |
 
 
 <br><a name="getJSON"></a>
 
-## getJSON(url, headers) ⇒ [<code>Promise.&lt;RequestUtilResponse&gt;</code>](#RequestUtilResponse)
+## getJSON(url, headers, body) ⇒ [<code>Promise.&lt;RequestUtilResponse&gt;</code>](#RequestUtilResponse)
 Get JSON via AJAX.
 
 
@@ -65,6 +66,7 @@ Get JSON via AJAX.
 | --- | --- | --- |
 | url | <code>string</code> | The URL to request. |
 | headers | <code>Object.&lt;string, \*&gt;</code> | Object of key:value headers. |
+| body | [<code>XMLHttpRequestBody</code>](#XMLHttpRequestBody) | Request body. |
 
 
 <br><a name="makeVerbosePromise"></a>
@@ -95,6 +97,10 @@ But modified according to the specs of promises : https://promisesaplus.com/
 | status | <code>number</code> | HTTP response code. |
 | xhr | <code>XMLHttpRequest</code> | Original XHR object. |
 
+
+<br><a name="XMLHttpRequestBody"></a>
+
+## XMLHttpRequestBody : <code>string</code> \| <code>Document</code> \| <code>Blob</code> \| <code>BufferSource</code> \| <code>FormData</code> \| <code>URLSearchParams</code> \| <code>ReadableStream</code>
 
 <br><a name="VerbosePromise"></a>
 
