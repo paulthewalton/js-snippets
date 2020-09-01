@@ -63,6 +63,12 @@
 <dt><a href="docs/camelCase.md">camelCase(str)</a> ⇒ <code>string</code></dt>
 <dd><p>Camel case a string.</p>
 </dd>
+<dt><a href="docs/leftPad.md">leftPad(str, length, [char])</a> ⇒ <code>string</code></dt>
+<dd><p>Add left padding to a string.</p>
+</dd>
+<dt><a href="docs/formatSeconds.md">formatSeconds(seconds, [forceHours])</a> ⇒ <code>string</code></dt>
+<dd><p>Get a formatted string representation of time in seconds.</p>
+</dd>
 </dl>
 
 
@@ -202,7 +208,7 @@ Sentence case a string.
 
 **Example**  
 ```js
-myFunc("this is my sample"); // => "This is my sample"
+sentenceCase("this is my sample"); // => "This is my sample"
 ```
 
 <br><a name="titleCase"></a>
@@ -217,7 +223,7 @@ Title case a string.
 
 **Example**  
 ```js
-myFunc("this is my sample"); // => "This Is My Sample"
+titleCase("this is my sample"); // => "This Is My Sample"
 ```
 
 <br><a name="pascalCase"></a>
@@ -232,7 +238,7 @@ Pascal case a string.
 
 **Example**  
 ```js
-myFunc("this is my sample"); // => "ThisIsMySample"
+pascalCase("this is my sample"); // => "ThisIsMySample"
 ```
 
 <br><a name="snakeCase"></a>
@@ -247,7 +253,7 @@ Snake case a string.
 
 **Example**  
 ```js
-myFunc("This is my sample"); // => "this_is_my_sample"
+snakeCase("This is my sample"); // => "this_is_my_sample"
 ```
 
 <br><a name="kebabCase"></a>
@@ -262,7 +268,7 @@ Kebab case a string.
 
 **Example**  
 ```js
-myFunc("This is my sample"); // => "this-is-my-sample"
+kebabCase("This is my sample"); // => "this-is-my-sample"
 ```
 
 <br><a name="camelCase"></a>
@@ -277,5 +283,44 @@ Camel case a string.
 
 **Example**  
 ```js
-myFunc("This is my sample"); // => "thisIsMySample"
+camelCase("This is my sample"); // => "thisIsMySample"
+```
+
+<br><a name="leftPad"></a>
+
+## leftPad(str, length, [char]) ⇒ <code>string</code>
+> Add left padding to a string.
+
+Add left padding to a string. Only validation is converting non-zero falsey
+values for `char` to a single space.
+
+
+| Param | Type | Description |
+| --- | --- | --- |
+| str | <code>string</code> | String to pad, value is cast to string. |
+| length | <code>number</code> | Desired minimum string length. |
+| [char] | <code>string</code> | Padding character, default single space. |
+
+**Example**  
+```js
+leftPad("hello", 8); // => "   hello"
+leftPad(24, 4, 0); // => "0024"
+```
+
+<br><a name="formatSeconds"></a>
+
+## formatSeconds(seconds, [forceHours]) ⇒ <code>string</code>
+Get a formatted string representation of time in seconds.
+
+**Returns**: <code>string</code> - Formatted time string.  
+
+| Param | Type | Default | Description |
+| --- | --- | --- | --- |
+| seconds | <code>number</code> |  | Time in seconds. |
+| [forceHours] | <code>boolean</code> | <code>false</code> | Whether to include hours in the output when time is less than 1 hour. |
+
+**Example**  
+```js
+formatSeconds(27); // => "0:27"
+formatSeconds(3822); // => "1:03:42"
 ```
