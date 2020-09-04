@@ -24,6 +24,9 @@
 <dt><a href="docs/makeVerbosePromise.md">makeVerbosePromise(promise)</a> ⇒ <code><a href="#VerbosePromise">VerbosePromise</a></code></dt>
 <dd><p>Add status props to a Promise.</p>
 </dd>
+<dt><a href="docs/unwrapPromises.md">unwrapPromises(...promises)</a> ⇒ <code>Array.&lt;*&gt;</code></dt>
+<dd><p>Unwrap promises once resolved.</p>
+</dd>
 </dl>
 
 
@@ -84,6 +87,20 @@ But modified according to the specs of promises : https://promisesaplus.com/
 | Param | Type |
 | --- | --- |
 | promise | <code>Promise</code> | 
+
+
+<br><a name="unwrapPromises"></a>
+
+## unwrapPromises(...promises) ⇒ <code>Array.&lt;\*&gt;</code>
+> Unwrap promises once resolved.
+
+Unwrap promises once resolved.
+! Make sure all individual promises have potential rejections handled, as each will be `await`-ed without error handling.
+
+
+| Param | Type |
+| --- | --- |
+| ...promises | <code>Promise.&lt;\*&gt;</code> | 
 
 
 <br><a name="RequestUtilResponse"></a>
