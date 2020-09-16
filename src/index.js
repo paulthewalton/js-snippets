@@ -10,6 +10,7 @@ export * from "./events";
 export * from "./fallbacks";
 export * from "./functions";
 export * from "./math";
+export * from "./media";
 export * from "./objects";
 export * from "./strings";
 export * from "./type";
