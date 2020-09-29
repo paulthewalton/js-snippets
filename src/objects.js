@@ -10,8 +10,8 @@ import { sequence } from "./functions";
 
 /**
  * Verify that an object has all of the supplied properties.
- * @arg {string[]} proplist List of property keys to check.
- * @arg {Object} subject Object to check.
+ * @arg {string[]} proplist - List of property keys to check.
+ * @arg {Object} subject - Object to check.
  * @returns {boolean}
  */
 export function hasAllProps(proplist, subject) {
@@ -20,8 +20,8 @@ export function hasAllProps(proplist, subject) {
 
 /**
  * Verify that an object has at least one of the supplied properties.
- * @arg {string[]} proplist List of property keys to check.
- * @arg {Object} subject Object to check.
+ * @arg {string[]} proplist - List of property keys to check.
+ * @arg {Object} subject - Object to check.
  * @returns {boolean}
  */
 export function hasAnyProps(proplist, subject) {
@@ -30,9 +30,9 @@ export function hasAnyProps(proplist, subject) {
 
 /**
  * Check a property of 2 objects to see if the values match.
- * @arg {string} prop The property by which to evaluate.
- * @arg {Object} subjectA An object to evaluate.
- * @arg {Object} subjectB Another object to evaluate.
+ * @arg {string} prop - The property by which to evaluate.
+ * @arg {Object} subjectA - An object to evaluate.
+ * @arg {Object} subjectB - Another object to evaluate.
  * @returns {boolean}
  */
 export function matchProps(prop, subjectA, subjectB) {
@@ -41,9 +41,9 @@ export function matchProps(prop, subjectA, subjectB) {
 
 /**
  * Copy properties from one object to another recursively.
- * @arg {Object} target Target object.
- * @arg {Object} extensions Object with properties to copy.
- * @arg {number} [limit=-1] Max depth for recursion. Negative value -> no limit.
+ * @arg {Object} target - Target object.
+ * @arg {Object} extensions - Object with properties to copy.
+ * @arg {number} [depth=-1] - Max depth for recursion. Negative value -> no limit.
  * @returns {Object}
  */
 export function extend(target, extensions, depth = -1) {
@@ -53,13 +53,38 @@ export function extend(target, extensions, depth = -1) {
 			continue;
 		}
 		const value = extensions[key];
-		if (isObject(target[key]) && depth !== 0 && (isPojo(value) || areSameType(value, target[key]))) {
+		if (depth !== 0 && isObject(target[key]) && (isPojo(value) || areSameType(value, target[key]))) {
 			extend(target[key], value, depth - 1);
 		} else {
 			target[key] = value;
 		}
 	}
 	return target;
+}
+
+/**
+ * Get the difference between one object and another recursively.
+ * @arg {Object} source - Object to get differences from.
+ * @arg {Object} compareTo - Object to compare values to.
+ * @arg {number} [depth=-1] - Max depth for recursion. Negative value -> no limit.
+ * @returns {Object}
+ */
+export function diff(source, compareTo, depth = -1) {
+	depth = depth >= 0 ? depth : -1;
+	const output = {};
+	for (const key in source) {
+		if (!source.hasOwnProperty(key)) {
+			continue;
+		}
+		const value = source[key];
+		const compareValue = compareTo[key];
+		if (depth !== 0 && isObject(compareValue) && (isPojo(value) || areSameType(value, compareValue))) {
+			output[key] = diff(value, compareValue, depth - 1);
+		} else if (value !== compareValue) {
+			output[key] = value;
+		}
+	}
+	return output;
 }
 
 /**
@@ -72,8 +97,8 @@ export const snapshot = sequence(JSON.stringify, JSON.parse);
 
 /**
  * Remove unknown properties from a given object (DESTRUCTIVE).
- * @arg {string[]} allowedProps Array of allowed property keys.
- * @arg {Object} subject Object to be processed.
+ * @arg {string[]} allowedProps - Array of allowed property keys.
+ * @arg {Object} subject - Object to be processed.
  * @returns {Object}
  * @example
  * var o = {foo: 'bar', hello: 'world', sieze: 'today'};
@@ -93,8 +118,8 @@ export function allowProps(allowedProps, subject) {
 
 /**
  * Remove known properties from a given object (DESTRUCTIVE).
- * @arg {string[]} deniedProps Array of denyed property keys.
- * @arg {Object} subject Object to be processed.
+ * @arg {string[]} deniedProps - Array of denied property keys.
+ * @arg {Object} subject - Object to be processed.
  * @returns {Object}
  * @example
  * var o = {foo: 'bar', hello: 'world', sieze: 'today'};
