@@ -121,38 +121,13 @@ export function denyValues(deniedValues, subject) {
 }
 
 /**
- * Index an array of objects to quickly access its entries by a unique key.
- * @arg {Object[]} arr
- * @arg {string|number} uniqueKey - Key for a property that will be unique for each member of the array.
- * @returns {Array.<Object, Function>} Index object and prefilled accessor function
- * @example
- * const fruitsInKitchen = [
- * 	{ name: "banana" },
- * 	{ name: "kiwi" },
- * 	{ name: "mango" },
- * ];
- * const [fruitsByName, getFruitsByName] = indexArray(fruitsInKitchen, "name");
- * fruitsByName["kiwi"]; // => { name: "kiwi" }
- * getFruitsByName("mango"); // => { name: "mango" }
- * getFruitsByName("banana") === fruitsInKitchen[0]; // => true
- */
-export function indexArray(arr, uniqueKey) {
-	const idx = {};
-	for (let i = 0; i < arr.length; i++) {
-		const value = arr[i];
-		idx[value[uniqueKey]] = i;
-	}
-	return [idx, partial(getIndexedValue, arr, idx)];
-}
-
-/**
  * Get indexed entry of an array by the indexed property.
  * * Assumes `idx` is up to date with `arr`.
  * @summary Get indexed entry of an array by the indexed property.
  * @function
  * @arg {Object[]} arr
- * @arg {Object.<(string|number), number>} idx
- * @arg {string|number} key
+ * @arg {Map} idx
+ * @arg {*} key
  * @returns {Object|undefined}
  * @example
  * const fruitsInKitchen = [
@@ -162,7 +137,32 @@ export function indexArray(arr, uniqueKey) {
  * const [fruitsByName] = indexArray(fruitsInKitchen, "name");
  * getIndexedValue(fruitsInKitchen, fruitsByName, "kiwi"); // => { name: "kiwi" }
  */
-export const getIndexedValue = (arr, idx, key) => arr[idx[key]];
+export const getIndexedValue = (arr, idx, key) => arr[idx.get(key)];
+
+/**
+ * Index an array of objects to quickly access its entries by a unique key.
+ * @arg {Object[]} arr
+ * @arg {string|Symbol} uniqueKey - Key for a property that will be unique for each member of the array.
+ * @returns {Array.<Map, Function>} Index object and prefilled accessor function
+ * @example
+ * const fruitsInKitchen = [
+ * 	{ name: "banana" },
+ * 	{ name: "kiwi" },
+ * 	{ name: "mango" },
+ * ];
+ * const [fruitsByName, getFruitsByName] = indexArray(fruitsInKitchen, "name");
+ * fruitsByName.get("kiwi"); // => { name: "kiwi" }
+ * getFruitsByName("mango"); // => { name: "mango" }
+ * getFruitsByName("banana") === fruitsInKitchen[0]; // => true
+ */
+export function indexArray(arr, uniqueKey) {
+	const idx = new Map();
+	for (let i = 0; i < arr.length; i++) {
+		const value = arr[i];
+		idx.set(value[uniqueKey], i);
+	}
+	return [idx, partial(getIndexedValue, arr, idx)];
+}
 
 /**
  * Shuffle the elements of an array. Uses the Durstenfeld shuffle.
