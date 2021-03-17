@@ -144,7 +144,7 @@ export const lowerCaseWords = (str) => str.replace(/\b\w/, (match) => match.toLo
  * @arg {string} str
  * @returns {string}
  */
-export const upperCaseFirst = (str) => str.charAt(0).toUpperCase + str.slice(1);
+export const upperCaseFirst = (str) => str.charAt(0).toUpperCase() + str.slice(1);
 
 /**
  * Lower case the first letter of a string.
@@ -152,7 +152,7 @@ export const upperCaseFirst = (str) => str.charAt(0).toUpperCase + str.slice(1);
  * @arg {string} str
  * @returns {string}
  */
-export const lowerCaseFirst = (str) => str.charAt(0).toLowerCase + str.slice(1);
+export const lowerCaseFirst = (str) => str.charAt(0).toLowerCase() + str.slice(1);
 
 /**
  * Sentence case a string.
