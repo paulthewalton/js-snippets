@@ -21,7 +21,7 @@ export const percentage = (fraction) => `${fraction * 100}%`;
  * @function
  * @returns {string}
  */
-export const getUniqueId = () => `${Date.now()}-${Math.random()}`;
+export const getUniqueId = () => `${Date.now()}-${("" + Math.random()).substring(2)}`;
 
 /**
  * Copy a string to the users clipboard.
