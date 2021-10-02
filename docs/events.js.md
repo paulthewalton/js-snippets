@@ -9,6 +9,16 @@
 
 <br>
 
+## Classes
+
+<dl>
+<dt><a href="docs/Emitter.md">Emitter</a></dt>
+<dd><p>Browser-friendly Emitter class.</p>
+</dd>
+</dl>
+
+<br>
+
 ## Functions
 
 <dl>

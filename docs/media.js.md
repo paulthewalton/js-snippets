@@ -12,6 +12,9 @@
 ## Constants
 
 <dl>
+<dt><a href="docs/preloadImage.md">preloadImage</a> ⇒ <code>Promise.&lt;boolean&gt;</code></dt>
+<dd><p>Preload an image for the browser, resolves to success/error state.</p>
+</dd>
 <dt><a href="docs/testImageURL.md">testImageURL</a> ⇒ <code>Promise.&lt;boolean&gt;</code></dt>
 <dd><p>Test if an image is &quot;good&quot;. Fails if:</p>
 <ul>
@@ -23,6 +26,17 @@
 </ul>
 </dd>
 </dl>
+
+
+<br><a name="preloadImage"></a>
+
+## preloadImage ⇒ <code>Promise.&lt;boolean&gt;</code>
+Preload an image for the browser, resolves to success/error state.
+
+
+| Param | Type |
+| --- | --- |
+| sources | <code>Object</code> | 
 
 
 <br><a name="testImageURL"></a>

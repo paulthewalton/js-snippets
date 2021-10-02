@@ -6,6 +6,24 @@
  */
 
 /**
+ * Preload an image for the browser, resolves to success/error state.
+ * @arg {{srcset: ?string, sizes: ?string, src: ?string}} sources
+ * @returns {Promise.<boolean>}
+ */
+export const preloadImage = ({ srcset = "", sizes = "", src = "" }) => {
+	return new Promise((resolve) => {
+		const loader = new Image();
+		loader.addEventListener("load", () => resolve(true));
+		loader.addEventListener("error", () => resolve(false));
+		if ("srcset" in loader) {
+			loader.srcset = srcset;
+			loader.sizes = sizes;
+		}
+		loader.src = src;
+	});
+};
+
+/**
  * Test if an image is "good". Fails if:
  * * `url` is empty or null, OR
  * * `url` is the same as the URL of the page the user is currently on, OR
@@ -16,10 +34,5 @@
  * @returns {Promise.<boolean>}
  */
 export const testImageURL = (url) => {
-	return new Promise((resolve) => {
-		const image = new Image();
-		image.addEventListener("load", () => resolve(true));
-		image.addEventListener("error", () => resolve(false));
-		image.src = url;
-	});
+	return preloadImage({ src: url });
 };
