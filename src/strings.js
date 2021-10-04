@@ -110,85 +110,101 @@ export function pathJoin(...segments) {
 /**
  * Strip the case of a string: no capitals, words separated by a single space.
  * @summary Strip the case of a string.
- * @function
  * @arg {string} str
  * @returns {string}
  */
-export const stripCase = (str) =>
-	str
+export function stripCase(str) {
+	return str
 		.replace(/([A-Z]+)/, " $1")
 		.replace(/[_-]+/, " ")
 		.replace(/\s+/, " ")
 		.trim()
 		.toLowerCase();
+}
 
 /**
  * Upper case the first letter of each word in a string.
- * @function
  * @arg {string} str
  * @returns {string}
  */
-export const upperCaseWords = (str) => str.replace(/\b\w/, (match) => match.toUpperCase());
+export function upperCaseWords(str) {
+	return str.replace(/\b\w/, (match) => match.toUpperCase());
+}
 
 /**
  * Lower case the first letter of each word in a string.
- * @function
  * @arg {string} str
  * @returns {string}
  */
-export const lowerCaseWords = (str) => str.replace(/\b\w/, (match) => match.toLowerCase());
+export function lowerCaseWords(str) {
+	return str.replace(/\b\w/, (match) => match.toLowerCase());
+}
 
 /**
  * Upper case the first letter of a string.
- * @function
  * @arg {string} str
  * @returns {string}
  */
-export const upperCaseFirst = (str) => str.charAt(0).toUpperCase() + str.slice(1);
+export function upperCaseFirst(str) {
+	return str.charAt(0).toUpperCase() + str.slice(1);
+}
 
 /**
  * Lower case the first letter of a string.
- * @function
  * @arg {string} str
  * @returns {string}
  */
-export const lowerCaseFirst = (str) => str.charAt(0).toLowerCase() + str.slice(1);
+export function lowerCaseFirst(str) {
+	return str.charAt(0).toLowerCase() + str.slice(1);
+}
 
 /**
  * Sentence case a string.
- * @function
  * @arg {string} str
  * @returns {string}
  * @example sentenceCase("this is my sample"); // => "This is my sample"
  */
-export const sentenceCase = (str) => upperCaseFirst(stripCase(str));
+export function sentenceCase(str) {
+	return upperCaseFirst(stripCase(str));
+}
 
 /**
  * Title case a string.
- * @function
  * @arg {string} str
  * @returns {string}
  * @example titleCase("this is my sample"); // => "This Is My Sample"
  */
-export const titleCase = (str) => upperCaseWords(stripCase(str));
+export function titleCase(str) {
+	return upperCaseWords(stripCase(str));
+}
 
 /**
  * Pascal case a string.
- * @function
  * @arg {string} str
  * @returns {string}
  * @example pascalCase("this is my sample"); // => "ThisIsMySample"
  */
-export const pascalCase = (str) => titleCase(str).replace(" ", "");
+export function pascalCase(str) {
+	return titleCase(str).replace(" ", "");
+}
 
 /**
  * Snake case a string.
- * @function
  * @arg {string} str
  * @returns {string}
  * @example snakeCase("This is my sample"); // => "this_is_my_sample"
  */
-export const snakeCase = (str) => stripCase(str).replace(" ", "_");
+export function snakeCase(str) {
+	return stripCase(str).replace(" ", "_");
+}
+
+/**
+ * Upper snake case a string (aka constant case).
+ * @
+ */
+export function upperSnakeCase(str) {
+	return snakeCase(str).toUpperCase();
+}
 
 /**
  * Kebab case a string.
@@ -197,7 +213,9 @@ export const snakeCase = (str) => stripCase(str).replace(" ", "_");
  * @returns {string}
  * @example kebabCase("This is my sample"); // => "this-is-my-sample"
  */
-export const kebabCase = (str) => stripCase(str).replace(" ", "-");
+export function kebabCase(str) {
+	return stripCase(str).replace(" ", "-");
+}
 
 /**
  * Camel case a string.
@@ -206,13 +224,14 @@ export const kebabCase = (str) => stripCase(str).replace(" ", "-");
  * @returns {string}
  * @example camelCase("This is my sample"); // => "thisIsMySample"
  */
-export const camelCase = (str) => lowerCaseFirst(pascalCase(str));
+export function camelCase(str) {
+	return lowerCaseFirst(pascalCase(str));
+}
 
 /**
  * Add left padding to a string. Only validation is converting non-zero falsey
  * values for `char` to a single space.
  * @summary Add left padding to a string.
- * @function
  * @arg {string} str - String to pad, value is cast to string.
  * @arg {number} length - Desired minimum string length.
  * @arg {string} [char] - Padding character, default single space.
@@ -221,18 +240,17 @@ export const camelCase = (str) => lowerCaseFirst(pascalCase(str));
  * leftPad("hello", 8); // => "   hello"
  * leftPad(24, 4, 0); // => "0024"
  */
-export const leftPad = (str, length, char = " ") => {
+export function leftPad(str, length, char = " ") {
 	str = String(str);
 	if (!char && char !== 0) char = " ";
 	while (str.length < length) {
 		str = char + str;
 	}
 	return str;
-};
+}
 
 /**
  * Get a formatted string representation of time in seconds.
- * @function
  * @arg {number} seconds - Time in seconds.
  * @arg {boolean} [forceHours=false] - Whether to include hours in the output when time is less than 1 hour.
  * @returns {string} Formatted time string.
@@ -240,11 +258,11 @@ export const leftPad = (str, length, char = " ") => {
  * formatSeconds(27); // => "0:27"
  * formatSeconds(3822); // => "1:03:42"
  */
-export const formatSeconds = (seconds, forceHours = false) => {
+export function formatSeconds(seconds, forceHours = false) {
 	const hours = Math.floor(seconds / 3600);
 	let output = `${Math.floor((seconds % 3600) / 60)}:${leftPad(Math.floor(seconds % 60), 2, 0)}`;
 	if (hours || forceHours) {
 		output = `${hours}:${leftPad(output, 5, 0)}`;
 	}
 	return output;
-};
+}

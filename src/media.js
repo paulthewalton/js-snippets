@@ -6,11 +6,18 @@
  */
 
 /**
+ * @typedef {Object} CollectedImageSrcAttributes
+ * @property {?string} srcset A valid srcset attribute string for an image element.
+ * @property {?string} sizes A valid sizes attribute string for an image element.
+ * @property {?string} src A valid src attribute string for an image element.
+ */
+
+/**
  * Preload an image for the browser, resolves to success/error state.
- * @arg {{srcset: ?string, sizes: ?string, src: ?string}} sources
+ * @arg {ImageSrcAttributes} sources
  * @returns {Promise.<boolean>}
  */
-export const preloadImage = ({ srcset = "", sizes = "", src = "" }) => {
+export function preloadImage({ srcset = "", sizes = "", src = "" }) {
 	return new Promise((resolve) => {
 		const loader = new Image();
 		loader.addEventListener("load", () => resolve(true));
@@ -21,7 +28,7 @@ export const preloadImage = ({ srcset = "", sizes = "", src = "" }) => {
 		}
 		loader.src = src;
 	});
-};
+}
 
 /**
  * Test if an image is "good". Fails if:
@@ -33,6 +40,6 @@ export const preloadImage = ({ srcset = "", sizes = "", src = "" }) => {
  * @arg {string} url
  * @returns {Promise.<boolean>}
  */
-export const testImageURL = (url) => {
+export function testImageURL(url) {
 	return preloadImage({ src: url });
-};
+}

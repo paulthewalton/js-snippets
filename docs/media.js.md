@@ -9,13 +9,13 @@
 
 <br>
 
-## Constants
+## Functions
 
 <dl>
-<dt><a href="docs/preloadImage.md">preloadImage</a> ⇒ <code>Promise.&lt;boolean&gt;</code></dt>
+<dt><a href="docs/preloadImage.md">preloadImage(sources)</a> ⇒ <code>Promise.&lt;boolean&gt;</code></dt>
 <dd><p>Preload an image for the browser, resolves to success/error state.</p>
 </dd>
-<dt><a href="docs/testImageURL.md">testImageURL</a> ⇒ <code>Promise.&lt;boolean&gt;</code></dt>
+<dt><a href="docs/testImageURL.md">testImageURL(url)</a> ⇒ <code>Promise.&lt;boolean&gt;</code></dt>
 <dd><p>Test if an image is &quot;good&quot;. Fails if:</p>
 <ul>
 <li><code>url</code> is empty or null, OR</li>
@@ -30,18 +30,18 @@
 
 <br><a name="preloadImage"></a>
 
-## preloadImage ⇒ <code>Promise.&lt;boolean&gt;</code>
+## preloadImage(sources) ⇒ <code>Promise.&lt;boolean&gt;</code>
 Preload an image for the browser, resolves to success/error state.
 
 
 | Param | Type |
 | --- | --- |
-| sources | <code>Object</code> | 
+| sources | <code>ImageSrcAttributes</code> | 
 
 
 <br><a name="testImageURL"></a>
 
-## testImageURL ⇒ <code>Promise.&lt;boolean&gt;</code>
+## testImageURL(url) ⇒ <code>Promise.&lt;boolean&gt;</code>
 Test if an image is "good". Fails if:
 * `url` is empty or null, OR
 * `url` is the same as the URL of the page the user is currently on, OR
@@ -53,4 +53,16 @@ Test if an image is "good". Fails if:
 | Param | Type |
 | --- | --- |
 | url | <code>string</code> | 
+
+
+<br><a name="CollectedImageSrcAttributes"></a>
+
+## CollectedImageSrcAttributes : <code>Object</code>
+**Properties**
+
+| Name | Type | Description |
+| --- | --- | --- |
+| srcset | <code>string</code> | A valid srcset attribute string for an image element. |
+| sizes | <code>string</code> | A valid sizes attribute string for an image element. |
+| src | <code>string</code> | A valid src attribute string for an image element. |
 

@@ -57,6 +57,10 @@
 <dt><a href="docs/snakeCase.md">snakeCase(str)</a> ⇒ <code>string</code></dt>
 <dd><p>Snake case a string.</p>
 </dd>
+<dt><a href="docs/upperSnakeCase.md">upperSnakeCase()</a></dt>
+<dd><p>Upper snake case a string (aka constant case).
+@</p>
+</dd>
 <dt><a href="docs/kebabCase.md">kebabCase(str)</a> ⇒ <code>string</code></dt>
 <dd><p>Kebab case a string.</p>
 </dd>
@@ -255,6 +259,13 @@ Snake case a string.
 ```js
 snakeCase("This is my sample"); // => "this_is_my_sample"
 ```
+
+<br><a name="upperSnakeCase"></a>
+
+## upperSnakeCase()
+Upper snake case a string (aka constant case).
+@
+
 
 <br><a name="kebabCase"></a>
 
