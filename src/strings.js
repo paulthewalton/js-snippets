@@ -115,9 +115,9 @@ export function pathJoin(...segments) {
  */
 export function stripCase(str) {
 	return str
-		.replace(/([A-Z]+)/, " $1")
-		.replace(/[_-]+/, " ")
-		.replace(/\s+/, " ")
+		.replace(/([A-Z]+)/g, " $1")
+		.replace(/[_-]+/g, " ")
+		.replace(/\s+/g, " ")
 		.trim()
 		.toLowerCase();
 }
@@ -128,7 +128,7 @@ export function stripCase(str) {
  * @returns {string}
  */
 export function upperCaseWords(str) {
-	return str.replace(/\b\w/, (match) => match.toUpperCase());
+	return str.replace(/\b\w/g, (match) => match.toUpperCase());
 }
 
 /**
@@ -137,7 +137,7 @@ export function upperCaseWords(str) {
  * @returns {string}
  */
 export function lowerCaseWords(str) {
-	return str.replace(/\b\w/, (match) => match.toLowerCase());
+	return str.replace(/\b\w/g, (match) => match.toLowerCase());
 }
 
 /**
@@ -185,7 +185,7 @@ export function titleCase(str) {
  * @example pascalCase("this is my sample"); // => "ThisIsMySample"
  */
 export function pascalCase(str) {
-	return titleCase(str).replace(" ", "");
+	return titleCase(str).replace(/\s+/g, "");
 }
 
 /**
@@ -195,7 +195,7 @@ export function pascalCase(str) {
  * @example snakeCase("This is my sample"); // => "this_is_my_sample"
  */
 export function snakeCase(str) {
-	return stripCase(str).replace(" ", "_");
+	return stripCase(str).replace(/\s+/g, "_");
 }
 
 /**
@@ -214,7 +214,7 @@ export function upperSnakeCase(str) {
  * @example kebabCase("This is my sample"); // => "this-is-my-sample"
  */
 export function kebabCase(str) {
-	return stripCase(str).replace(" ", "-");
+	return stripCase(str).replace(/\s+/g, "-");
 }
 
 /**
