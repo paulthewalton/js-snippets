@@ -1,14 +1,17 @@
 {
-	"name": "js-utils",
+	"name": "@pwalton/js-utils",
 	"version": "1.1.0",
 	"description": "Vanilla JS utility functions and snippets with wide cross-browser compatibilty. May need transpiling, but doesn't use any APIs not supported by IE 10 (except for Promises, polyfill that good stuff).",
 	"author": "Paul Walton",
 	"license": "MIT",
 	"repository": {
-		"url": "https://github.com/pwalton/js-utils",
+		"url": "https://github.com/paulthewalton/js-utils",
 		"type": "git"
 	},
-	"homepage": "https://github.com/pwalton/js-utils#readme",
+	"bugs": {
+    "url": "https://github.com/paulthewalton/js-utils/issues"
+  },
+	"homepage": "https://github.com/paulthewalton/js-utils#readme",
 	"browserslist": [
 		">= 0.1% in CA",
 		">= 0.5%",
