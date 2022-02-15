@@ -96,7 +96,6 @@ export function polyfill(scope, methodName, resolver) {
 
 /**
  * @type {CompatResolver<CompatNow>}
- * @
  */
 export const compatNow = new CompatResolver([
 	{ scope: performance, fn: "now" },
