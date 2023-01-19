@@ -48,24 +48,13 @@ export function taskDocs(done) {
  * @example gulp apiDocs
  */
 export function apiDocs() {
-	const glob = require("glob");
 	const jsdoc2md = require("jsdoc-to-markdown");
-	return new Promise((resolve, reject) => {
-		glob("src/**/!(index|*spec|*test).[tj]s?(x)", async (err, matches) => {
-			if (err) {
-				reject(err);
-			}
-			Promise.all(
-				matches.map(async (match) => {
-					const outPath = `docs/${path.basename(match)}.md`;
-					const data = await jsdoc2md.render({ files: match, ...jsdoc2mdOpts });
-					return fs.promises.writeFile(outPath, data);
-				})
-			)
-				.then(resolve)
-				.catch(reject);
-		});
-	});
+
+	const outPath = `docs/index.md`;
+
+	return jsdoc2md
+		.render({ files: "lib/**/!(index|*spec|*test).[tj]s", ...jsdoc2mdOpts })
+		.then((data) => fs.promises.writeFile(outPath, data));
 }
 
 /**
@@ -104,12 +93,12 @@ function handleESLintOutput(result) {
  */
 export function lint() {
 	const ifThen = require("gulp-if");
-	const eslint = require("gulp-eslint");
+	const eslint = require("gulp-eslint-new");
 	return gulp
-		.src("**/*.js?(x)", { cwd: "src" })
+		.src("**/*.js?(x)", { cwd: "lib" })
 		.pipe(eslint({ fix: !watchFlag }))
 		.pipe(eslint.result(handleESLintOutput))
-		.pipe(ifThen(!watchFlag, gulp.dest("src")));
+		.pipe(ifThen(!watchFlag, gulp.dest("lib")));
 }
 
 /**
@@ -122,12 +111,12 @@ export function lint() {
  */
 export function lintTests() {
 	const ifThen = require("gulp-if");
-	const eslint = require("gulp-eslint");
+	const eslint = require("gulp-eslint-new");
 	return gulp
 		.src("**/*.js?(x)", { cwd: "tests" })
 		.pipe(eslint({ fix: !watchFlag }))
 		.pipe(eslint.result(handleESLintOutput))
-		.pipe(ifThen(!watchFlag, gulp.dest("src")));
+		.pipe(ifThen(!watchFlag, gulp.dest("tests")));
 }
 
 /**
@@ -139,7 +128,7 @@ export function lintTests() {
  */
 export function dev() {
 	watchFlag = true;
-	gulp.watch(`src/**/*.js?(x)`, lint);
+	gulp.watch(`lib/**/*.js?(x)`, lint);
 	gulp.watch(`tests/**/*.js?(x)`, lintTests);
 }
 

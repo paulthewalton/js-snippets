@@ -1,4 +1,4 @@
-import { toNumber, toInteger, toDecimal, capMinMax } from "../src/math";
+import { toNumber, toInteger, toDecimal, capMinMax } from "../lib/math";
 
 test("testing toNumber() for successful conversions", () => {
 	expect(toNumber(1)).toBe(1);

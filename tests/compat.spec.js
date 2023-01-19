@@ -1,5 +1,5 @@
-import { CompatResolver, compatNow } from "../src/compat";
-import { isCallable, isNumber } from "../src/type";
+import { CompatResolver, compatNow } from "../lib/compat";
+import { isCallable, isNumber } from "../lib/type";
 
 test("testing CompatResolver", () => {
 	const resolver = new CompatResolver();

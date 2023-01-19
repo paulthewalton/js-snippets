@@ -1,0 +1,704 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <meta charset="utf-8">
+    <title>CompatResolver - Documentation</title>
+    
+    
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc.css">
+    <script src="scripts/nav.js" defer></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+  <div class="navicon"></div>
+</label>
+
+<label for="nav-trigger" class="overlay"></label>
+
+<nav >
+    
+    <input type="text" id="nav-search" placeholder="Search" />
+    
+    <h2><a href="index.html">Home</a></h2><h2><a href="https://github.com/your-github-username/pet-adoption-center-sdk" target="_blank" class="menu-item" id="repository" >Github repo</a></h2><h3>Classes</h3><ul><li><a href="CompatResolver.html">CompatResolver</a><ul class='methods'><li data-type='method' style='display: none;'><a href="CompatResolver.html#add">add</a></li><li data-type='method' style='display: none;'><a href="CompatResolver.html#resolve">resolve</a></li></ul></li><li><a href="CompatResolver_CompatResolver.html">CompatResolver#CompatResolver</a></li><li><a href="Emitter.html">Emitter</a><ul class='methods'><li data-type='method' style='display: none;'><a href="Emitter.html#addEventListener">addEventListener</a></li><li data-type='method' style='display: none;'><a href="Emitter.html#dispatchEvent">dispatchEvent</a></li><li data-type='method' style='display: none;'><a href="Emitter.html#removeEventListener">removeEventListener</a></li></ul></li></ul><h3>Global</h3><ul><li><a href="global.html#allowProps">allowProps</a></li><li><a href="global.html#allowValues">allowValues</a></li><li><a href="global.html#applyEventListeners">applyEventListeners</a></li><li><a href="global.html#areSameType">areSameType</a></li><li><a href="global.html#arraysAreEqual">arraysAreEqual</a></li><li><a href="global.html#assertArray">assertArray</a></li><li><a href="global.html#batch">batch</a></li><li><a href="global.html#batchApply">batchApply</a></li><li><a href="global.html#Breakpoint">Breakpoint</a></li><li><a href="global.html#byNumericValue">byNumericValue</a></li><li><a href="global.html#calculateScrollbarWidth">calculateScrollbarWidth</a></li><li><a href="global.html#camelCase">camelCase</a></li><li><a href="global.html#capMinMax">capMinMax</a></li><li><a href="global.html#compareProps">compareProps</a></li><li><a href="global.html#CompatCancelAnimationFrame">CompatCancelAnimationFrame</a></li><li><a href="global.html#compatCancelAnimationFrame">compatCancelAnimationFrame</a></li><li><a href="global.html#CompatNow">CompatNow</a></li><li><a href="global.html#compatNow">compatNow</a></li><li><a href="global.html#CompatRequestAnimationFrame">CompatRequestAnimationFrame</a></li><li><a href="global.html#compatRequestAnimationFrame">compatRequestAnimationFrame</a></li><li><a href="global.html#CompatResolverCandidate">CompatResolverCandidate</a></li><li><a href="global.html#compose">compose</a></li><li><a href="global.html#copyArray">copyArray</a></li><li><a href="global.html#copyToClipboard">copyToClipboard</a></li><li><a href="global.html#createElem">createElem</a></li><li><a href="global.html#debounce">debounce</a></li><li><a href="global.html#denyProps">denyProps</a></li><li><a href="global.html#denyValues">denyValues</a></li><li><a href="global.html#diff">diff</a></li><li><a href="global.html#dispatchCustomEvent">dispatchCustomEvent</a></li><li><a href="global.html#ensureCSSUnits">ensureCSSUnits</a></li><li><a href="global.html#EventListenerOptionsCompat">EventListenerOptionsCompat</a></li><li><a href="global.html#extend">extend</a></li><li><a href="global.html#fallbackUntil">fallbackUntil</a></li><li><a href="global.html#fallbackUntilAsync">fallbackUntilAsync</a></li><li><a href="global.html#flatten">flatten</a></li><li><a href="global.html#formatSeconds">formatSeconds</a></li><li><a href="global.html#FREQ">FREQ</a></li><li><a href="global.html#getEm">getEm</a></li><li><a href="global.html#getEventPath">getEventPath</a></li><li><a href="global.html#getHTML">getHTML</a></li><li><a href="global.html#getIndexedValue">getIndexedValue</a></li><li><a href="global.html#getJSON">getJSON</a></li><li><a href="global.html#getPageOffset">getPageOffset</a></li><li><a href="global.html#getParents">getParents</a></li><li><a href="global.html#getUniqueId">getUniqueId</a></li><li><a href="global.html#hasAllProps">hasAllProps</a></li><li><a href="global.html#hasAnyProps">hasAnyProps</a></li><li><a href="global.html#indexArray">indexArray</a></li><li><a href="global.html#isArray">isArray</a></li><li><a href="global.html#isCallable">isCallable</a></li><li><a href="global.html#isDev">isDev</a></li><li><a href="global.html#isDomObject">isDomObject</a></li><li><a href="global.html#isInDom">isInDom</a></li><li><a href="global.html#isInt">isInt</a></li><li><a href="global.html#isInViewport">isInViewport</a></li><li><a href="global.html#isNumber">isNumber</a></li><li><a href="global.html#isNumeric">isNumeric</a></li><li><a href="global.html#isObject">isObject</a></li><li><a href="global.html#isPojo">isPojo</a></li><li><a href="global.html#isSameOrChildNode">isSameOrChildNode</a></li><li><a href="global.html#isScrollable">isScrollable</a></li><li><a href="global.html#isString">isString</a></li><li><a href="global.html#kebabCase">kebabCase</a></li><li><a href="global.html#leftPad">leftPad</a></li><li><a href="global.html#listenerOptions">listenerOptions</a></li><li><a href="global.html#lowerCaseFirst">lowerCaseFirst</a></li><li><a href="global.html#lowerCaseWords">lowerCaseWords</a></li><li><a href="global.html#makeTest">makeTest</a></li><li><a href="global.html#makeVerbosePromise">makeVerbosePromise</a></li><li><a href="global.html#matchProps">matchProps</a></li><li><a href="global.html#onDocReady">onDocReady</a></li><li><a href="global.html#parseBool">parseBool</a></li><li><a href="global.html#parseCSSColor">parseCSSColor</a></li><li><a href="global.html#parseCSSTime">parseCSSTime</a></li><li><a href="global.html#ParsedCSSColor">ParsedCSSColor</a></li><li><a href="global.html#partial">partial</a></li><li><a href="global.html#partialRight">partialRight</a></li><li><a href="global.html#pascalCase">pascalCase</a></li><li><a href="global.html#pathJoin">pathJoin</a></li><li><a href="global.html#percentage">percentage</a></li><li><a href="global.html#Point">Point</a></li><li><a href="global.html#polyfill">polyfill</a></li><li><a href="global.html#preloadImage">preloadImage</a></li><li><a href="global.html#processPartialPlaceholders">processPartialPlaceholders</a></li><li><a href="global.html#RECT">RECT</a></li><li><a href="global.html#request">request</a></li><li><a href="global.html#RequestUtilResponse">RequestUtilResponse</a></li><li><a href="global.html#rotateArray">rotateArray</a></li><li><a href="global.html#ScrollbarStatus">ScrollbarStatus</a></li><li><a href="global.html#scrollIntoView">scrollIntoView</a></li><li><a href="global.html#sentenceCase">sentenceCase</a></li><li><a href="global.html#sequence">sequence</a></li><li><a href="global.html#setPrefixedStyle">setPrefixedStyle</a></li><li><a href="global.html#setUpInterfaceDetection">setUpInterfaceDetection</a></li><li><a href="global.html#setUpMediaQueries">setUpMediaQueries</a></li><li><a href="global.html#setUpTabFocus">setUpTabFocus</a></li><li><a href="global.html#shuffleArray">shuffleArray</a></li><li><a href="global.html#snakeCase">snakeCase</a></li><li><a href="global.html#snapshot">snapshot</a></li><li><a href="global.html#stripCase">stripCase</a></li><li><a href="global.html#stripEnd">stripEnd</a></li><li><a href="global.html#stripStart">stripStart</a></li><li><a href="global.html#testImageURL">testImageURL</a></li><li><a href="global.html#throttle">throttle</a></li><li><a href="global.html#TIME">TIME</a></li><li><a href="global.html#titleCase">titleCase</a></li><li><a href="global.html#toDecimal">toDecimal</a></li><li><a href="global.html#toInteger">toInteger</a></li><li><a href="global.html#toNumber">toNumber</a></li><li><a href="global.html#uniq">uniq</a></li><li><a href="global.html#unwrapPromises">unwrapPromises</a></li><li><a href="global.html#upperCaseFirst">upperCaseFirst</a></li><li><a href="global.html#upperCaseWords">upperCaseWords</a></li><li><a href="global.html#upperSnakeCase">upperSnakeCase</a></li><li><a href="global.html#VerbosePromise">VerbosePromise</a></li><li><a href="global.html#XMLHttpRequestBody">XMLHttpRequestBody</a></li></ul>
+</nav>
+
+<div id="main">
+    
+    <h1 class="page-title">CompatResolver</h1>
+    
+
+    
+
+
+
+
+<section>
+
+<header>
+    
+        <h2>
+        CompatResolver
+        </h2>
+        
+    
+</header>
+
+<article>
+    
+        <div class="container-overview">
+        
+            
+
+    
+
+    <h4 class="name" id="CompatResolver"><span class="type-signature"></span>new CompatResolver<span class="signature">()</span><span class="type-signature"></span></h4>
+
+    
+    <p class="summary usertext"><p>Framework for resolving functions with different names &amp; availabilities across browsers.</p></p>
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="compat.js.html">compat.js</a>, <a href="compat.js.html#line16">line 16</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+    <h5 class="subsection-title">Properties:</h5>
+
+    
+
+<table class="props">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>candidates</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Array.&lt;<a href="global.html#CompatResolverCandidate">CompatResolverCandidate</a>></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>scope</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+        </div>
+    
+
+    
+
+    
+
+    
+        <h3 class="subsection-title">Classes</h3>
+
+        <dl>
+            <dt><a href="CompatResolver_CompatResolver.html">CompatResolver</a></dt>
+            <dd></dd>
+        </dl>
+    
+    
+    
+
+     
+
+    
+
+    
+
+    
+        <h3 class="subsection-title">Methods</h3>
+
+        
+            
+
+    
+
+    <h4 class="name" id="add"><span class="type-signature"></span>add<span class="signature">(fn, scope<span class="signature-attributes">opt</span>, prepend<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {void}</span></h4>
+
+    
+    <p class="summary usertext"><p>Add additional candidates to an existing CompatResolver instance.</p></p>
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="compat.js.html">compat.js</a>, <a href="compat.js.html#line43">line 43</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+        <th>Attributes</th>
+        
+
+        
+        <th>Default</th>
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>fn</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+|
+
+<span class="param-type">function</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last"><p>Either the member name of a candidate function within the <code>scope</code>, or a function that returns a candidate function.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>scope</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last"><p>An optional scope object to check for the candidate function, defaults to scope of the CompatResolver instance.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>prepend</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">boolean</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    <code>false</code>
+                
+                </td>
+            
+
+            <td class="description last"><p>Whether to prepend the candidate to the list, default <code>false</code>.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">void</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="resolve"><span class="type-signature"></span>resolve<span class="signature">(forceEvaluation<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; (nullable) {T}</span></h4>
+
+    
+    <p class="summary usertext"><p>Resolve the candidates to a usable implementation.</p></p>
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="compat.js.html">compat.js</a>, <a href="compat.js.html#line58">line 58</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+        <th>Attributes</th>
+        
+
+        
+        <th>Default</th>
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>forceEvaluation</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">boolean</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    <code>false</code>
+                
+                </td>
+            
+
+            <td class="description last"><p>Force (re)evaluation of candidates.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>Resolved compat function.</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">T</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+    
+
+    
+
+    
+</article>
+
+</section>
+
+
+
+
+    
+    
+</div>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.10</a> on Tue Feb 15 2022 14:17:16 GMT-0800 (Pacific Standard Time) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+</footer>
+
+<script>prettyPrint();</script>
+<script src="scripts/polyfill.js"></script>
+<script src="scripts/linenumber.js"></script>
+
+<script src="scripts/search.js" defer></script>
+
+
+<script src="scripts/collapse.js" defer></script>
+
+
+</body>
+</html>

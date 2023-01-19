@@ -1,9 +1,8 @@
 {
 	"name": "@pwalton/js-utils",
 	"version": "1.2.0",
-	"type": "module",
 	"description": "Vanilla JS utility functions and snippets with wide cross-browser compatibilty. May need transpiling, but doesn't use any APIs not supported by IE 10 (except for Promises, polyfill that good stuff).",
-	"author": "Paul Walton",
+	"author": "Paul Walton <paul@denmandigital.com>",
 	"license": "MIT",
 	"repository": {
 		"url": "https://github.com/paulthewalton/js-utils",
@@ -23,35 +22,40 @@
 		"not IE < 10",
 		"not dead"
 	],
-	"main": "src/index.js",
+	"main": "index.js",
 	"devDependencies": {
-		"@babel/core": "^7.12.13",
+		"@babel/core": "^7.20.12",
+		"@babel/eslint-parser": "^7.19.1",
 		"@babel/plugin-transform-runtime": "^7.12.15",
 		"@babel/preset-env": "^7.12.13",
 		"@babel/register": "^7.12.13",
 		"@types/jest": "^26.0.20",
 		"acorn": "^7.4.1",
-		"babel-eslint": "^10.1.0",
 		"babel-polyfill": "^6.26.0",
-		"chalk": "^4.1.0",
+		"chalk": "^4.*",
 		"dmd-readable": "github:paulthewalton/dmd-readable#main",
+		"docdash": "^1.2.0",
 		"eslint": "^7.19.0",
 		"eslint-config-prettier": "^6.15.0",
 		"eslint-plugin-compat": "^3.9.0",
 		"eslint-plugin-jest": "^23.20.0",
 		"eslint-plugin-prettier": "^3.3.1",
-		"fancy-log": "^1.3.3",
+		"fancy-log": "^2.0.0",
 		"gulp": "^4.0.2",
-		"gulp-eslint": "^6.0.0",
+		"gulp-eslint-new": "^1.7.1",
 		"gulp-if": "^3.0.0",
 		"jest": "^26.6.3",
 		"jsdoc-to-markdown": "^7.1.1",
-		"prettier": "^2.2.1"
+		"prettier": "^2.8.3"
+	},
+	"__unused": {
+		"dmd-readable": "^1.2.4"
 	},
 	"scripts": {
 		"dev": "gulp dev --color",
 		"lint": "gulp lint --color",
 		"test": "jest",
-		"docs": "gulp docs --color"
+		"docs": "gulp docs --color",
+		"jsdoc": "jsdoc -a all -c jsdoc.json -r -R readme.md lib/*.js -d docs/jsdoc && jsdoc2md --plugin dmd-readable --files lib/*.js > docs/api.md"
 	}
 }

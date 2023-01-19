@@ -1,4 +1,4 @@
-import { rotateArray } from "../src/arrays";
+import { rotateArray } from "../lib/arrays";
 
 test("testing rotateArray", () => {
 	let testArray = [1, 2, 3, 4, 5];

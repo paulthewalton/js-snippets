@@ -1,4 +1,4 @@
-import { unwrapPromises } from "../src/async";
+import { unwrapPromises } from "../lib/async";
 
 test("testing unwrapPromises()", async () => {
 	const testObj = { a: 1, b: 2 };

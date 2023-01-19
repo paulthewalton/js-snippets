@@ -1,4 +1,4 @@
-import { hasAllProps, hasAnyProps, matchProps, extend, diff, allowProps, denyProps } from "../src/objects";
+import { hasAllProps, hasAnyProps, matchProps, extend, diff, allowProps, denyProps } from "../lib/objects";
 
 test("testing hasAllProps", () => {
 	const testObj = { a: 1, b: 2, c: 3, foo: false, bar: NaN };

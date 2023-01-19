@@ -1,1 +1,1 @@
-export * from "./src/addons";
+export * from "./lib/addons";

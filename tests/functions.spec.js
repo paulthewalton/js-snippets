@@ -8,7 +8,7 @@ import {
 	partialRight,
 	throttle,
 	debounce,
-} from "../src/functions";
+} from "../lib/functions";
 
 const times10 = (x) => x * 10;
 const plus2 = (x) => x + 2;

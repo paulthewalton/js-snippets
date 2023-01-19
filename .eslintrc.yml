@@ -7,11 +7,12 @@ extends:
 - prettier
 plugins:
 - jest
+- prettier
 env:
   browser: true
   jest/globals: true
   es6: true
-parser: babel-eslint
+parser: "@babel/eslint-parser"
 parserOptions:
   ecmaVersion: 6
 globals:

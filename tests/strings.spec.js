@@ -9,7 +9,7 @@ import {
 	upperSnakeCase,
 	kebabCase,
 	camelCase,
-} from "../src/strings";
+} from "../lib/strings";
 
 test("testing leftPad", () => {
 	expect(leftPad("hello")).toBe("hello");
