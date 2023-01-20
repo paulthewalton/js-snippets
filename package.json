@@ -22,7 +22,8 @@
 		"not IE < 10",
 		"not dead"
 	],
-	"main": "index.js",
+	"type": "module",
+	"exports": "./lib/index.js",
 	"devDependencies": {
 		"@babel/core": "^7.20.12",
 		"@babel/eslint-parser": "^7.19.1",
