@@ -9,11 +9,18 @@
 
 /* eslint-env node, es6 */
 
-const fs = require("fs");
-const path = require("path");
-const gulp = require("gulp");
-const log = require("fancy-log");
-const chalk = require("chalk");
+import fs from "fs";
+import path from "path";
+import gulp from "gulp";
+import log from "fancy-log";
+import chalk from "chalk";
+import { fileURLToPath } from "url";
+import jsdoc2md from "jsdoc-to-markdown";
+import ifThen from "gulp-if";
+import eslint from "gulp-eslint-new";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 let watchFlag = false;
 
@@ -34,7 +41,6 @@ const jsdoc2mdOpts = {
  * @example gulp taskDocs
  */
 export function taskDocs(done) {
-	const jsdoc2md = require("jsdoc-to-markdown");
 	jsdoc2md
 		.render({ files: __filename, "example-lang": "sh", ...jsdoc2mdOpts })
 		.then((output) => fs.writeFileSync(`docs/${path.basename(__filename)}.md`, output), done());
@@ -48,8 +54,6 @@ export function taskDocs(done) {
  * @example gulp apiDocs
  */
 export function apiDocs() {
-	const jsdoc2md = require("jsdoc-to-markdown");
-
 	const outPath = `docs/index.md`;
 
 	return jsdoc2md
@@ -92,8 +96,6 @@ function handleESLintOutput(result) {
  * @example gulp lint
  */
 export function lint() {
-	const ifThen = require("gulp-if");
-	const eslint = require("gulp-eslint-new");
 	return gulp
 		.src("**/*.js?(x)", { cwd: "lib" })
 		.pipe(eslint({ fix: !watchFlag }))
@@ -110,8 +112,6 @@ export function lint() {
  * @example gulp lintTests
  */
 export function lintTests() {
-	const ifThen = require("gulp-if");
-	const eslint = require("gulp-eslint-new");
 	return gulp
 		.src("**/*.js?(x)", { cwd: "tests" })
 		.pipe(eslint({ fix: !watchFlag }))
