@@ -89,10 +89,10 @@
 <dt><a href="docs/flatten.md">flatten(arr, [depth])</a> ⇒ <code>Array</code></dt>
 <dd><p>Flatten an array up to a set number of levels.</p>
 </dd>
-<dt><a href="docs/getIndexedValue.md">getIndexedValue(arr, idx, key)</a> ⇒ <code>IndexableArrayMember</code> | <code>undefined</code></dt>
+<dt><a href="docs/getIndexedValue.md">getIndexedValue(arr, idx, key)</a> ⇒ <code>Object</code> | <code>undefined</code></dt>
 <dd><p>Get indexed entry of an array by the indexed property.</p>
 </dd>
-<dt><a href="docs/indexArray.md">indexArray(arr, uniqueKey)</a> ⇒ <code>IndexArrayResult.&lt;T&gt;</code></dt>
+<dt><a href="docs/indexArray.md">indexArray(arr, uniqueKey)</a> ⇒</dt>
 <dd><p>Index an array of objects to quickly access its entries by a unique key.</p>
 </dd>
 <dt><a href="docs/rotateArray.md">rotateArray(arr, [rotation])</a> ⇒ <code>Array</code></dt>
@@ -125,11 +125,11 @@
 
 #### CSS Functions
 
-<dt><a href="docs/convertRemToPx.md">convertRemToPx(rem, useRealValue)</a> ⇒ <code>number</code></dt>
-<dd><p>Convert a rem value to a pixel value</p>
-</dd>
 <dt><a href="docs/convertPxToRem.md">convertPxToRem(px, useRealValue)</a> ⇒ <code>number</code></dt>
 <dd><p>Convert a pixel value to the equivalent rem value.</p>
+</dd>
+<dt><a href="docs/convertRemToPx.md">convertRemToPx(rem, useRealValue)</a> ⇒ <code>number</code></dt>
+<dd><p>Convert a rem value to a pixel value</p>
 </dd>
 <dt><a href="docs/ensureCSSUnits.md">ensureCSSUnits(value, units, fallback)</a> ⇒ <code>string</code></dt>
 <dd></dd>
@@ -162,14 +162,14 @@
 
 #### Environment Functions
 
+<dt><a href="docs/calculateScrollbarWidth.md">calculateScrollbarWidth()</a> ⇒ <code>number</code></dt>
+<dd><p>Calculate the width of the native scrollbars.</p>
+</dd>
 <dt><del><a href="docs/detectBrowser.md">detectBrowser()</a> ⇒ <code>string</code></del></dt>
 <dd><p>Try to determine the client browser.</p>
 </dd>
 <dt><del><a href="docs/isDev.md">isDev()</a> ⇒ <code>boolean</code></del></dt>
 <dd><p>Try to identify development environment from location host TLD.</p>
-</dd>
-<dt><a href="docs/calculateScrollbarWidth.md">calculateScrollbarWidth()</a> ⇒ <code>number</code></dt>
-<dd><p>Calculate the width of the native scrollbars.</p>
 </dd>
 <dt><a href="docs/setUpMediaQueries.md">setUpMediaQueries(breakpoints)</a> ⇒ <code>Object</code></dt>
 <dd><p>Get an object of preset matchMedia media queries.</p>
@@ -615,18 +615,18 @@ flatten([1,2,[3,[[[[4]]]]],5], Infinity); // -> [1,2,3,4,5]
 
 <br><a name="getIndexedValue"></a>
 
-## getIndexedValue(arr, idx, key) ⇒ <code>IndexableArrayMember</code> \| <code>undefined</code>
+## getIndexedValue(arr, idx, key) ⇒ <code>Object</code> \| <code>undefined</code>
 > Get indexed entry of an array by the indexed property.
 
 Get indexed entry of an array by the indexed property.
 * Assumes `idx` is up to date with `arr`.
 
 
-| Param | Type |
-| --- | --- |
-| arr | <code>Array.&lt;IndexableArrayMember&gt;</code> | 
-| idx | <code>ArrayIndex</code> | 
-| key | <code>T</code> | 
+| Param | Type | Description |
+| --- | --- | --- |
+| arr | <code>Array.&lt;Object&gt;</code> | Array of indexed objects |
+| idx | <code>Map.&lt;K, number&gt;</code> | Array index |
+| key | <code>K</code> |  |
 
 **Example**  
 ```js
@@ -640,14 +640,14 @@ getIndexedValue(fruitsInKitchen, fruitsByName, "kiwi"); // => { name: "kiwi" }
 
 <br><a name="indexArray"></a>
 
-## indexArray(arr, uniqueKey) ⇒ <code>IndexArrayResult.&lt;T&gt;</code>
+## indexArray(arr, uniqueKey) ⇒
 Index an array of objects to quickly access its entries by a unique key.
 
-**Returns**: <code>IndexArrayResult.&lt;T&gt;</code> - Index object and prefilled accessor function  
+**Returns**: Index object and prefilled accessor function  
 
 | Param | Type | Description |
 | --- | --- | --- |
-| arr | <code>Array.&lt;IndexableArrayMember.&lt;T&gt;&gt;</code> |  |
+| arr | <code>Array.&lt;T&gt;</code> |  |
 | uniqueKey | <code>string</code> | Key for a property that will be unique for each member of the array. |
 
 **Example**  
@@ -806,18 +806,6 @@ Unwrap promises once resolved.
 | isPending | <code>boolean</code> | Promise is not yet settled. |
 
 
-<br><a name="convertRemToPx"></a>
-
-## convertRemToPx(rem, useRealValue) ⇒ <code>number</code>
-Convert a rem value to a pixel value
-
-
-| Param | Type |
-| --- | --- |
-| rem | <code>number</code> | 
-| useRealValue | <code>boolean</code> | 
-
-
 <br><a name="convertPxToRem"></a>
 
 ## convertPxToRem(px, useRealValue) ⇒ <code>number</code>
@@ -827,6 +815,18 @@ Convert a pixel value to the equivalent rem value.
 | Param | Type |
 | --- | --- |
 | px | <code>number</code> | 
+| useRealValue | <code>boolean</code> | 
+
+
+<br><a name="convertRemToPx"></a>
+
+## convertRemToPx(rem, useRealValue) ⇒ <code>number</code>
+Convert a rem value to a pixel value
+
+
+| Param | Type |
+| --- | --- |
+| rem | <code>number</code> | 
 | useRealValue | <code>boolean</code> | 
 
 
@@ -1175,6 +1175,13 @@ The breakpoint media query.
 A link to the "next" breakpoint, assuming in order of increasing viewport widths.
 
 
+<br><a name="calculateScrollbarWidth"></a>
+
+## calculateScrollbarWidth() ⇒ <code>number</code>
+Calculate the width of the native scrollbars.
+
+**Returns**: <code>number</code> - Width of native browser scrollbars in px.  
+
 <br><a name="detectBrowser"></a>
 
 ## ~~detectBrowser() ⇒ <code>string</code>~~&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;_`🚫 Deprecated`_
@@ -1190,13 +1197,6 @@ Try to determine the client browser.
 Try to identify development environment from location host TLD.
 
 **Returns**: <code>boolean</code> - Whether it was able to detect current environment as 'dev'.  
-
-<br><a name="calculateScrollbarWidth"></a>
-
-## calculateScrollbarWidth() ⇒ <code>number</code>
-Calculate the width of the native scrollbars.
-
-**Returns**: <code>number</code> - Width of native browser scrollbars in px.  
 
 <br><a name="setUpMediaQueries"></a>
 
