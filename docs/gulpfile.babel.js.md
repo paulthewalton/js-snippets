@@ -2,7 +2,7 @@
 ## Modules
 
 <dl>
-<dt><a href="docs/module_Tasks.md">Tasks</a></dt>
+<dt><a href="#module_Tasks">Tasks</a></dt>
 <dd><p>Tasks for Gulp task runner.</p>
 </dd>
 </dl>
@@ -12,22 +12,22 @@
 ## Functions
 
 <dl>
-<dt><a href="docs/taskDocs.md">taskDocs()</a></dt>
+<dt><a href="#taskDocs">taskDocs()</a></dt>
 <dd><p>Generate documentation for Gulp tasks.</p>
 </dd>
-<dt><a href="docs/apiDocs.md">apiDocs()</a></dt>
+<dt><a href="#apiDocs">apiDocs()</a></dt>
 <dd><p>Generate documentation for project API.</p>
 </dd>
-<dt><a href="docs/docs.md">docs()</a></dt>
+<dt><a href="#docs">docs()</a></dt>
 <dd><p>Generate all documentation for this project.</p>
 </dd>
-<dt><a href="docs/lint.md">lint()</a></dt>
+<dt><a href="#lint">lint()</a></dt>
 <dd><p>Lint scripts with ESLint.</p>
 </dd>
-<dt><a href="docs/lintTests.md">lintTests()</a></dt>
+<dt><a href="#lintTests">lintTests()</a></dt>
 <dd><p>Lint tests with ESLint.</p>
 </dd>
-<dt><a href="docs/dev.md">dev()</a></dt>
+<dt><a href="#dev">dev()</a></dt>
 <dd><p>Starts a file watcher, linting scripts on save.</p>
 </dd>
 </dl>

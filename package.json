@@ -55,7 +55,6 @@
 		"dev": "gulp dev --color",
 		"lint": "gulp lint --color",
 		"test": "jest",
-		"docs": "gulp docs --color",
-		"jsdoc": "jsdoc -a all -c jsdoc.json -r -R readme.md lib/*.js -d docs/jsdoc && jsdoc2md --plugin dmd-readable --files lib/*.js > docs/api.md"
+		"docs": "gulp docs --color"
 	}
 }

@@ -36,10 +36,11 @@ const jsdoc2mdOpts = {
  * @requires dmd-readable
  * @example gulp taskDocs
  */
-export function taskDocs(done) {
-	jsdoc2md
-		.render({ files: __filename, "example-lang": "sh", ...jsdoc2mdOpts })
-		.then((output) => fs.writeFileSync(`docs/${path.basename(__filename)}.md`, output), done());
+export function taskDocs() {
+	return jsdoc2md.render({ files: __filename, "example-lang": "sh", ...jsdoc2mdOpts }).then((output) => {
+		output = output.replace(/docs\/(.+?)\.md/g, "#$1");
+		fs.writeFileSync(`docs/${path.basename(__filename)}.md`, output);
+	});
 }
 
 /**
@@ -50,11 +51,10 @@ export function taskDocs(done) {
  * @example gulp apiDocs
  */
 export function apiDocs() {
-	const outPath = `docs/readme.md`;
-
-	return jsdoc2md
-		.render({ files: "lib/**/!(index|*spec|*test).[tj]s", ...jsdoc2mdOpts })
-		.then((data) => fs.promises.writeFile(outPath, data));
+	return jsdoc2md.render({ files: "lib/**/!(index|*spec|*test).[tj]s", ...jsdoc2mdOpts }).then((output) => {
+		output = output.replace(/docs\/(.+?)\.md/g, "#$1");
+		fs.promises.writeFile(`docs/readme.md`, output);
+	});
 }
 
 /**
