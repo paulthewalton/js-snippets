@@ -50,7 +50,7 @@ export function taskDocs(done) {
  * @example gulp apiDocs
  */
 export function apiDocs() {
-	const outPath = `docs/index.md`;
+	const outPath = `docs/readme.md`;
 
 	return jsdoc2md
 		.render({ files: "lib/**/!(index|*spec|*test).[tj]s", ...jsdoc2mdOpts })
