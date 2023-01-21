@@ -14,13 +14,9 @@ import path from "path";
 import gulp from "gulp";
 import log from "fancy-log";
 import chalk from "chalk";
-import { fileURLToPath } from "url";
 import jsdoc2md from "jsdoc-to-markdown";
 import ifThen from "gulp-if";
 import eslint from "gulp-eslint-new";
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
 
 let watchFlag = false;
 

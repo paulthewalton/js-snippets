@@ -14,7 +14,7 @@ These utility & helper functions should:
 
 ## API & Features
 
-See generated [documentation](docs), annotated [source code](src), or [test specs](tests).
+See generated [documentation](docs), annotated [source code](lib), or [test specs](tests).
 
 ## Scripts & Dev
 
